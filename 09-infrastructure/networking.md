@@ -77,6 +77,18 @@ Each log record includes the full `messages` array (training-ready for v3 router
 |---------|-----|---------|
 | GitHub Org | github.com/swarm-bee-github | Source repos |
 | HuggingFace Org | huggingface.co/SwarmandBee | Model hosting |
-| Supabase | gizwfmgowyfadmvjjitb.supabase.co | Auth DB (18 tables, 10 RPCs) |
-| DigitalOcean | -- | Account created, pending provisioning |
+| Supabase | gizwfmgowyfadmvjjitb.supabase.co | PostgreSQL + pgvector (13 tables, 10 RPCs) |
+| DigitalOcean | -- | Account created, provisioning for CreditSniper/CreditCase |
 | Together.ai | api.together.xyz | API inference (keys in swarm-agents/.env) |
+| Rocket.Chat | chat.swarmandbee.com | Team chat, CreditSniper contact webhook |
+| PostGrid | api.postgrid.com | Physical mail API (letter_sender skill) |
+
+## Cloud Domains
+
+| Domain | Platform | Service |
+|--------|----------|---------|
+| `router.swarmandbee.com` | Cloudflare Workers | SwarmRouter edge API (40+ endpoints) |
+| `api.swarmandbee.com` | Cloudflare Workers | Data commerce API (Stripe, catalog) |
+| `swarmandbee.ai` | Cloudflare Pages | Marketing site |
+| `creditsniper.xyz` | Cloudflare Pages | Credit dispute intelligence |
+| `chat.swarmandbee.com` | Rocket.Chat | Team communications |
