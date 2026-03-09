@@ -6,7 +6,15 @@
 
 **Status**: IN DEVELOPMENT
 
-API scaling layer at `api.swarmandbee.ai`. Manages fleet scaling, load balancing, and metered access to SwarmCurator inference endpoints.
+The operating system of sovereign AI compute. Not just an API scaler — the unified control plane for models, datasets, nodes, agents, billing, and compute proofs. See [Sovereign Compute Architecture](../01-architecture/sovereign-compute.md) for the full vision.
+
+Six control planes behind one domain:
+1. **Models** — Inference routing, model registry, deployment, evaluation
+2. **Datasets** — 1.16M pairs, catalog, pull, cook, commerce
+3. **Nodes** — GPU clusters, edge devices, serverless providers
+4. **Agents** — 8 Hedera-registered agents, task bus, autonomous operations
+5. **Billing** — Stripe subscriptions, per-IO metering, data commerce
+6. **Compute Proofs** — Hedera HCS/HTS, merkle trees, guarantee.json
 
 ### SwarmCRE App Store (swarmandbee.ai/app-store)
 

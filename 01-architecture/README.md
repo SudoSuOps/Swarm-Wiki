@@ -69,3 +69,11 @@ This is not a one-shot pipeline. Every cycle through the loop makes the next cyc
 - **Signal first.** Nothing happens without a market event. No hallucinated analysis, no speculative generation.
 - **Every model earns its slot.** If a model does not measurably improve output quality or reduce latency, it gets cut.
 - **Deterministic where possible, LLM where necessary.** Six hard gates handle what rules can handle. The 27B handles what rules cannot.
+
+## Section Index
+
+- [Deal Machine](deal-machine.md) -- M&M brokerage lifecycle mapped to Swarm pipeline
+- [Data Flow](data-flow.md) -- End-to-end signal-to-seal diagram
+- [API Gateway Architecture](api-gateway.md) -- SwarmRouter + swarm-api deep architecture, inference topology, data flows
+- [Sovereign Compute OS](sovereign-compute.md) -- api.swarmandbee.ai vision: models, datasets, nodes, agents, billing, compute proofs
+- [Glossary](glossary.md) -- Intelligence Object, PIO, Cook, Gate, Promote
