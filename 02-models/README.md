@@ -46,16 +46,38 @@ Two form factors in Gen 2:
 - **Dense** (9B, 27B): All parameters active on every token. Higher per-token quality, higher VRAM.
 - **MoE** (35B-A3B): 256 experts, 8+1 active per token, only 3B parameters active. Lower VRAM, specialist-grade output in trained domains.
 
-## Training Pattern
+## Gold Standard Build
 
-All models follow the same recipe. See [training-patterns.md](training-patterns.md) for the full reference.
+All Qwen3.5 models follow the **Swarm Gold Standard** — a proven training playbook documented at:
 
-Short version:
+**Repo**: [`swarm-qwen-27B-Gold-Standard-Build-LLM`](https://github.com/SudoSuOps/swarm-qwen-27B-Gold-Standard-Build-LLM)
+
+The SwarmCurator-27B-v1 build (loss **0.477**, 1,000 steps, 14.38h) is the crown jewel — the best build to date. Every future model starts from this config or gets nuked.
+
+### Config by Tier
+
+| Parameter | 27B | 9B | 2B |
+|-----------|-----|----|----|
+| LoRA r / alpha | 64 / 32 | 64 / 32 | 32 / 16 |
+| Learning Rate | 1e-5 | 1e-5 | 2e-5 |
+| Batch × Accum | 2 × 16 | 4 × 8 | 8 × 4 |
+| **Effective Batch** | **32** | **32** | **32** |
+| Max Seq Len | 4096 | 4096 | 2048 |
+| Epoch Fraction | 0.6 | 0.6 | 0.8 |
+
+### Invariants (all tiers)
+
 - Unsloth FastLanguageModel + TRL SFTTrainer
-- bf16 LoRA only (no QLoRA for Qwen3.5)
-- packing=True, AutoTokenizer bypass
-- 30+ system prompts, 26+ task types, no single prompt > 10%
+- bf16 LoRA only (no QLoRA for Qwen3.5 — higher quantization error)
+- AutoTokenizer bypass (Qwen3.5 VL dispatch bug in unsloth_zoo)
+- packing=True (may be skipped by Unsloth VL detection — OK)
+- 30+ system prompts, no single prompt > 15%
+- Cosine LR scheduler, 5% warmup, weight decay 0.01
 - Early stopping patience=3 on eval_loss
+- SHA256 on every dataset, MANIFEST.json on every build
+- vision_config fix post-merge for vLLM serving
+
+See [gold-standard-build.md](gold-standard-build.md) for the full specification.
 
 ## Deployment Targets
 

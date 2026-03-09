@@ -24,11 +24,19 @@
 | swarmbeeai-factory | ~/Desktop/swarmbeeai-factory/ | swarmandbee.ai (Cloudflare Pages, 7 pages) |
 | swarm-bee | ~/Desktop/swarm-bee/ | swarmandbee.com main site |
 
-## Training & Eval
+## Training & Inference
 
 | Repo | Path | Description |
 |------|------|-------------|
+| **swarm-qwen-27B-Gold-Standard-Build-LLM** | ~/Desktop/swarm-qwen-27B-Gold-Standard-Build-LLM/ | **Gold standard Qwen3.5 training playbook** — 27B/9B/2B templates, proven manifests, deploy scripts, quality gates. THE source of truth for all builds. |
+| swarm-vllm | ~/Desktop/swarm-vllm/ | vLLM 0.17.0 deployment configs, launch scripts, OpenAI gateway (FastAPI), vision_config fixes, benchmark scripts |
 | swarm_router_train | ~/Desktop/swarm_router_train/ | BeeMini router v2 training (60K pairs, serve_router.py) |
+| swarm-capital-markets | ~/Desktop/swarm-capital-markets/ | Capital markets intelligence: 8-stream cook, 7 skills, training, 180-prompt eval |
+
+## Eval
+
+| Repo | Path | Description |
+|------|------|-------------|
 | swarmresearch32_eval | ~/Desktop/swarmresearch32_eval/ | Research model eval (300 prompts, 10 categories) |
 | swarmresearch32_deep_eval | ~/Desktop/swarmresearch32_deep_eval/ | Deep eval (100 prompts, 9 categories, 4 tiers) |
 
