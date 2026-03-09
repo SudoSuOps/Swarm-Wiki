@@ -61,3 +61,4 @@ Cloudflare Account: `6abec5e82728df0610a98be9364918e4`
 - [Cloudflare R2](cloudflare-r2.md) -- 16 R2 buckets (8 active + 8 legacy), path patterns, access
 - [Cloudflare Workers](cloudflare-workers.md) -- 3 workers (router, API, CreditSniper), bindings, routes
 - [Deep Architecture](../01-architecture/api-gateway.md) -- Gateway architecture, inference topology, data flows
+- [OpenAI Server](openai-server.md) -- OpenAI-compatible inference gateway, model catalog, streaming, auth
