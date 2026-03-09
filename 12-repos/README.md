@@ -1,6 +1,6 @@
 # Repository Map
 
-18 repos across the Swarm & Bee ecosystem. All on `~/Desktop/`.
+19 repos across the Swarm & Bee ecosystem. All on `~/Desktop/`.
 
 ## Core Platform
 
@@ -9,6 +9,7 @@
 | swarmrouter | ~/Desktop/swarmrouter/ | Core platform: signal pipeline, curator fleet, data factory, worker API, skills framework, 28 skills |
 | swarm-capital-markets | ~/Desktop/swarm-capital-markets/ | CRE capital markets intelligence engine: 8-stream cook, 7 skills, training scripts, 180-prompt eval |
 | swarm-agents | ~/Desktop/swarm-agents/ | Agent framework: broker, reasoning, router, specialist, verifier agents |
+| **swarm-skills** | ~/Desktop/swarm-skills/ | **Full skill library** — 35 skills (19 CRE, 9 medical, 7 capital markets). SKILL.md specs, JS runtime, registry, schemas, validators, Python framework. |
 
 ## Blockchain & Infrastructure
 
