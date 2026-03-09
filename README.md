@@ -8,7 +8,7 @@ Single source of truth for all Swarm & Bee IP. Industrial AI Intelligence Infras
 
 | Metric | Count | Details |
 |--------|-------|---------|
-| Trained Models | 9 | 3 deployed, 1 training, 5 done |
+| Trained Models | 9 | 3 deployed, 1 training (CapitalMarkets-27B), 5 done |
 | Skills | 35 | 19 CRE + 9 medical + 7 capital markets |
 | Signal Workers | 11 | Real-time, 3-tier scheduling (15min/1hr/6hr) |
 | Verified Pairs | 1,158,902+ | Across 5 verticals in R2 |
@@ -60,6 +60,9 @@ Signal Workers (11 sources, real-time)
 | 13 | [Competitive](13-competitive/) | CRE tech landscape, 8 gaps nobody fills |
 | 14 | [Business](14-business/) | Pricing tiers, monetization layers, engine architecture |
 | 15 | [Operations](15-operations/) | Runbooks: daily ops, training, deployment |
+| 16 | [Dev Tools](16-dev-tools/) | CLI reference, Supabase schema, Stripe, Discord, Wrangler |
+| 17 | [Audits](17-audits/) | Market audits: CRE, medical, pharma, aviation, infrastructure, regulatory |
+| 18 | [Blueprints](18-blueprints/) | SwarmCurator-9B blueprint, Last-Mile AI Appliances |
 
 ## The Deal Machine
 

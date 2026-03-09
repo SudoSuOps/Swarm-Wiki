@@ -33,6 +33,10 @@ Built with Cloudflare Pages. Marketing + product showcase.
 
 Stripe tiers: `curator` ($20), `starter` ($49)
 
+## Section Index
+
+- [Products In Development](products-in-development.md) -- SwarmScaler, App Store, SwarmMed, SwarmPharma, SwarmAviation, OpenRouter
+
 ## Cloudflare Workers
 
 - Deploy: `cd worker && npx wrangler deploy --remote`
