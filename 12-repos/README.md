@@ -1,6 +1,6 @@
 # Repository Map
 
-17 repos across the Swarm & Bee ecosystem. All on `~/Desktop/`.
+18 repos across the Swarm & Bee ecosystem. All on `~/Desktop/`.
 
 ## Core Platform
 
@@ -29,7 +29,8 @@
 | Repo | Path | Description |
 |------|------|-------------|
 | **swarm-qwen-27B-Gold-Standard-Build-LLM** | ~/Desktop/swarm-qwen-27B-Gold-Standard-Build-LLM/ | **Gold standard Qwen3.5 training playbook** — 27B/9B/2B templates, proven manifests, deploy scripts, quality gates. THE source of truth for all builds. |
-| swarm-vllm | ~/Desktop/swarm-vllm/ | vLLM 0.17.0 deployment configs, launch scripts, OpenAI gateway (FastAPI), vision_config fixes, benchmark scripts |
+| **swarm-inference-gateway** | ~/Desktop/swarm-inference-gateway/ | **OpenAI-compatible API server** — routes to vLLM fleet, API key auth, SSE streaming, JSONL logging, Together.ai fallback. The front door to `api.swarmandbee.ai`. |
+| swarm-vllm | ~/Desktop/swarm-vllm/ | vLLM 0.17.0 deployment configs, launch scripts, vision_config fixes, benchmark scripts |
 | swarm_router_train | ~/Desktop/swarm_router_train/ | BeeMini router v2 training (60K pairs, serve_router.py) |
 | swarm-capital-markets | ~/Desktop/swarm-capital-markets/ | Capital markets intelligence: 8-stream cook, 7 skills, training, 180-prompt eval |
 
@@ -66,6 +67,7 @@
 | Skills (7 capital markets) | swarm-capital-markets/skills/ | — |
 | Worker API (40+ endpoints) | swarmrouter/worker/ | — |
 | Training scripts | swarmrouter/data/ | swarm-capital-markets/train/ |
+| Inference gateway | swarm-inference-gateway/ | swarm-vllm/ |
 | Eval suites | swarmresearch32_eval/ | swarm-capital-markets/eval/ |
 | Hedera bridge | swarmrouter/data/factory/ | hedera-swarmfoundry/ |
 | Websites | swarmbeeai-factory/ | swarm-bee/ |
