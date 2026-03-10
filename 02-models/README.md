@@ -6,10 +6,10 @@ Every model in the Swarm ecosystem, its status, and where it runs.
 
 | Model | Base | Status | Pairs | Steps | Loss | Location |
 |-------|------|--------|-------|-------|------|----------|
-| [SwarmCurator-27B](swarmcurator-27b.md) | Qwen3.5-27B Dense | DEPLOYED | 62K | 1,000 | 0.477 | swarmrails:8082 vLLM bf16 GPU1/Blackwell |
+| [SwarmAtlas-27B](swarm-atlas-27b.md) | Qwen3.5-27B Dense | DEPLOYED | 45K | 844 | 0.419 | swarmrails:8082 vLLM bf16 GPU1/Blackwell |
+| [SwarmCurator-27B](swarmcurator-27b.md) | Qwen3.5-27B Dense | SUPERSEDED | 62K | 1,000 | 0.477 | swarmrails:/data2/swarmcurator-27b/merged/ |
 | [SwarmCurator-9B](swarmcurator-9b.md) | Qwen3.5-9B | DEPLOYED | 46K | 414 | 0.707 | swarmrails:8081 vLLM bf16 GPU0 |
 | [SwarmCurator-2B](swarmcurator-2b.md) | Qwen3.5-2B | DONE | 9.4K | 224 | 0.880 | whale:~/swarmcurator-2b/merged/ |
-| [SwarmCapitalMarkets-27B](swarmcapitalmarkets-27b.md) | Qwen3.5-27B Dense | TRAINING | 45K | 844 | TBD | swarmrails:/data2/swarmcapitalmarkets/ |
 | [SwarmPharma-35B](swarmpharma-35b.md) | Qwen3.5-35B-A3B | DONE | 25.6K | 2,402 | 0.337 | swarmrails:/data2/swarmpharma-35b/ |
 | [SwarmCRE-35B](swarmcre-35b.md) | Qwen3.5-35B-A3B | STOPPED | 100K | 5,000 | gen gap | NAS |
 | [SwarmResearch-32B](swarmresearch-32b.md) | Qwen2.5-32B | DONE | 35.5K | 2,220 | 0.635 | swarmrails:/data2/swarm-research-32b/ |
@@ -20,8 +20,7 @@ Every model in the Swarm ecosystem, its status, and where it runs.
 
 ```
                     Strategic Layer
-                   SwarmCurator-27B (Blackwell 96GB)
-                   SwarmCapitalMarkets-27B (training)
+                   SwarmAtlas-27B (Blackwell 96GB)
                           |
                    Operational Layer
                    SwarmCurator-9B (RTX PRO 4500 32GB)
@@ -52,7 +51,7 @@ All Qwen3.5 models follow the **Swarm Gold Standard** — a proven training play
 
 **Repo**: [`swarm-qwen-27B-Gold-Standard-Build-LLM`](https://github.com/SudoSuOps/swarm-qwen-27B-Gold-Standard-Build-LLM)
 
-The SwarmCurator-27B-v1 build (loss **0.477**, 1,000 steps, 14.38h) is the crown jewel — the best build to date. Every future model starts from this config or gets nuked.
+SwarmAtlas-27B (loss **0.419**, 844 steps, 29.32h) is the best build to date, beating the Curator-27B reference (0.477). Every future model starts from this config or gets nuked.
 
 ### Config by Tier
 
@@ -87,7 +86,7 @@ See [gold-standard-build.md](gold-standard-build.md) for the full specification.
 | Edge | zima-edge-1 N150 14GB | SwarmSignal-2B Q4_K_M | Python + systemd |
 | Inference | whale RTX 3090 24GB | SwarmCurator-2B, BeeMini | llama-server / vLLM |
 | Inference | swarmrails GPU0 32GB | SwarmCurator-9B bf16 | vLLM 0.17.0 |
-| Strategic | swarmrails GPU1 96GB | SwarmCurator-27B bf16 | vLLM 0.17.0 |
+| Strategic | swarmrails GPU1 96GB | SwarmAtlas-27B bf16 | vLLM 0.17.0 |
 | Training | swarmrails both GPUs | Any model up to 35B | Unsloth |
 
 ## Grand Data Numbers
