@@ -33,7 +33,7 @@ Workers are configured via the signal engine. Each worker defines:
 - `schedule`: FAST, MEDIUM, or SLOW
 - `fetch()`: Source-specific data retrieval
 - `normalize(raw_data)`: Convert to standard signal schema
-- `dedup_key(signal)`: MD5 fingerprint field selection
+- `dedup_key(signal)`: SHA-256 fingerprint field selection (per RJP-1)
 
 ## CLI
 

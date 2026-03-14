@@ -42,6 +42,17 @@
 | swarmresearch32_eval | ~/Desktop/swarmresearch32_eval/ | Research model eval (300 prompts, 10 categories) |
 | swarmresearch32_deep_eval | ~/Desktop/swarmresearch32_deep_eval/ | Deep eval (100 prompts, 9 categories, 4 tiers) |
 
+## RJP-1 Protocol Stack
+
+| Repo | Path | Description |
+|------|------|-------------|
+| virgin-jelly | github:SudoSuOps/virgin-jelly | RJP-1 canonical spec — JellyScore formula, tier thresholds, source weights, domain codes |
+| hive-ledger | /data2/hive-ledger/ | Unified provenance chain — Cloudflare Workers + D1, Merkle sealing, Hedera HCS anchoring |
+| hive-warehouse | /data2/hive-warehouse/ | Customer storefront — catalog, ordering, fulfillment, delivery verification (CF Workers + D1 + R2) |
+| SwarmRadar | /data2/SwarmRadar/ | Signal detection + Royal Jelly routing — enrichment, rj_ingest, domain prompts |
+| cook-domain-prompts | /data2/cook-domain-prompts/ | Shared prompt library — pip-installable, RJ-aligned reasoning keywords, domain registry |
+| Swarm-Jelly | /data2/Swarm-Jelly/ | Self-healing model (SwarmJelly-4B) — converts propolis failures into royal_jelly training pairs |
+
 ## Tools & Utilities
 
 | Repo | Path | Description |

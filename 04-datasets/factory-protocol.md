@@ -54,7 +54,7 @@ Promoted data paths:
 Failure mode handling and retry logic. Pairs that fail any gate get logged with the failure reason and can be retried with adjusted prompts or parameters.
 
 ### 8. Dedup
-MD5 fingerprint on normalized text. The normalized form strips whitespace and lowercases before hashing. Duplicates are rejected at the shard level.
+SHA-256 fingerprint on normalized text (per RJP-1 standard). The normalized form strips whitespace and lowercases before hashing. Duplicates are rejected at the shard level.
 
 ### 9. Audit
 18 integrated audits run across the dataset checking for distribution balance, label consistency, numeric accuracy, and format compliance.

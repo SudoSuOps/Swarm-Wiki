@@ -27,8 +27,10 @@ Factory Pipeline
     |-- skeleton    --> Generate deal/scenario structure
     |-- generate    --> LLM produces instruction-response pairs
     |-- gate        --> 6 deterministic checks
-    |-- promote     --> CoVe verification (platinum/gold/fail)
+    |-- promote     --> CoVe verification → RJP-1 tiers (royal_jelly/honey/pollen/propolis)
     |-- publish     --> R2 upload + manifest update
+    |-- ledger      --> hive-ledger (Merkle seal + Hedera HCS anchor)
+    |-- warehouse   --> hive-warehouse (catalog + fulfillment API)
     |
     v
 Training (Unsloth LoRA on swarmrails GPUs)
@@ -116,15 +118,15 @@ The factory converts cook orders into training-ready data:
 
 **Generate**: An LLM (Together.ai Llama-3.3-70B or local vLLM) produces the instruction-response pair. System prompts rotate across 30+ unique templates to prevent memorization. 26+ task types ensure diversity.
 
-**Gate**: Six deterministic checks in sequence:
-1. JSON validity (weight 0.30) -- is the output valid JSON?
-2. Schema completeness (weight 0.25) -- are all required fields present?
-3. Enum validation (weight 0.25) -- are categorical values from allowed sets?
-4. Verdict match -- does the conclusion follow from the analysis?
-5. Score MAE -- are numerical outputs within acceptable error bounds?
-6. Confidence threshold -- composite score >= 0.80 to promote
+**Gate**: Six deterministic checks per RJP-1, in sequence:
+1. **json_valid** -- is the output valid JSON?
+2. **output_length** -- minimum character counts (JSON: 20, text: 50)
+3. **degenerate** -- no 40+ char repeated patterns
+4. **dedup** -- SHA-256 fingerprint uniqueness within shard
+5. **concept_present** -- domain-specific terms present (min 2 hits)
+6. **numeric_verify** -- computed values match gold targets within tolerance
 
-**Promote**: CoVe (Chain of Verification) pass. Pairs that clear all gates get promoted to platinum. Pairs that fail get logged with failure reasons for analysis.
+**Promote**: CoVe (Chain of Verification) pass. Pairs that clear all gates are scored via the RJP-1 JellyScore formula and assigned canonical tiers: royal_jelly (>= 95), honey (>= 85), pollen (>= 70), or propolis (< 70). Pairs below propolis threshold are logged with failure reasons for analysis.
 
 **Publish**: Promoted pairs upload to the appropriate R2 bucket with updated manifest. Shard files follow naming convention: `{vertical}_{task}_{shard_num}.jsonl`.
 

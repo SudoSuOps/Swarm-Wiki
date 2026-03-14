@@ -17,7 +17,7 @@ Single source of truth for all Swarm & Bee IP. Industrial AI Intelligence Infras
 | HCS Topics | 5 | Mainnet immutable audit trails |
 | HTS Tokens | 5 | Tokenized asset classes |
 | API Endpoints | 40+ | router.swarmandbee.com |
-| Repos | 17 | Full production ecosystem |
+| Repos | 23 | Full production ecosystem (17 core + 6 RJP-1 protocol stack) |
 
 *Last updated: 2026-03-09*
 
@@ -27,8 +27,9 @@ Single source of truth for all Swarm & Bee IP. Industrial AI Intelligence Infras
 Signal Workers (11 sources, real-time)
     -> SwarmCurator Fleet (27B + 9B + 2B)
     -> Vertical Models (CRE, Medical, Aviation, Pharma)
-    -> Intelligence Objects (verified, structured)
-    -> HCS Seal (SHA256 + guarantee.json)
+    -> Intelligence Objects (verified, RJP-1 tiered)
+    -> Hive Ledger (Merkle seal + Hedera HCS anchor)
+    -> Hive Warehouse (catalog + fulfillment API)
     -> HTS Token (Deed per IO)
 ```
 

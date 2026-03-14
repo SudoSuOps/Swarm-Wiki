@@ -26,7 +26,7 @@ This gate is the reason sb-cre went from 881K factory output to 643K promoted pa
 Checks that domain-specific terms appear in the response. Requires a minimum of 2 hits from the relevant domain vocabulary. Catches off-topic or generic responses that lack domain grounding.
 
 ### 5. dedup
-MD5 fingerprint on normalized text (lowercased, whitespace-stripped). Any pair whose fingerprint matches an existing pair in the current shard is rejected. Prevents near-identical outputs from inflating the dataset.
+SHA-256 fingerprint on normalized text (lowercased, whitespace-stripped), per RJP-1 standard. Any pair whose fingerprint matches an existing pair in the current shard is rejected. Prevents near-identical outputs from inflating the dataset.
 
 ### 6. degenerate
 Regex pattern: `(.{40,})\1{2,}`
@@ -49,12 +49,14 @@ After deterministic gates, surviving pairs can be promoted via CoVe (Chain of Ve
 
 ### Promotion Thresholds
 
-A pair is promoted to PLATINUM if ALL of the following hold:
+A pair is promoted to **royal_jelly** tier (RJP-1) if ALL of the following hold:
 - Total score >= 20 out of 25
 - Every individual criterion >= 3
 - Accuracy >= 4
 
-Pairs that pass gates but fail CoVe promotion remain at GOLD tier.
+Pairs that pass gates but fall below CoVe promotion thresholds are assigned lower RJP-1 tiers based on JellyScore: honey (>= 85), pollen (>= 70), or propolis (< 70).
+
+**Legacy mapping**: Factory "PLATINUM" = royal_jelly, factory "GOLD" = honey.
 
 ## Gate Application Order
 

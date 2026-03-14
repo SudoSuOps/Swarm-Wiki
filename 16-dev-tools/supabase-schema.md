@@ -18,7 +18,7 @@
 
 | Table | Purpose | Key Columns |
 |-------|---------|-------------|
-| `cooked_pairs` | Training pairs from factory | `id` serial, `cook_name`, `cook_run_id`, `domain`, `pair_data` JSON, `fingerprint` MD5, `specialty`, `tier`, `vertical`, `r2_synced` bool, `created_at` |
+| `cooked_pairs` | Training pairs from factory | `id` serial, `cook_name`, `cook_run_id`, `domain`, `pair_data` JSON, `fingerprint` SHA-256, `specialty`, `tier`, `vertical`, `r2_synced` bool, `created_at` |
 | `cook_runs` | Cook job metadata | `id` UUID, `name`, `domain`, `cook_type`, `status` (running/completed/failed/cancelled), `gen_model`, `gen_model_provider`, `pass_model`, `output_count`, `pass_count`, `r2_verified`, `started_at`, `completed_at`, `notes`, `created_at` |
 | `dataset_versions` | Finalized dataset snapshots | `id` UUID, `name`, `domain`, `record_count`, `r2_bucket`, `r2_prefix`, `notes`, `created_at` |
 | `training_runs` | Model fine-tuning jobs | `id` UUID, `model_name`, `base_model`, `status`, `current_step`, `total_steps`, `loss_curve` JSON array, `final_loss`, `started_at`, `completed_at`, `created_at` |

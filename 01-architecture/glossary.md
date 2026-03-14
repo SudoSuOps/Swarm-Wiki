@@ -6,7 +6,7 @@ Definitions for terms used throughout the Swarm ecosystem.
 
 **Intelligence Object** -- A finalized, verified, structured piece of CRE (or vertical-specific) data that has passed all quality gates. This is the correct term for what Swarm produces. Not a dataset. Not a document. An Intelligence Object. It has provenance, a quality score, and optionally an HCS seal.
 
-**PIO (Platinum Intelligence Object)** -- An Intelligence Object that has passed all six deterministic gates plus CoVe verification. The highest quality tier. PIOs are eligible for HCS sealing and promotion to production training sets.
+**PIO (Platinum Intelligence Object)** -- An Intelligence Object that has passed all six deterministic gates plus CoVe verification. Maps to `royal_jelly` tier in RJP-1 (JellyScore >= 95). PIOs are eligible for HCS sealing and promotion to production training sets.
 
 **Pair** -- A single instruction-response training example in JSONL format. Contains a system prompt, user instruction, and assistant response. The atomic unit of training data in the Swarm factory.
 
@@ -14,7 +14,7 @@ Definitions for terms used throughout the Swarm ecosystem.
 
 **Cook** -- The process of generating new training pairs from raw data or signals. A cook order specifies the vertical, task type, number of pairs, and source data. "Cooking" is running the factory pipeline to produce pairs.
 
-**Gate** -- A deterministic quality check applied to generated pairs before promotion. Six gates run in sequence: JSON validity (0.30 weight), schema completeness (0.25), enum validation (0.25), verdict match, score MAE, and confidence threshold (>= 0.80 to pass). Gates are code, not models.
+**Gate** -- A deterministic quality check applied to generated pairs before promotion. Six gates per RJP-1: json_valid, output_length, numeric_verify, concept_present, dedup (SHA-256), degenerate. Gates are code, not models. After gates, pairs are scored via JellyScore and assigned RJP-1 tiers.
 
 **Promote** -- Moving a pair from generated status to verified status after passing all gates and CoVe review. Promoted pairs enter the training pool. Failed pairs are logged with reasons.
 
@@ -44,7 +44,18 @@ Definitions for terms used throughout the Swarm ecosystem.
 
 **Cook Order** -- A specification sent from the Curator Planner to the Factory, defining what pairs to generate. Includes vertical, task type, target count, source data references, and quality constraints.
 
-**CoVe (Chain of Verification)** -- The multi-step verification process applied to generated pairs. Pairs pass through deterministic gates first, then receive a quality classification (platinum, gold, or fail) with per-criterion scores for accuracy, completeness, structure, relevance, and SFT quality.
+**CoVe (Chain of Verification)** -- The multi-step verification process applied to generated pairs. Pairs pass through deterministic gates first, then receive a quality classification with per-criterion scores for accuracy, completeness, structure, relevance, and SFT quality. CoVe promotion maps to the RJP-1 canonical tiers (see RJP-1 entry).
+
+**RJP-1 (Royal Jelly Protocol v1)** -- The canonical quality protocol defined in the `virgin-jelly` repo. Standardizes tier names, scoring, fingerprinting, and provenance across the entire ecosystem. Key components:
+
+- **4 canonical tiers**: `royal_jelly` (score >= 95), `honey` (>= 85), `pollen` (>= 70), `propolis` (< 70). Factory "platinum" maps to royal_jelly; factory "gold" maps to honey.
+- **JellyScore formula**: `(source_confidence×0.25 + gate_integrity×0.30 + reasoning_depth×0.20 + entropy_health×0.10 + fingerprint_uniqueness×0.15) × 100`
+- **14 source weights**: edgar=0.90, fred=0.90, human=0.90, openalex=0.85, zenodo=0.85, arxiv=0.80, github=0.72, swarmjelly=0.70, cre_news=0.65, rss=0.60, webhook=0.60, hn=0.50, reddit=0.50, trending=0.40
+- **14 domain codes**: ai→AIS, medical→MED, aviation→AVI, cre→CRE, economic→ECO, legal→LGL, energy→NRG, climate→CLM, crypto→CRY, finance→FIN, software→SFT, supply_chain→SCH, patents→PAT, general→GEN
+- **Fingerprinting**: SHA-256 on normalized text (lowercased, whitespace-stripped). No MD5.
+- **6 quality gates**: json_valid, output_length, numeric_verify, concept_present, dedup, degenerate
+
+Implemented in: `hive-ledger` (provenance chain), `hive-warehouse` (storefront), `SwarmRadar` (signal detection), `cook-domain-prompts` (shared prompt library), `Swarm-Jelly` (self-healing model).
 
 **EntityScorer** -- A component in the signal pipeline that assigns relevance scores to detected entities based on profile data, market context, and historical signal patterns.
 
