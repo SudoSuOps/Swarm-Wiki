@@ -4,29 +4,47 @@ Two edge devices for signal processing and lightweight inference at the network 
 
 ## signal-edge-01 (Jetson Orin Nano 8GB)
 
-NVIDIA Jetson for edge AI inference. Currently CPU-only due to firmware limitation.
+NVIDIA Jetson running as an edge cook node. Full GPU offload enabled, producing ~12 pairs/hr.
 
 | Field | Value |
 |-------|-------|
-| IP | 192.168.1.95 |
+| IP | 192.168.0.79 |
 | User | sigedge (password: mack, SSH key auth) |
 | Hostname | signal-edge-01 |
 | OS | JetPack 6.2 (R36.4.7) |
 | SoC | Orin Nano, 8GB shared memory |
 | CUDA | 12.6 |
 | GPU Arch | sm_87 |
+| Power Mode | MAXN (jetson_clocks enabled) |
+| Throughput | ~7.8 tok/s GPU, ~12 pairs/hr |
 
 ### Software
 
 | Component | Status |
 |-----------|--------|
-| llama.cpp | Built for sm_87 (CUDA) |
-| SwarmSignal-2B | Q4_K_M (1.2GB), deployed |
-| Inference | CPU-only (Super firmware needed for GPU mode) |
+| llama.cpp | Built for sm_87 (CUDA), full GPU offload |
+| Qwen3.5-4B base | Q4_K_M GGUF, cooking aviation pairs |
+| jetson_cook.py | Custom cook script with thinking mode disabled |
+| Cook output | ~/swarm/cook/cooked_shard_2k.jsonl |
 
-### Firmware Note
+### Cook Setup
 
-The Orin Nano ships with standard firmware that does not enable GPU compute for llama.cpp. The "Super" firmware update is required to unlock GPU-accelerated inference. Until then, the 2B model runs on CPU only, which is adequate for the signal classification workload.
+```bash
+# llama-server with full GPU offload, reduced context to fit 8GB
+llama-server -m qwen35-4b-base-q4_k_m.gguf \
+  --host 0.0.0.0 --port 8085 \
+  -ngl 99 -c 2048
+
+# Cook script (nohup, screen not installed)
+nohup python3 jetson_cook.py --input shard_2k.jsonl --domain aviation &
+```
+
+### Key Configuration
+
+- **Thinking mode disabled**: Base Qwen3.5-4B consumes all tokens in `<think>` tags. Fix: `"chat_template_kwargs": {"enable_thinking": false}` in cook script payload.
+- **Context reduced to 2048**: Full 4096 causes CUDA OOM on 8GB shared memory. 2048 fits with full GPU offload.
+- **Power mode MAXN**: Set with `sudo nvpmodel -m 0 && sudo jetson_clocks` for maximum throughput.
+- **Desktop environment removed**: Freed ~500MB RAM for inference.
 
 ## zima-edge-1 (Intel N150)
 

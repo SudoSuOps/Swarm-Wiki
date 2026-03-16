@@ -15,6 +15,8 @@ Every model in the Swarm ecosystem, its status, and where it runs.
 | [SwarmResearch-32B](swarmresearch-32b.md) | Qwen2.5-32B | DONE | 35.5K | 2,220 | 0.635 | swarmrails:/data2/swarm-research-32b/ |
 | [BeeMini Router v2](beemini-router.md) | Qwen2.5-3B | DONE | 60K | 693 | 0.026 | swarmrouter-v2-q4_k_m.gguf (1.8GB) |
 | [SwarmSignal-2B](swarmcurator-2b.md) | Qwen3.5-2B | LIVE | Custom | 224 | 0.880 | signal-edge-01, zima-edge-1 |
+| [SwarmJelly-4B](swarmjelly-4b.md) | Qwen3.5-4B | DEPLOYED | 5K cells | -- | -- | swarmrails:8085 Q4_K_M CPU (AMX+mlock, 1083 tok/s) |
+| Qwen3.5-4B Base | Qwen3.5-4B | COOK NODE | -- | -- | -- | swarmrails:8081+8083, whale:8085, jetson:8085 |
 
 ## Fleet Topology
 
@@ -29,6 +31,14 @@ Every model in the Swarm ecosystem, its status, and where it runs.
                    SwarmPharma-35B (3B active params)
                    SwarmCRE-35B v2 (3B active params)
                    SwarmResearch-32B (legacy)
+                          |
+                   Self-Healing Layer
+                   SwarmJelly-4B (propolis -> RJ pairs)
+                          |
+                   Cook Layer (Base Qwen3.5-4B)
+                   rails GPU0+GPU1 (16 workers, 810 tok/s)
+                   whale (ASRS 4B, 4 workers)
+                   jetson (4B, GPU offload, 12 pairs/hr)
                           |
                    Edge Layer
                    SwarmCurator-2B / SwarmSignal-2B
@@ -82,15 +92,24 @@ See [gold-standard-build.md](gold-standard-build.md) for the full specification.
 
 | Tier | Hardware | Models | Serving |
 |------|----------|--------|---------|
-| Edge | Jetson Orin Nano 8GB | SwarmSignal-2B Q4_K_M | llama.cpp CPU |
+| Cook | swarmrails GPU0 32GB | Qwen3.5-4B base | vLLM 0.17.0 :8081 (8 workers) |
+| Cook | swarmrails GPU1 96GB | Qwen3.5-4B base | vLLM 0.17.0 :8083 (8 workers) |
+| Cook | whale RTX 3090 24GB | Qwen3.5-4B base (ASRS) | vLLM :8085 (4 workers) |
+| Cook | Jetson Orin Nano 8GB | Qwen3.5-4B Q4_K_M | llama-server GPU :8085 (-ngl 99 -c 2048) |
+| Self-Heal | swarmrails CPU | SwarmJelly-4B Q4_K_M | llama-server :8085 (AMX, 1083 tok/s) |
 | Edge | zima-edge-1 N150 14GB | SwarmSignal-2B Q4_K_M | Python + systemd |
-| Inference | whale RTX 3090 24GB | SwarmCurator-2B, BeeMini | llama-server / vLLM |
-| Inference | swarmrails GPU0 32GB | SwarmCurator-9B bf16 | vLLM 0.17.0 |
-| Strategic | swarmrails GPU1 96GB | SwarmAtlas-27B bf16 | vLLM 0.17.0 |
 | Training | swarmrails both GPUs | Any model up to 35B | Unsloth |
+
+## Key Finding: Base 4B = Fine-Tuned 9B
+
+Discovered 2026-03-15: Base Qwen3.5-4B at temp 0.05 produces 100% Honey-tier output, matching fine-tuned 9B quality. The 27B model actually scored WORSE (31.5% Honey). The bottleneck was **the prompt, not the model** -- RJ-aligned prompts with the right reasoning cues and domain grounding unlock base model capability that fine-tuning cannot improve further.
+
+This finding powers the entire cook fleet: all 3 nodes run base 4B with the Prompt Machine, not fine-tuned models.
 
 ## Grand Data Numbers
 
-- 1,158,902+ training pairs across all verticals
-- 643K CRE, 432K Medical, 45K Aviation, 6.7K Drone, 31K Core
-- R2 buckets: sb-cre, sb-medical, sb-aviation, sb-drone, sb-core, sb-judge
+- 1,513,479+ verified pairs across 13 domains (359 batches)
+- Aviation: 9K+ (rails OpenAlex) + 4.6K (whale ASRS) + growing
+- CRE: 643K, Medical: 432K, Signal: 23K local + 1.16M R2
+- 13 domains: aviation, cre, medical, ai, energy, legal, crypto, finance, economic, climate, software, supply_chain, patents
+- R2 buckets: sb-cre, sb-medical, sb-aviation, sb-drone, sb-core, sb-judge, sb-honey-verified, swarm-ledger-vault

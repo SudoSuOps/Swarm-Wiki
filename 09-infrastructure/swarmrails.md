@@ -31,8 +31,11 @@ Both GPUs sm_120 Blackwell -- single CUDA toolkit, no split builds needed.
 | Port | Service | GPU | Model |
 |------|---------|-----|-------|
 | 8080 | FastAPI router proxy | CPU | swarmrouter-v2 (Ollama) |
-| 8081 | vLLM | GPU 0 (4500, 32GB) | SwarmCurator-9B bf16 (23.5GB) |
-| 8082 | vLLM | GPU 1 (6000, 96GB) | SwarmCurator-27B bf16 (93GB) |
+| 8081 | vLLM | GPU 0 (4500, 32GB) | Qwen3.5-4B base (cook, 8 workers) |
+| 8083 | vLLM | GPU 1 (6000, 96GB) | Qwen3.5-4B base (cook, 8 workers) |
+| 8085 | llama-server | CPU (AMX) | SwarmJelly-4B Q4_K_M (mlock, 1083 tok/s) |
+
+**Note**: GPUs switched from fine-tuned model inference to base 4B cooking as of 2026-03-15. Base 4B + RJ-aligned prompts matches fine-tuned 9B quality (see key finding in [models README](../02-models/README.md)).
 
 ## Key Paths
 
@@ -79,13 +82,21 @@ Required config fix: copy `vision_config` from base Qwen3.5 into merged `config.
 
 ## Benchmarks
 
+### Current (Cook Fleet Mode)
+
+| Model | Throughput | VRAM | Workers |
+|-------|-----------|------|---------|
+| 4B base (GPU 0) | ~400 tok/s | ~9GB | 8 |
+| 4B base (GPU 1) | ~410 tok/s | ~9GB | 8 |
+| Combined | ~810 tok/s | ~18GB | 16 |
+| SwarmJelly CPU | 1,083 tok/s prompt | 0 (AMX) | 1 |
+
+### Previous (Inference Mode)
+
 | Model | Sequential | 4 Concurrent | VRAM |
 |-------|-----------|-------------|------|
 | 9B bf16 (GPU 0) | ~45 tok/s | 165 tok/s | 23.5GB |
 | 27B bf16 (GPU 1) | ~25 tok/s | 88 tok/s | 93GB |
-| Combined | -- | ~1,740 pairs/hr | -- |
-
-3.6x speedup with concurrent batching.
 
 ## Access
 

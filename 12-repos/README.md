@@ -47,7 +47,7 @@
 | Repo | Path | Description |
 |------|------|-------------|
 | virgin-jelly | github:SudoSuOps/virgin-jelly | RJP-1 canonical spec — JellyScore formula, tier thresholds, source weights, domain codes |
-| hive-ledger | /data2/hive-ledger/ | Unified provenance chain — Cloudflare Workers + D1, Merkle sealing, Hedera HCS anchoring |
+| hive-ledger | /data2/hive-ledger/ | Unified provenance chain — CF Workers + D1, Merkle sealing, Hedera HCS anchoring, prompt telemetry API, RJ showcase dashboard |
 | hive-warehouse | /data2/hive-warehouse/ | Customer storefront — catalog, ordering, fulfillment, delivery verification (CF Workers + D1 + R2) |
 | SwarmRadar | /data2/SwarmRadar/ | Signal detection + Royal Jelly routing — enrichment, rj_ingest, domain prompts |
 | cook-domain-prompts | /data2/cook-domain-prompts/ | Shared prompt library — pip-installable, RJ-aligned reasoning keywords, domain registry |

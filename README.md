@@ -8,28 +8,32 @@ Single source of truth for all Swarm & Bee IP. Industrial AI Intelligence Infras
 
 | Metric | Count | Details |
 |--------|-------|---------|
-| Trained Models | 9 | 3 deployed, 1 training (CapitalMarkets-27B), 5 done |
+| Trained Models | 10 | 4 deployed (incl. SwarmJelly-4B), 6 done |
 | Skills | 35 | 19 CRE + 9 medical + 7 capital markets |
 | Signal Workers | 11 | Real-time, 3-tier scheduling (15min/1hr/6hr) |
-| Verified Pairs | 1,158,902+ | Across 5 verticals in R2 |
-| Verticals | 5 | CRE, Medical, Aviation, Drone, Signal |
-| GPU Nodes | 4 | swarmrails (2x Blackwell), whale (3090), Jetson, zima |
+| Verified Pairs | 1,513,479+ | Across 13 domains in R2 + D1, 359 batches |
+| Domains | 13 | Aviation, CRE, Medical, AI, Energy, Legal, Crypto, Finance, Economic, Climate, Software, Supply Chain, Patents |
+| Cook Fleet | 3 nodes | swarmrails (dual 4B, 16w), whale (ASRS 4B, 4w), Jetson (4B, GPU offload) |
+| GPU Nodes | 4 | swarmrails (2x Blackwell), whale (3090), Jetson Orin, zima |
+| Prompt Mutations | 10 | 2 parents + 8 structured mutations, softmax allocation, extinction rule |
 | HCS Topics | 5 | Mainnet immutable audit trails |
 | HTS Tokens | 5 | Tokenized asset classes |
-| API Endpoints | 40+ | router.swarmandbee.com |
+| API Endpoints | 40+ | router.swarmandbee.com + ledger.swarmandbee.ai |
 | Repos | 23 | Full production ecosystem (17 core + 6 RJP-1 protocol stack) |
 
-*Last updated: 2026-03-09*
+*Last updated: 2026-03-16*
 
 ## Architecture
 
 ```
 Signal Workers (11 sources, real-time)
-    -> SwarmCurator Fleet (27B + 9B + 2B)
-    -> Vertical Models (CRE, Medical, Aviation, Pharma)
-    -> Intelligence Objects (verified, RJP-1 tiered)
-    -> Hive Ledger (Merkle seal + Hedera HCS anchor)
+    -> SwarmRadar (enrichment + domain routing)
+    -> Cook Fleet (3 nodes: rails + whale + jetson)
+       -> Base Qwen3.5-4B + Prompt Machine (10 mutations, softmax allocation)
+       -> RJ Quality Gates (mechanism + tradeoff + density)
+    -> Hive Ledger (Merkle seal + Hedera HCS anchor + prompt telemetry)
     -> Hive Warehouse (catalog + fulfillment API)
+    -> SwarmJelly-4B (self-healing: propolis failures -> RJ training pairs)
     -> HTS Token (Deed per IO)
 ```
 

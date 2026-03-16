@@ -50,10 +50,10 @@ Eval
     |
     v
 Fleet Deployment
-    |-- 27B on Blackwell (strategic analysis)
-    |-- 9B on RTX PRO 4500 (operational inference)
-    |-- 2B on edge devices (classification)
-    |-- Router on whale (request routing)
+    |-- Cook fleet: 3 nodes running base 4B + Prompt Machine
+    |-- SwarmJelly-4B on CPU (self-healing loop)
+    |-- Edge cook on Jetson Orin (12 pairs/hr)
+    |-- Signal classification on zima-edge-1
 ```
 
 ## Stage 1: Signal Ingestion

@@ -8,7 +8,7 @@ Hardware fleet for training, inference, and edge deployment.
 |------|-----|-----|-----|------|-----|
 | swarmrails | Xeon w9-3475X 36C/72T | 256GB DDR5 | RTX PRO 4500 (32GB) + RTX PRO 6000 (96GB) | Primary training + inference | `ssh swarmrails` |
 | whale | Ryzen 9 5900X 12C/24T | 64GB DDR4 | RTX 3090 (24GB) | Secondary training/eval | `ssh whale` |
-| signal-edge-01 | Jetson Orin Nano | 8GB | Orin iGPU (sm_87) | Edge inference | `ssh sigedge@192.168.1.95` |
+| signal-edge-01 | Jetson Orin Nano | 8GB | Orin iGPU (sm_87) | Edge cook node | `ssh sigedge@192.168.0.79` |
 | zima-edge-1 | Intel N150 4C/4T | 14GB LPDDR5 | None (CPU only) | Signal + edge services | `ssh dev@192.168.0.70` |
 
 ## Total Compute
@@ -46,16 +46,17 @@ Both swarmrails GPUs are Blackwell (sm_120) -- single CUDA toolkit, no split bui
 | Python | 3.12.3 | whale |
 | uv | 0.10.6 | local, whale, swarmrails |
 
-## Fleet Distribution Vision
+## Fleet Distribution (Active 2026-03-16)
 
 ```
-Training          -> swarmrails (Blackwell GPUs)
-27B Inference     -> swarmrails GPU 1 (RTX PRO 6000, 96GB)
-9B Inference      -> swarmrails GPU 0 (RTX PRO 4500, 32GB)
-2B/Edge Inference -> whale (RTX 3090) or signal-edge-01 (Jetson)
+Cook (OpenAlex)   -> swarmrails GPU 0+1 (dual 4B base, 16 workers, ~810 tok/s)
+Cook (ASRS)       -> whale (4B base, 4 workers, RJ-gated)
+Cook (Edge)       -> signal-edge-01 (4B Q4_K_M, full GPU offload, 12 pairs/hr)
+Self-Healing      -> swarmrails CPU (SwarmJelly-4B, AMX, 1083 tok/s)
 Signal Processing -> zima-edge-1 (CPU, 15min cycles)
-Router            -> whale (BeeMini GGUF on :8081)
 ```
+
+All cook nodes run base Qwen3.5-4B with the Prompt Machine (10 mutations, softmax allocation). Fine-tuned model inference (9B, 27B) paused while the cook fleet scales to 1.5M+ verified pairs.
 
 ## Section Index
 

@@ -22,15 +22,23 @@ Processing flows through 7 ordered middlewares (see [middleware.md](middleware.m
 SignalIngestion -> Classification(2B) -> Analysis(9B) -> Strategy(27B) -> QualityGate -> StateUpdate -> Dispatch
 ```
 
-## 5 Verticals
+## 13 Domains
 
-| Vertical | Status | Focus |
-|----------|--------|-------|
-| CRE | OPERATIONAL | Deal manufacturing, underwriting, capital markets |
-| Medical | OPERATIONAL | Drug interactions, dosing, reconciliation, safety |
-| Aviation | OPERATIONAL | Safety, maintenance, logistics |
-| Drone | OPERATIONAL | Regulatory, operations, routing |
-| Signal | OPERATIONAL | Market intelligence, trend detection |
+| Domain | Status | Focus |
+|--------|--------|-------|
+| aviation | COOKING | Safety (ASRS), maintenance, research (OpenAlex). 3-node cook fleet |
+| cre | OPERATIONAL | Deal manufacturing, underwriting, capital markets |
+| medical | OPERATIONAL | Drug interactions, dosing, reconciliation, safety |
+| ai | OPERATIONAL | AI/ML research, model architectures |
+| energy | OPERATIONAL | Grid, renewables, nuclear, storage |
+| legal | OPERATIONAL | Regulatory, compliance, case analysis |
+| crypto | OPERATIONAL | DeFi, protocol analysis, market structure |
+| finance | OPERATIONAL | Capital markets, fixed income, derivatives |
+| economic | OPERATIONAL | Macro, labor, trade, monetary policy |
+| climate | OPERATIONAL | Environmental, emissions, adaptation |
+| software | OPERATIONAL | Architecture, security, systems |
+| supply_chain | OPERATIONAL | Logistics, procurement, optimization |
+| patents | OPERATIONAL | IP analysis, prior art, claims |
 
 See [verticals.md](verticals.md) for vertical configuration and the BaseVertical ABC.
 
@@ -47,8 +55,20 @@ python3 -m curator skills             # List discovered skills
 python3 -m curator skills --vertical cre  # List CRE skills only
 ```
 
+## Prompt Machine (Added 2026-03-15)
+
+The Prompt Machine is an automated prompt evolution system that closes the loop between cook output quality and prompt selection. See [prompt-machine.md](prompt-machine.md) for full details.
+
+Key components:
+- **Prompt Registry**: Shared library (cook-domain-prompts repo), SHA-256 hashed for tracking
+- **Softmax Allocation**: Temperature-scaled weighting from telemetry scores (t=0.5, 5% floor)
+- **8 Structured Mutations**: 4 axes (specificity, reasoning, numeric, persona) x 2 parents
+- **Extinction Rule**: avg < 85 + 200 pairs -> prompt removed from pool
+- **Telemetry**: 6 endpoints on hive-ledger for leaderboard, domain matrix, timeline, adoption
+
 ## Related
 
+- [prompt-machine.md](prompt-machine.md) -- Prompt evolution, mutations, softmax allocation
 - [middleware.md](middleware.md) -- 7-middleware chain details
 - [orchestrator.md](orchestrator.md) -- State machine, planner, assembler, validator, publisher
 - [verticals.md](verticals.md) -- 5 verticals and BaseVertical ABC
