@@ -7,7 +7,7 @@ Signal collection runs on two dedicated edge nodes in addition to the main swarm
 | Spec | Value |
 |------|-------|
 | Hardware | NVIDIA Jetson Orin Nano 8GB |
-| IP | 192.168.1.95 |
+| IP | 192.168.0.79 |
 | User | sigedge (password: mack) |
 | Hostname | signal-edge-01 |
 | OS | JetPack 6.2 (R36.4.7) |

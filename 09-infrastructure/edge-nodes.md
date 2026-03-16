@@ -46,44 +46,58 @@ nohup python3 jetson_cook.py --input shard_2k.jsonl --domain aviation &
 - **Power mode MAXN**: Set with `sudo nvpmodel -m 0 && sudo jetson_clocks` for maximum throughput.
 - **Desktop environment removed**: Freed ~500MB RAM for inference.
 
-## zima-edge-1 (Intel N150)
+## zima-edge-1 / Bee Node (Intel N150)
 
-Always-on Intel mini PC running signal processing, Discord bridge, and edge services.
+Always-on Intel mini PC serving as the swarm's infrastructure node — finalize pipeline, audit archive, staging, signal ingestion, and S3-compatible object storage. Registered as `bee` in swarm-controller.
 
 | Field | Value |
 |-------|-------|
 | IP | 192.168.0.70 |
 | User | dev (password: mack) |
-| CPU | Intel N150 4C/4T, 3.6GHz, AVX2 + AVX-VNNI |
-| RAM | 14GB LPDDR5 |
-| Storage | 931GB + 466GB SSDs |
-| GPU | None (CPU only) |
+| Hostname | zima-edge-1 |
+| CPU | Intel N150 4C/4T, 3.6GHz, 6W TDP, AVX2 + AVX-VNNI |
+| RAM | 16 GB DDR5 |
+| Storage | 915 GB NVMe (851 GB free) + 458 GB /data (430 GB free) |
+| Network | 10G fiber + NAS mount at /mnt/swarm |
+| GPU | None (CPU only -- too weak for inference, perfect for always-on services) |
+| OS | Ubuntu 25.04, kernel 6.17.0, Python 3.13 |
 
-### Services
+### Active Services
 
 | Service | Port | Details |
 |---------|------|---------|
-| swarmsignal.service | -- | systemd, enabled, 15min signal collection cycles |
-| Discord bridge | -- | Posts P1-P3 signals to #swarm-signal channel via webhook |
-| BitNet b1.58-2B-4T | -- | Microsoft BitNet GGUF (1.2GB), 19.7 tok/s on N150 CPU |
-| MinIO | 9000/9001 | S3-compatible object storage + web console |
-| Nginx Proxy Manager | 81 | Reverse proxy management |
-| cloudflared | -- | Cloudflare tunnel (outbound) |
-| swarm-witness | -- | Witness/attestation service |
+| bee-finalize-watcher | -- | Auto-finalize cooked pairs from /data/swarm-staging/{domain}/ |
+| swarmsignal | -- | Python RSS/feed ingestion, 29K sources/day, 169 MB RAM |
+| MinIO | 9000/9001 | S3 buckets: grind-output, platinum-cache, swarm-aero, training-staging |
+| swarm-witness | 8420 | Rust binary, SwarmOS identity/attestation daemon |
+| cloudflared | -- | CF tunnel cf6a905e -> chat.swarmandbee.com:3000 |
+| Nginx Proxy Manager | 80/443 | Reverse proxy (Docker) |
 
-### SwarmSignal Pipeline
+### Data Directories
 
-- Python venv: `/data/swarmsignal/venv/`
-- Service: `swarmsignal.service` (systemd, enabled at boot)
-- Cycle: Every 15 minutes, collects signals, classifies priority (P1-P3), posts to Discord
-- Discord webhook: Posts to #swarm-signal channel with priority-based formatting
+| Path | Purpose |
+|------|---------|
+| `/data/swarm-finalize/` | finalize_batch.py + watcher daemon |
+| `/data/swarm-staging/{domain}/` | Incoming cooked JSONL from cook nodes |
+| `/data/swarm-audit/` | Archived finalized batches |
+| `/data/swarmsignal/` | Signal ingestion engine |
+| `/data/platinum/` | CoVe verify, MRI gold |
+| `/data/minio/data/` | 4 S3 buckets |
 
-### BitNet
+### Finalize Pipeline
 
-Microsoft's BitNet b1.58-2B-4T model running via `bitnet.cpp` (separate from llama.cpp). 1-bit weights achieve 19.7 tok/s on the N150's CPU with AVX-VNNI acceleration. Used for experimental edge inference testing.
+The `bee-finalize-watcher` monitors `/data/swarm-staging/{domain}/` for new cooked JSONL files. When detected:
+1. Runs `finalize_batch.py` -- stamps HiveCells, scores RJ tiers
+2. Pushes to hive-ledger API (Cloudflare Workers + D1 + Hedera)
+3. Uploads to R2 (sb-honey-verified bucket)
+4. Archives to `/data/swarm-audit/`
+
+### Controller Integration
+
+Registered as `bee` node in swarm-controller. Health-checked via MinIO `/minio/health/live` on port 9000. Capabilities: `["finalize", "audit", "staging", "signal"]`.
 
 ### Access
 
 ```bash
-ssh dev@192.168.0.70  # password: mack
+ssh dev@192.168.0.70  # password: mack (needs sshpass from remote)
 ```

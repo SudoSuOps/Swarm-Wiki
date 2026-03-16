@@ -4,10 +4,11 @@
 
 | Node | IP | SSH | Ports |
 |------|----|-----|-------|
-| swarmrails | local | `ssh swarmrails` | 8081 (9B vLLM), 8082 (27B vLLM), 8080 (router proxy) |
-| whale | 192.168.0.99 | `ssh whale` | 8081 (BeeMini GGUF) |
-| signal-edge-01 | 192.168.1.95 | `ssh sigedge@192.168.1.95` | -- |
-| zima-edge-1 | 192.168.0.70 | `ssh dev@192.168.0.70` | 9000/9001 (MinIO), 81 (Nginx Proxy Manager) |
+| swarmrails | local | `ssh swarmrails` | 8081 (Nemotron FP4 vLLM), 8083 (Nemotron FP8 vLLM), 8085 (SwarmJelly), 9000 (controller) |
+| whale | 192.168.0.99 | `ssh whale` (pw: mack) | 8081 (4B vLLM), 8085 (SwarmJelly CPU) |
+| signal-edge-01 | 192.168.0.79 | `ssh sigedge@192.168.0.79` | 8085 (llama-server) |
+| zima-edge-1 (bee) | 192.168.0.70 | `ssh dev@192.168.0.70` (pw: mack) | 9000/9001 (MinIO), 81 (Nginx), 8420 (swarm-witness) |
+| nas (DS1525+) | 192.168.0.102 | `ssh admin@192.168.0.102` | 5000 (DSM web) |
 
 ## 10G NICs
 
@@ -26,7 +27,7 @@ All nodes use SSH key authentication. No password SSH access.
 |-------|------|------|-----|
 | `swarmrails` | swarm | local | SSH key |
 | `whale` | swarm | 192.168.0.99 | SSH key |
-| `sigedge` | sigedge | 192.168.1.95 | SSH key (password: mack) |
+| `sigedge` | sigedge | 192.168.0.79 | SSH key (password: mack) |
 | `zima` | dev | 192.168.0.70 | SSH key (password: mack) |
 
 ## Cloudflare
@@ -57,9 +58,10 @@ Use `npx wrangler` with `CLOUDFLARE_ACCOUNT_ID` env var (no `--remote` flag in n
 
 | Service | Port | Description |
 |---------|------|-------------|
-| vLLM (9B) | 8081 | SwarmCurator-9B bf16, GPU 0 |
-| vLLM (27B) | 8082 | SwarmCurator-27B bf16, GPU 1 |
-| FastAPI router proxy | 8080 | Wraps Ollama swarmrouter-v2, logs decisions |
+| vLLM (Nemotron FP4) | 8081 | Nemotron Nano FP4, GPU 0 (standby -- SwarmJelly using GPU) |
+| vLLM (Nemotron FP8) | 8083 | Nemotron Nano FP8, GPU 1 (active aviation cook) |
+| llama-server (SwarmJelly) | 8085 | SwarmJelly-4B BF16, GPU 0 (or CPU AMX fallback) |
+| Swarm Controller | 9000 | Central orchestration daemon, HTML dashboard |
 
 ### Router Proxy (swarmrails:8080)
 

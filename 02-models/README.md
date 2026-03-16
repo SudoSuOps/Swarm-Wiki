@@ -16,7 +16,8 @@ Every model in the Swarm ecosystem, its status, and where it runs.
 | [BeeMini Router v2](beemini-router.md) | Qwen2.5-3B | DONE | 60K | 693 | 0.026 | swarmrouter-v2-q4_k_m.gguf (1.8GB) |
 | [SwarmSignal-2B](swarmcurator-2b.md) | Qwen3.5-2B | LIVE | Custom | 224 | 0.880 | signal-edge-01, zima-edge-1 |
 | [SwarmJelly-4B](swarmjelly-4b.md) | Qwen3.5-4B | DEPLOYED | 5K cells | -- | -- | swarmrails:8085 Q4_K_M CPU (AMX+mlock, 1083 tok/s) |
-| Qwen3.5-4B Base | Qwen3.5-4B | COOK NODE | -- | -- | -- | swarmrails:8081+8083, whale:8085, jetson:8085 |
+| [Nemotron Nano](nemotron-nano.md) | NVIDIA Nemotron 30B MoE | ACTIVE | -- | -- | -- | swarmrails:8083 vLLM FP8 GPU1 (cook fleet) |
+| Qwen3.5-4B Base | Qwen3.5-4B | COOK NODE | -- | -- | -- | whale:8085, jetson:8085 |
 
 ## Fleet Topology
 
@@ -92,11 +93,11 @@ See [gold-standard-build.md](gold-standard-build.md) for the full specification.
 
 | Tier | Hardware | Models | Serving |
 |------|----------|--------|---------|
-| Cook | swarmrails GPU0 32GB | Qwen3.5-4B base | vLLM 0.17.0 :8081 (8 workers) |
-| Cook | swarmrails GPU1 96GB | Qwen3.5-4B base | vLLM 0.17.0 :8083 (8 workers) |
+| Cook | swarmrails GPU1 96GB | Nemotron Nano FP8 | vLLM 0.17.0 :8083 (20 workers) |
+| Self-Heal | swarmrails GPU0 32GB | SwarmJelly-4B BF16 | llama-server :8085 (-ngl 99) |
 | Cook | whale RTX 3090 24GB | Qwen3.5-4B base (ASRS) | vLLM :8085 (4 workers) |
 | Cook | Jetson Orin Nano 8GB | Qwen3.5-4B Q4_K_M | llama-server GPU :8085 (-ngl 99 -c 2048) |
-| Self-Heal | swarmrails CPU | SwarmJelly-4B Q4_K_M | llama-server :8085 (AMX, 1083 tok/s) |
+| Self-Heal (fallback) | swarmrails CPU | SwarmJelly-4B Q4_K_M | llama-server :8085 (AMX, 1083 tok/s) |
 | Edge | zima-edge-1 N150 14GB | SwarmSignal-2B Q4_K_M | Python + systemd |
 | Training | swarmrails both GPUs | Any model up to 35B | Unsloth |
 
