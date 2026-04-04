@@ -176,3 +176,20 @@ The market wants **outcome infrastructure**. Not tools, not dashboards — syste
 *Validate the Validator. Prove the Location.*
 
 *Last updated: 2026-04-04*
+
+---
+
+## The Doctrine — Glass Wall
+
+The [glass-wall](https://github.com/SudoSuOps/glass-wall) repo is the philosophical foundation — 19 documents covering the vision, the biology, the arena, the doctrine. The glass-wall is the WHY. This wiki is the HOW.
+
+| Document | What It Covers |
+|----------|---------------|
+| [GENESIS.md](https://github.com/SudoSuOps/glass-wall/blob/main/GENESIS.md) | The first titled AI data pair — block 8f42666ef87c |
+| [DOCTRINE.md](https://github.com/SudoSuOps/glass-wall/blob/main/DOCTRINE.md) | Six roles, one tribunal — Scout, Router, Filter, Repair, Critic, Katniss |
+| [HIVE.md](https://github.com/SudoSuOps/glass-wall/blob/main/HIVE.md) | Biology = architecture = product. 50-bee hive on Xeon. |
+| [ARENA.md](https://github.com/SudoSuOps/glass-wall/blob/main/ARENA.md) | Convergence through elimination. The tributes. The games. |
+| [SWARMOS.md](https://github.com/SudoSuOps/glass-wall/blob/main/SWARMOS.md) | HiveOS for AI mining — flight sheets, power tuning, hashrate |
+| [SWARMEVAL.md](https://github.com/SudoSuOps/glass-wall/blob/main/SWARMEVAL.md) | Combat evaluation — drop your model in the chain |
+| [PRESSURE_TO_TRUTH.md](https://github.com/SudoSuOps/glass-wall/blob/main/PRESSURE_TO_TRUTH.md) | The thesis under pressure |
+| [SPECTATORS.md](https://github.com/SudoSuOps/glass-wall/blob/main/SPECTATORS.md) | The audience — who watches the glass wall |
