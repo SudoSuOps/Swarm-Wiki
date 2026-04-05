@@ -231,6 +231,75 @@ This is not theoretical. This is measured on production hardware under real trai
 
 ---
 
+## Xeon w9-3475X Sapphire Rapids — CPU Mining Profile
+
+The CPU is a compute node. Same tuning discipline. Same economics.
+
+```
+╔══════════════════════════════════════════════════════════════════╗
+║           XEON w9-3475X SAPPHIRE RAPIDS                          ║
+╠══════════════════════════════════════════════════════════════════╣
+║  Cores/Threads: 36C / 72T                                        ║
+║  Base / Turbo:  2,200 MHz / 4,800 MHz                            ║
+║  Cache:         L2: 72 MiB (2MB/core) | L3: 82.5 MiB            ║
+║  TDP:           300W (MTP: 360W)                                 ║
+║  Memory:        256GB DDR5-4800 ECC, 8 channels, 307 GB/s       ║
+║  NUMA:          1 node (all local)                               ║
+║  AMX:           INT8: 2,048 ops/cycle | BF16: 1,024 ops/cycle   ║
+║  Socket:        LGA-4677                                         ║
+╚══════════════════════════════════════════════════════════════════╝
+```
+
+### Current State — Problems Found
+
+| Setting | Current | Optimal | Impact |
+|---------|---------|---------|--------|
+| CPU Governor | **powersave** | performance | Cores idle at 800 MHz instead of 4.8 GHz |
+| HugePages | **0 configured** | 16GB of 1GB pages | 5-50% inference boost (like RandomX) |
+| AMX utilization | Unknown | Verify ollama uses AMX | 8x throughput if INT8 via AMX vs AVX-512 |
+
+### The RandomX Parallel
+
+Both RandomX mining and AI inference are **memory-bandwidth bound on CPU**. Same tuning applies:
+
+- **CPU Governor → performance** (mandatory, same as mining rigs)
+- **Enable Huge Pages** (RandomX miners get 1-50% boost, AI inference similar)
+- **All 8 DDR5 channels populated** (half the channels = half the bandwidth)
+- **RAM speed matters** (DDR5-4800 = 307 GB/s ceiling, every MHz counts)
+- **L3 cache is the fast lane** (82.5 MB = model weights stay hot)
+
+### Immediate Tuning Commands
+
+```bash
+# 1. Switch governor to performance (instant, no risk)
+echo performance | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
+
+# 2. Enable 1GB huge pages (AI inference + mining boost)
+echo 16 | sudo tee /sys/kernel/mm/hugepages/hugepages-1048576kB/nr_hugepages
+
+# 3. Verify DDR5 channel population (should be 8x 32GB)
+sudo dmidecode -t memory | grep -E "Size:|Locator:|Speed:"
+
+# 4. Check AMX usage
+cat /proc/cpuinfo | grep amx
+
+# 5. Monitor power
+sudo turbostat --interval 1 --num_iterations 3 --show PkgWatt,CorWatt,Avg_MHz 2>/dev/null
+```
+
+### Expected Gains
+
+| Tuning | Estimated Improvement | Risk |
+|--------|----------------------|------|
+| Governor → performance | +20-40% tok/s | None |
+| Enable huge pages | +5-20% tok/s | None (reversible) |
+| Verify AMX active | +100-700% if currently AVX-512 | None (diagnostic) |
+| **Combined** | **+30-60% inference throughput** | **Zero risk** |
+
+Current: ~200 tok/s on gemma3:4b. After tuning: potentially 300-400 tok/s. Same CPU, same power draw, just not running in powersave mode with zero huge pages.
+
+---
+
 ## CUDA Device Ordering
 
 Always set on swarmrails for consistent GPU numbering:
