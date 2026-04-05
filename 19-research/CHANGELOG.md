@@ -16,7 +16,7 @@ Every improvement tested against Royal Jelly ground truth. No change ships witho
 | 1 | Test position bias (swap Q&A order) | MT-Bench | LOW | HIGH | **DONE — NO ACTION** |
 | 2 | Add few-shot exemplars from RJ deeds | Auto-CoT | LOW | MEDIUM | **DONE — NO ACTION** |
 | 3 | Per-dimension CoT scoring | CoT for Assessment | LOW | MEDIUM | **SHIPPED** |
-| 4 | APE-optimize scoring_prompt.py | APE | MEDIUM | HIGH | TODO |
+| 4 | APE-optimize scoring_prompt.py | APE | MEDIUM | HIGH | **RUNNING** |
 | 5 | Debate pass for high-drift pairs | ChatEval | MEDIUM | MEDIUM | TODO |
 | 6 | Chain-of-Verification 2nd pass | CoVe | MEDIUM | MEDIUM | TODO |
 | 7 | STaR bootstrap Judge C from traces | STaR | HIGH | HIGH | TODO |
@@ -64,3 +64,30 @@ Every improvement tested against Royal Jelly ground truth. No change ships witho
 **Decision**: **SHIPPED** — Judge B validated. Per-dimension scoring deployed to production 2026-04-05 13:51 UTC.
 **Key finding**: Specificity is the corpus quality gap. Feed back into pair generation prompts.
 **Ship note**: First per-dimension deed SB-2026-0405-019819 confirmed — both judges independently scored specificity=0.85, structure=0.90. 10 data points per deed. 20 new DB columns (bin + deeds). Tribunal runner + deed recorder restarted.
+
+### 2026-04-05 — APE Prompt Optimization (APE #3, OPRO #11) — RUNNING
+
+**Change**: Use a stronger LLM (qwen2.5:32b) to generate 10 variant scoring prompts, evaluate each against ground truth, select the winner.
+**File**: scoring_prompt.py (will be modified if winner found)
+**Optimizer**: qwen2.5:32b (19.9GB Q4) — different architecture family from judge (Qwen vs Gemma), 2.5x larger than judge. Avoids self-preference bias.
+**Judge**: gemma3:12b (Judge A — production scorer)
+**Eval set**: 100 pairs (eval_set_100.json — RJ tier, medical + grants + legal)
+**Baseline**: Current production SCORING_PROMPT (per-dimension CoT from EXP-003)
+
+**Design**:
+- Round 1 SCREENING: 10 variants × 30 pairs = 300 scoring calls (~50 min)
+- Round 2 FINALS: top 3 variants × 100 pairs = 300 calls (~50 min) + Judge B cross-validation
+- Total: ~2-3 hours
+
+**Meta-prompt strategy**:
+- Feed optimizer: current prompt + 5 example pairs with known scores
+- Tell it what's weak: specificity inflation (0.849), structure inflation (0.968)
+- Ask for 10 complete replacement variants
+- Constraints: must keep 5-dim JSON format, must keep per-dim reasoning
+
+**Gate**: Ship if ANY of:
+- >2% inter-judge agreement improvement
+- >5% specificity dimension improvement (stricter scoring)
+- Tighter score distribution (lower stdev) without losing discrimination
+
+**Status**: Running in parallel terminal. Results pending.
