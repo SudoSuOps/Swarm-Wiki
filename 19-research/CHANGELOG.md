@@ -15,7 +15,7 @@ Every improvement tested against Royal Jelly ground truth. No change ships witho
 |---|------------|-------|--------|--------|--------|
 | 1 | Test position bias (swap Q&A order) | MT-Bench | LOW | HIGH | **DONE — NO ACTION** |
 | 2 | Add few-shot exemplars from RJ deeds | Auto-CoT | LOW | MEDIUM | **DONE — NO ACTION** |
-| 3 | Per-dimension CoT scoring | CoT for Assessment | LOW | MEDIUM | TODO |
+| 3 | Per-dimension CoT scoring | CoT for Assessment | LOW | MEDIUM | **HOLD — testing Judge B** |
 | 4 | APE-optimize scoring_prompt.py | APE | MEDIUM | HIGH | TODO |
 | 5 | Debate pass for high-drift pairs | ChatEval | MEDIUM | MEDIUM | TODO |
 | 6 | Chain-of-Verification 2nd pass | CoVe | MEDIUM | MEDIUM | TODO |
@@ -50,3 +50,16 @@ Every improvement tested against Royal Jelly ground truth. No change ships witho
 **Per-domain**: grants agreement improved (+0.0081), legal improved (+0.0209), medical worsened (-0.0191)
 **Decision**: NO ACTION — overall agreement worsened. Exemplars from one domain help cross-domain scoring but hurt same-domain via self-reference. Zero-shot prompt is robust at 98% agreement.
 **Note**: Negative result — documents that single-domain exemplars are not the right approach. Domain-specific or cross-domain-only exemplars may warrant future testing.
+
+### 2026-04-05 — Per-Dimension CoT (#12, #15) — HOLD
+
+**Change**: Replaced holistic 5-dim scoring with per-dimension independent scoring + average
+**File**: scoring_prompt.py (not modified — experiment only)
+**Eval set**: 500 pairs, RJ tier, score > 0.85
+**Baseline (holistic)**: mean=0.9320 (stdev=0.0454), JB agree=98.0%
+**Treatment (per-dim)**: mean=0.9154 (stdev=0.0357), JB agree=99.0%
+**Delta**: -0.0165 score, **+1.0% agreement** (first improvement), 21% tighter score spread
+**Dimension finding**: specificity=0.849 is weakest; structure=0.968 is strongest
+**Per-domain**: grants agreement +19%, medical/legal slightly worse
+**Decision**: HOLD — +1.0% below +2% gate. Running Judge B validation on whale.
+**Key finding**: Specificity is the corpus quality gap. Feed back into pair generation prompts.
