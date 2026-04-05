@@ -151,6 +151,7 @@ Single source of truth for all Swarm & Bee IP. Defendable AI Training Data Infra
 | 16 | [Dev Tools](16-dev-tools/) | CLI reference, Stripe, Discord, Claude Code skills |
 | 17 | [Audits](17-audits/) | Code audit (Phase 1+2), domain audits, 206 tests pass |
 | 18 | [Blueprints](18-blueprints/) | SwarmSignal v2, arena vision, Proof of Location protocol |
+| 19 | [Research](19-research/) | 50 papers: LLM-as-judge, agents, CoT, RAG, knowledge graphs (EgoAlpha) |
 
 ## Karpathy Connection (April 2026, 12M views)
 
