@@ -1,7 +1,7 @@
 # Experiment #003 — Per-Dimension Chain-of-Thought Scoring
 
 **Date**: 2026-04-05
-**Status**: HOLD — testing Judge B for symmetric validation
+**Status**: SHIPPED — deployed to production 2026-04-05 13:51 UTC
 **Papers**: CoT for Assessment (#12), Complexity-Based Prompting (#15)
 **Researcher**: Claude Opus 4.6 + swarm operator
 

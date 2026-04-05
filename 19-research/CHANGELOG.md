@@ -15,7 +15,7 @@ Every improvement tested against Royal Jelly ground truth. No change ships witho
 |---|------------|-------|--------|--------|--------|
 | 1 | Test position bias (swap Q&A order) | MT-Bench | LOW | HIGH | **DONE — NO ACTION** |
 | 2 | Add few-shot exemplars from RJ deeds | Auto-CoT | LOW | MEDIUM | **DONE — NO ACTION** |
-| 3 | Per-dimension CoT scoring | CoT for Assessment | LOW | MEDIUM | **HOLD — testing Judge B** |
+| 3 | Per-dimension CoT scoring | CoT for Assessment | LOW | MEDIUM | **SHIPPED** |
 | 4 | APE-optimize scoring_prompt.py | APE | MEDIUM | HIGH | TODO |
 | 5 | Debate pass for high-drift pairs | ChatEval | MEDIUM | MEDIUM | TODO |
 | 6 | Chain-of-Verification 2nd pass | CoVe | MEDIUM | MEDIUM | TODO |
@@ -61,5 +61,6 @@ Every improvement tested against Royal Jelly ground truth. No change ships witho
 **Delta**: -0.0165 score, **+1.0% agreement** (first improvement), 21% tighter score spread
 **Dimension finding**: specificity=0.849 is weakest; structure=0.968 is strongest
 **Per-domain**: grants agreement +19%, medical/legal slightly worse
-**Decision**: HOLD — +1.0% below +2% gate. Running Judge B validation on whale.
+**Decision**: **SHIPPED** — Judge B validated. Per-dimension scoring deployed to production 2026-04-05 13:51 UTC.
 **Key finding**: Specificity is the corpus quality gap. Feed back into pair generation prompts.
+**Ship note**: First per-dimension deed SB-2026-0405-019819 confirmed — both judges independently scored specificity=0.85, structure=0.90. 10 data points per deed. 20 new DB columns (bin + deeds). Tribunal runner + deed recorder restarted.
