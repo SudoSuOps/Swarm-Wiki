@@ -4,11 +4,12 @@ Power management, clock optimization, and the MINER discipline: tune GPUs like a
 
 ## Fleet (April 2026)
 
-| GPU | Card | VRAM | Architecture | Max Power | Max Core | Max Mem | Role |
-|-----|------|------|-------------|-----------|----------|---------|------|
-| GPU0 | RTX PRO 6000 Blackwell | 96GB GDDR7 | sm_120 | 600W | 3,090 MHz | 14,001 MHz | Training (cook) |
-| GPU1 | RTX PRO 6000 Blackwell | 96GB GDDR7 | sm_120 | 600W | 3,090 MHz | 14,001 MHz | Judge A (inference) |
-| Whale | RTX 3090 | 24GB GDDR6X | sm_86 | 350W | 1,860 MHz | 9,751 MHz | Judge B (inference) |
+| GPU | Card | VRAM | Architecture | Max Power | Max Core | Max Mem | Bandwidth | Role |
+|-----|------|------|-------------|-----------|----------|---------|-----------|------|
+| GPU0 | RTX PRO 6000 Blackwell | 96GB GDDR7 | sm_120 | 600W | 3,090 MHz | 14,001 MHz | 1,792 GB/s | Training (cook) |
+| GPU1 | RTX PRO 6000 Blackwell | 96GB GDDR7 | sm_120 | 600W | 3,090 MHz | 14,001 MHz | 1,792 GB/s | Judge A (inference) |
+| Whale | RTX 3090 | 24GB GDDR6X | sm_86 | 350W | 1,860 MHz | 9,751 MHz | 936 GB/s | Judge B (inference) |
+| Fleet (48x) | RTX PRO 4500 Blackwell | 32GB GDDR7 | sm_120 | 200W | 2,617 MHz | ~14,001 MHz | 896 GB/s | Expansion |
 
 ## MINER — The Mining Discipline Applied to AI
 
@@ -42,6 +43,60 @@ The same clock tuning that crypto miners use to maximize hashrate-per-watt appli
 ║                                                                  ║
 ╚══════════════════════════════════════════════════════════════════╝
 ```
+
+### RTX PRO 4500 Blackwell — The Fleet Card (48 incoming)
+
+```
+╔══════════════════════════════════════════════════════════════════╗
+║           RTX PRO 4500 BLACKWELL — CLOCK CHART                   ║
+╠══════════════════════════════════════════════════════════════════╣
+║                                                                  ║
+║  GPU:         GB203 (Blackwell, sm_120, same arch as 6000)       ║
+║  CUDA Cores:  10,496 (82 SMs)                                   ║
+║  Tensor:      328 (5th gen) — FP4/FP8/INT8/BF16                 ║
+║  VRAM:        32GB GDDR7 — ECC — 256-bit                        ║
+║  Bandwidth:   896 GB/s                                           ║
+║                                                                  ║
+║  CORE CLOCK (Graphics)                                           ║
+║  ├─ Base:      1,590 MHz                                         ║
+║  ├─ Boost:     2,617 MHz                                         ║
+║  ├─ Inference:  1,200 - 1,600 MHz  ← sweet spot (7B-12B models) ║
+║  └─ Idle:       ~210 MHz                                         ║
+║                                                                  ║
+║  MEMORY CLOCK (GDDR7)                                            ║
+║  └─ Maximum:  ~14,001 MHz  ← same GDDR7 tech as 6000            ║
+║                                                                  ║
+║  POWER LIMIT                                                     ║
+║  ├─ Minimum:     ~100W (est, verify with nvidia-smi)             ║
+║  ├─ Inference:    120 - 150W  ← sweet spot for 7B-12B scoring    ║
+║  ├─ Default:      200W (TDP workstation)                         ║
+║  └─ Server Ed:    165W (single-slot, max density)                ║
+║                                                                  ║
+║  FLEET ECONOMICS (48 cards)                                      ║
+║  ├─ Total VRAM:   1,536 GB (1.5 TB)                             ║
+║  ├─ Total Power:  9,600W max / ~6,000W tuned                    ║
+║  ├─ Total Cost:   $132,000 (48 × $2,750)                        ║
+║  ├─ $/GB VRAM:    $85.94                                         ║
+║  ├─ Cores/Watt:   52.5 (vs 23.3 on 6000 at 600W)               ║
+║  └─ Use case:     1 model per card, inference fleet              ║
+║                                                                  ║
+╚══════════════════════════════════════════════════════════════════╝
+```
+
+**Why the 4500 is the perfect fleet card:**
+
+| Metric | RTX PRO 6000 | RTX PRO 4500 | 4500 Advantage |
+|--------|-------------|-------------|----------------|
+| VRAM | 96GB | 32GB | Right-sized for 7B-12B inference |
+| TDP | 400W (default) | 200W | 2x more efficient by design |
+| CUDA Cores | 24,576 | 10,496 | Still 10K+ cores for inference |
+| Bandwidth | 1,792 GB/s | 896 GB/s | Sufficient for single-model serving |
+| Price | ~$7,500 | ~$2,750 | 2.7x cheaper |
+| Cores/Watt | 23.3 (at 600W) | 52.5 (at 200W) | 2.25x more cores per watt |
+| Form factor | Dual-slot | Dual-slot (or single-slot server) | Density option |
+| Architecture | sm_120 | sm_120 | Same Blackwell, same software |
+
+**Fleet deployment pattern:** Each 4500 runs one model (gemma3:12b quantized = ~8GB, qwen2.5:7b = ~5GB). At 150W per card, 48 cards = 7.2 kW running 48 independent judges. That's 48 parallel scoring threads. At 380 pairs/hr per judge pair, 24 parallel tribunal pairs = **9,120 pairs/hr**. The 163-day wall becomes **7 days**.
 
 ### Why Training is Memory-Bound (The ETH Mining Parallel)
 
