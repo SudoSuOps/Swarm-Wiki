@@ -35,3 +35,4 @@ Papers are ranked by direct applicability to our stack. Read Tier 1 first — th
 ## Experiments
 
 - [EXP-001: Position Bias](exp001-position-bias.md) — NO ACTION — delta +0.0064, below threshold (2026-04-05)
+- [EXP-002: Few-Shot Exemplars](exp002-fewshot-exemplars.md) — NO ACTION — agreement worsened -1.2%, self-reference effect (2026-04-05)

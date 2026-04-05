@@ -14,7 +14,7 @@ Every improvement tested against Royal Jelly ground truth. No change ships witho
 | # | Improvement | Paper | Effort | Impact | Status |
 |---|------------|-------|--------|--------|--------|
 | 1 | Test position bias (swap Q&A order) | MT-Bench | LOW | HIGH | **DONE — NO ACTION** |
-| 2 | Add few-shot exemplars from RJ deeds | Auto-CoT | LOW | MEDIUM | TODO |
+| 2 | Add few-shot exemplars from RJ deeds | Auto-CoT | LOW | MEDIUM | **DONE — NO ACTION** |
 | 3 | Per-dimension CoT scoring | CoT for Assessment | LOW | MEDIUM | TODO |
 | 4 | APE-optimize scoring_prompt.py | APE | MEDIUM | HIGH | TODO |
 | 5 | Debate pass for high-drift pairs | ChatEval | MEDIUM | MEDIUM | TODO |
@@ -38,3 +38,15 @@ Every improvement tested against Royal Jelly ground truth. No change ships witho
 **Per-domain**: grants +0.0042 (n=286), medical +0.0113 (n=179), legal -0.0009 (n=35)
 **Decision**: NO ACTION — bias exists but is below noise floor for tier classification. Medical shows mild domain-specific bias (+0.0113) worth monitoring. No prompt change warranted.
 **Note**: 100-pair pilot showed +0.0107, 500-pair confirmation corrected to +0.0064. Confirms protocol: always run confirmation before shipping.
+
+### 2026-04-05 — Few-Shot Exemplars (Auto-CoT #7, #13) — NO ACTION
+
+**Change**: Added 3 tier-spanning exemplars (RJ/Honey/Propolis, medical domain) to scoring prompt
+**File**: scoring_prompt.py (not modified — experiment only)
+**Eval set**: 500 pairs, RJ tier, score > 0.85
+**Baseline (zero-shot)**: mean=0.9321, JB agree=98.0%
+**Treatment (few-shot)**: mean=0.9168, JB agree=96.8%
+**Delta**: -0.0153 score, -1.2% agreement
+**Per-domain**: grants agreement improved (+0.0081), legal improved (+0.0209), medical worsened (-0.0191)
+**Decision**: NO ACTION — overall agreement worsened. Exemplars from one domain help cross-domain scoring but hurt same-domain via self-reference. Zero-shot prompt is robust at 98% agreement.
+**Note**: Negative result — documents that single-domain exemplars are not the right approach. Domain-specific or cross-domain-only exemplars may warrant future testing.
