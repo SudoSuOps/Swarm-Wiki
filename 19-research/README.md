@@ -31,3 +31,7 @@ Papers are ranked by direct applicability to our stack. Read Tier 1 first — th
 - [Reliability & Calibration](reliability-calibration.md) — Making LLM scores defensible
 - [Knowledge Graphs & RAG](knowledge-graphs-rag.md) — Graph construction, retrieval, provenance
 - [Chain-of-Thought & Prompt Design](cot-prompt-design.md) — Scoring prompt optimization
+
+## Experiments
+
+- [EXP-001: Position Bias](exp001-position-bias.md) — NO ACTION — delta +0.0064, below threshold (2026-04-05)
