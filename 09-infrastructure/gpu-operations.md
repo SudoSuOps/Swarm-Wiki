@@ -8,8 +8,9 @@ Power management, clock optimization, and the MINER discipline: tune GPUs like a
 |-----|------|------|-------------|-----------|----------|---------|-----------|------|
 | GPU0 | RTX PRO 6000 Blackwell | 96GB GDDR7 | sm_120 | 600W | 3,090 MHz | 14,001 MHz | 1,792 GB/s | Training (cook) |
 | GPU1 | RTX PRO 6000 Blackwell | 96GB GDDR7 | sm_120 | 600W | 3,090 MHz | 14,001 MHz | 1,792 GB/s | Judge A (inference) |
-| Whale | RTX 3090 | 24GB GDDR6X | sm_86 | 350W | 1,860 MHz | 9,751 MHz | 936 GB/s | Judge B (inference) |
-| Fleet (48x) | RTX PRO 4500 Blackwell | 32GB GDDR7 | sm_120 | 200W | 2,617 MHz | ~14,001 MHz | 896 GB/s | Expansion |
+| Whale | RTX 3090 | 24GB GDDR6X | sm_86 | 350W | 1,695 MHz | 9,751 MHz | 936 GB/s | Judge B (inference) |
+| Fleet (48x) | RTX PRO 4500 Blackwell | 32GB GDDR7 | sm_120 | 200W | 2,617 MHz | ~14,001 MHz | 896 GB/s | Expansion (Blackwell) |
+| Fleet (100x) | RTX 3090 | 24GB GDDR6X | sm_86 | 350W | 1,695 MHz | 9,751 MHz | 936 GB/s | Expansion (Ampere) |
 
 ## MINER — The Mining Discipline Applied to AI
 
@@ -297,6 +298,72 @@ sudo turbostat --interval 1 --num_iterations 3 --show PkgWatt,CorWatt,Avg_MHz 2>
 | **Combined** | **+30-60% inference throughput** | **Zero risk** |
 
 Current: ~200 tok/s on gemma3:4b. After tuning: potentially 300-400 tok/s. Same CPU, same power draw, just not running in powersave mode with zero huge pages.
+
+## RTX 3090 / 3090 Ti — The Fleet Workhorses (100+ cards)
+
+Former mining cards. We tuned these for ETH. Same knowledge, new workload.
+
+```
+╔══════════════════════════════════════════════════════════════════╗
+║              RTX 3090                 RTX 3090 Ti                ║
+╠══════════════════════════════════════════════════════════════════╣
+║  GPU        GA102 (sm_86)           GA102 full (sm_86)          ║
+║  Cores      10,496 CUDA             10,752 CUDA                 ║
+║  Tensor     328 (3rd gen)           336 (3rd gen)               ║
+║  VRAM       24GB GDDR6X 384-bit    24GB GDDR6X 384-bit         ║
+║  Bandwidth  936 GB/s               1,008 GB/s (+7.7%)          ║
+║  Base       1,395 MHz              1,560 MHz                    ║
+║  Boost      1,695 MHz              1,860 MHz                    ║
+║  TDP        350W                   450W                         ║
+║  Power Min  ~100W                  ~100W                        ║
+║  Mem Clock  9,751 MHz (19.5Gbps)   10,752 MHz (21 Gbps)        ║
+║  PCIe       Gen 4 x16             Gen 4 x16                    ║
+║  NVLink     Yes (2-way)           No                           ║
+║  Price(used) $600-800              $800-1,000                   ║
+╚══════════════════════════════════════════════════════════════════╝
+```
+
+### Mining DNA → AI Inference
+
+| Setting | ETH Mining (proven) | AI Inference (7B) | AI Inference (12B) |
+|---------|-------------------|-------------------|-------------------|
+| Core | -400 MHz offset | Lock 1,200 MHz | Lock 1,400 MHz |
+| Memory | +1,100 MHz | Auto (9,501 MHz) | Auto (9,501 MHz) |
+| Power | 290W (77%) | 150W (43%) | 200W (57%) |
+| Workload | Memory-bound (DAG) | Memory-bound (KV cache) | Memory-bound (weights) |
+| Output | 121 MH/s | ~200 tok/s | ~80 tok/s |
+
+### Fleet Economics (100 × RTX 3090)
+
+| Metric | Value |
+|--------|-------|
+| Total VRAM | 2,400 GB (2.4 TB) |
+| Total Power (max) | 35,000W |
+| Total Power (tuned 150W each) | 15,000W |
+| Cards per model | 1 card = 1× 7B quantized |
+| Judge pairs | 50 parallel tribunals |
+| Throughput | 50 × 380 = **19,000 pairs/hr** |
+| **163-day wall** | **→ 3.3 days** |
+| Monthly power cost (at $0.10/kWh) | $1,080 |
+
+### 3090 Inference Flight Sheets
+
+```
+JUDGE 7B (qwen2.5:7b):     Core 1,200 MHz | Mem auto | Power 150W | ~200 tok/s
+JUDGE 12B (gemma3:12b):    Core 1,400 MHz | Mem auto | Power 200W | ~80 tok/s
+IDLE / STANDBY:            Core 210 MHz   | Mem auto | Power 100W
+```
+
+### Fleet Recommendation
+
+Buy 3090s over 3090 Ti for fleet builds. The Ti's 7.7% bandwidth advantage doesn't justify the price premium or higher idle power. The 3090 at 150W is the sweet spot for inference fleet density.
+
+### GDDR6X Thermal Note
+
+3090's GDDR6X backside VRAM runs 90-110°C under sustained load. For fleet:
+- Thermal pad replacement on VRAM (drops 10-20°C)
+- Power limit 150W keeps VRAM < 95°C
+- Monitor: `nvidia-smi -q -d TEMPERATURE`
 
 ---
 
