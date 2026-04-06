@@ -367,6 +367,34 @@ Buy 3090s over 3090 Ti for fleet builds. The Ti's 7.7% bandwidth advantage doesn
 
 ---
 
+## Rigel Mining Patterns Applied to AI
+
+Borrowed from [rigelminer/rigel](https://github.com/rigelminer/rigel) — crypto mining solved GPU optimization before AI did.
+
+| Rigel Feature | AI Equivalent | Implementation |
+|--------------|---------------|----------------|
+| `--lock-cclock/mclock` | Lock clocks for stability | `nvidia-smi -lgc 1000,1000 -lmc 14001` |
+| `--dag-reset-mclock` | Reset mem OC before model load | Reset → load model → reapply OC |
+| `--dual-mode a12:h92` | Tribunal + experiment on 1 GPU | Priority scheduling via ollama |
+| `--temp-limit tc[60-70]` | Thermal hysteresis | Throttle at 85°C, resume at 78°C |
+| `--kernel 2` (energy efficient) | Attention implementation | eager / flash_attn2 / SDPA |
+| `--power-avg 10` | Smooth power readings | 10-second averaging window |
+| `--pl` per device | Per-GPU power limits | `nvidia-smi -i N -pl X` |
+
+### Autotune Protocol
+
+```
+1. Set power to 60% TDP, memory to max
+2. Start core at 50% of max
+3. Benchmark 5 min, record throughput
+4. Increase core +100 MHz, repeat
+5. Stop when throughput plateaus = memory-bound ceiling
+6. Sweep power limits to find the knee
+7. Lock final settings to flight sheet
+```
+
+---
+
 ## CUDA Device Ordering
 
 Always set on swarmrails for consistent GPU numbering:
