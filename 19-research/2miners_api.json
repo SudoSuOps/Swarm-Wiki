@@ -1,0 +1,1201 @@
+{
+  "openapi": "3.0.0",
+  "servers": [
+    {
+      "url": "https://ethw.2miners.com/api"
+    },
+    {
+      "url": "https://solo-ethw.2miners.com/api"
+    },
+    {
+      "url": "https://etc.2miners.com/api"
+    },
+    {
+      "url": "https://solo-etc.2miners.com/api"
+    },
+    {
+      "url": "https://kas.2miners.com/api"
+    },
+    {
+      "url": "https://solo-kas.2miners.com/api"
+    },
+    {
+      "url": "https://erg.2miners.com/api"
+    },
+    {
+      "url": "https://solo-erg.2miners.com/api"
+    },
+    {
+      "url": "https://nexs.2miners.com/api"
+    },
+    {
+      "url": "https://solo-nexa.2miners.com/api"
+    },
+    {
+      "url": "https://zec.2miners.com/api"
+    },
+    {
+      "url": "https://solo-zec.2miners.com/api"
+    },
+    {
+      "url": "https://btg.2miners.com/api"
+    },
+    {
+      "url": "https://solo-btg.2miners.com/api"
+    },
+    {
+      "url": "https://zeph.2miners.com/api"
+    },
+    {
+      "url": "https://solo-zeph.2miners.com/api"
+    },
+    {
+      "url": "https://rvn.2miners.com/api"
+    },
+    {
+      "url": "https://solo-rvn.2miners.com/api"
+    },
+    {
+      "url": "https://neox.2miners.com/api"
+    },
+    {
+      "url": "https://solo-neox.2miners.com/api"
+    },
+    {
+      "url": "https://xna.2miners.com/api"
+    },
+    {
+      "url": "https://solo-xna.2miners.com/api"
+    },
+    {
+      "url": "https://grin.2miners.com/api"
+    },
+    {
+      "url": "https://solo-grin.2miners.com/api"
+    },
+    {
+      "url": "https://mwc.2miners.com/api"
+    },
+    {
+      "url": "https://solo-mwc.2miners.com/api"
+    },
+    {
+      "url": "https://ctxc.2miners.com/api"
+    },
+    {
+      "url": "https://solo-ctxc.2miners.com/api"
+    },
+    {
+      "url": "https://ae.2miners.com/api"
+    },
+    {
+      "url": "https://solo-ae.2miners.com/api"
+    },
+    {
+      "url": "https://beam.2miners.com/api"
+    },
+    {
+      "url": "https://solo-beam.2miners.com/api"
+    },
+    {
+      "url": "https://ckb.2miners.com/api"
+    },
+    {
+      "url": "https://solo-ckb.2miners.com/api"
+    },
+    {
+      "url": "https://bch.2miners.com/api"
+    },
+    {
+      "url": "https://solo-bch.2miners.com/api"
+    },
+    {
+      "url": "https://quaisha.2miners.com/api"
+    },
+    {
+      "url": "https://solo-quaisha.2miners.com/api"
+    }
+  ],
+  "info": {
+    "description": "2Miners APIs Documentation. Contribute at https://github.com/2miners/apidoc",
+    "version": "2.0.0",
+    "title": "2Miners APIs Documentation",
+    "contact": {
+      "name": "support@2miners.com"
+    },
+    "license": {
+      "name": "2Miners Mining Pools",
+      "url": "https://2miners.com"
+    }
+  },
+  "paths": {
+    "/accounts/{walletid}": {
+      "get": {
+        "tags": [
+          "accounts"
+        ],
+        "summary": "View an Account",
+        "description": "",
+        "operationId": "getStats",
+        "parameters": [
+          {
+            "name": "walletid",
+            "in": "path",
+            "description": "id of the wallet",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the account info",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountReturnModel"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountReturnModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blocks": {
+      "get": {
+        "tags": [
+          "blocks"
+        ],
+        "summary": "Get all Blocks",
+        "description": "",
+        "operationId": "getStats",
+        "responses": {
+          "200": {
+            "description": "Returns a list of all Block",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BlockReturnModel"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/BlockReturnModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/miners ": {
+      "get": {
+        "tags": [
+          "miners "
+        ],
+        "summary": "Get all Miners",
+        "description": "",
+        "operationId": "getMiner",
+        "responses": {
+          "200": {
+            "description": "Returns a list of all Miners",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MinerReturnModel"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/MinerReturnModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/payments": {
+      "get": {
+        "tags": [
+          "payments"
+        ],
+        "summary": "Get all Payments",
+        "description": "",
+        "operationId": "getStats",
+        "responses": {
+          "200": {
+            "description": "Returns the list of Payments",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentReturnModel"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentReturnModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stats": {
+      "get": {
+        "tags": [
+          "stats"
+        ],
+        "summary": "Get all Stats",
+        "description": "",
+        "operationId": "getStats",
+        "responses": {
+          "200": {
+            "description": "Returns a list of all Stats",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatsReturnModel"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatsReturnModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/workers/{walletid}/{workerid}/{range}": {
+      "get": {
+        "tags": [
+          "workers"
+        ],
+        "summary": "Get Worker Stats by Range",
+        "description": "Returns hashrate data for a specific worker within a given time range. Available for apiVersion:200 coins (ETC, KAS, RVN, ZEC, ETHW, etc.).",
+        "operationId": "getWorkerRange",
+        "parameters": [
+          {
+            "name": "walletid",
+            "in": "path",
+            "description": "id of the wallet",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "workerid",
+            "in": "path",
+            "description": "id of the worker",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "range",
+            "in": "path",
+            "description": "time range for data",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "5m",
+                "30m",
+                "6h"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns worker hashrate data for the specified range",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkerRangeReturnModel"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkerRangeReturnModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/accounts/{walletid}/shares/{range}": {
+      "get": {
+        "tags": [
+          "accounts"
+        ],
+        "summary": "Get Account Shares by Range",
+        "description": "Returns share statistics for an account within a given time range. Available for apiVersion:200 coins (ETC, KAS, RVN, ZEC, ETHW, etc.).",
+        "operationId": "getAccountSharesRange",
+        "parameters": [
+          {
+            "name": "walletid",
+            "in": "path",
+            "description": "id of the wallet",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "range",
+            "in": "path",
+            "description": "time range for data",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "5m",
+                "30m",
+                "6h"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns share data for the specified range",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SharesRangeReturnModel"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/SharesRangeReturnModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "PaymentReturnModel": {
+        "type": "object",
+        "properties": {
+          "payments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PaymentsModel"
+            }
+          },
+          "paymentsTotal": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "xml": {
+          "name": "PaymentReturnModel"
+        }
+      },
+      "StatsReturnModel": {
+        "type": "object",
+        "properties": {
+          "candidatesTotal": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "hashrate": {
+            "type": "number",
+            "format": "float",
+            "description": "Pool hashrate (apiVersion:200 coins)"
+          },
+          "hashrates": {
+            "type": "object",
+            "description": "Pool hashrates by algorithm (non-apiVersion:200 coins like AE, GRIN, MWC, BEAM). Keys are algorithm numbers.",
+            "additionalProperties": {
+              "type": "number",
+              "format": "float"
+            }
+          },
+          "charts": {
+            "type": "object",
+            "description": "Pool charts by algorithm (non-apiVersion:200 coins like AE, GRIN, MWC, BEAM). Keys are algorithm numbers.",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/PoolChartsModel"
+              }
+            }
+          },
+          "immatureTotal": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "luck": {
+            "type": "number",
+            "format": "float"
+          },
+          "maturedTotal": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "minersTotal": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "nodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NodeModel"
+            }
+          },
+          "now": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "paymentsTotal": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "poolCharts": {
+            "type": "array",
+            "description": "Pool charts (apiVersion:200 coins)",
+            "items": {
+              "$ref": "#/components/schemas/PoolChartsModel"
+            }
+          },
+          "stats": {
+            "type": "object",
+            "properties": {
+              "lastBlockFound": {
+                "type": "integer",
+                "format": "int64"
+              },
+              "roundShares": {
+                "type": "number",
+                "format": "float"
+              },
+              "nShares": {
+                "type": "integer",
+                "format": "int64"
+              },
+              "eu_sessions": {
+                "type": "integer",
+                "format": "int64",
+                "description": "Number of active EU sessions"
+              }
+            }
+          },
+          "workersTotal": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Total number of workers across all miners"
+          }
+        },
+        "xml": {
+          "name": "StatsReturnModel"
+        }
+      },
+      "SumrewardsModel": {
+        "type": "object",
+        "properties": {
+          "inverval": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "reward": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "numreward": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "offset": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "WorkerGroupModel": {
+        "type": "object",
+        "properties": {
+          "lastBeat": {
+            "type": "string"
+          },
+          "hr": {
+            "type": "number",
+            "format": "float"
+          },
+          "offline": {
+            "type": "boolean",
+            "default": false
+          },
+          "hr2": {
+            "type": "number",
+            "format": "float"
+          }
+        }
+      },
+      "AccountReturnModel": {
+        "type": "object",
+        "properties": {
+          "currentHashrate": {
+            "type": "number",
+            "format": "float",
+            "description": "Current hashrate (apiVersion:200 coins)"
+          },
+          "currentHashrates": {
+            "type": "object",
+            "description": "Current hashrates by algorithm (non-apiVersion:200 coins like AE, GRIN, MWC, BEAM). Keys are algorithm numbers.",
+            "additionalProperties": {
+              "type": "number",
+              "format": "float"
+            }
+          },
+          "currentLuck": {
+            "type": "string"
+          },
+          "hashrate": {
+            "type": "number",
+            "format": "float",
+            "description": "Average hashrate (apiVersion:200 coins)"
+          },
+          "hashrates": {
+            "type": "object",
+            "description": "Average hashrates by algorithm (non-apiVersion:200 coins like AE, GRIN, MWC, BEAM). Keys are algorithm numbers.",
+            "additionalProperties": {
+              "type": "number",
+              "format": "float"
+            }
+          },
+          "charts": {
+            "type": "object",
+            "description": "Charts data by algorithm (non-apiVersion:200 coins like AE, GRIN, MWC, BEAM). Keys are algorithm numbers.",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/AccountChartModel"
+              }
+            }
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "payments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PaymentModel"
+            }
+          },
+          "paymentsTotal": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "rewards": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RewardsModel"
+            }
+          },
+          "roundShares": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "shares": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "stats": {
+            "$ref": "#/components/schemas/StatsModel"
+          },
+          "sumrewards": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SumrewardsModel"
+            }
+          },
+          "workers": {
+            "$ref": "#/components/schemas/WorkerModel"
+          },
+          "workersOffline": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "workersOnline": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "workersTotal": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "24hreward": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "24hnumreward": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "xml": {
+          "name": "AccountReturnModel"
+        }
+      },
+      "PaymentModel": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "timestamp": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "tx": {
+            "type": "string"
+          },
+          "txFee": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Transaction fee"
+          },
+          "txKernelExcess": {
+            "type": "string",
+            "description": "Transaction kernel excess (coins like AE, GRIN, MWC, BEAM)"
+          }
+        }
+      },
+      "StatsModel": {
+        "type": "object",
+        "properties": {
+          "balance": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "blocksFound": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "immature": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "lastShare": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "paid": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "pending": {
+            "type": "boolean",
+            "default": false
+          }
+        }
+      },
+      "MinerReturnModel": {
+        "type": "object",
+        "properties": {
+          "hashrate": {
+            "type": "number",
+            "format": "float"
+          },
+          "miners": {
+            "$ref": "#/components/schemas/MinerModel"
+          },
+          "minersTotal": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "now": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "xml": {
+          "name": "MinerReturnModel"
+        }
+      },
+      "MinerModel": {
+        "type": "object",
+        "properties": {
+          "minerUid": {
+            "$ref": "#/components/schemas/MinerUidModel"
+          }
+        }
+      },
+      "NodeModel": {
+        "type": "object",
+        "properties": {
+          "avgBlockTime": {
+            "type": "string"
+          },
+          "blockReward": {
+            "type": "string",
+            "description": "Block reward (present for AE and some other coins)"
+          },
+          "difficulty": {
+            "type": "string"
+          },
+          "height": {
+            "type": "string"
+          },
+          "lastBeat": {
+            "type": "string"
+          },
+          "minDiff": {
+            "type": "string",
+            "description": "Minimum difficulty (non-apiVersion:200 coins like AE, GRIN, MWC, BEAM)"
+          },
+          "name": {
+            "type": "string"
+          },
+          "networkhashps": {
+            "type": "string"
+          },
+          "primaryWeight31": {
+            "type": "string",
+            "description": "Primary weight for algorithm 31 (MWC)"
+          },
+          "primaryWeight32": {
+            "type": "string",
+            "description": "Primary weight for algorithm 32 (GRIN)"
+          }
+        }
+      },
+      "LuckModel": {
+        "type": "object",
+        "properties": {
+          "luckNumber": {
+            "$ref": "#/components/schemas/LuckNumberModel"
+          }
+        }
+      },
+      "RewardsModel": {
+        "type": "object",
+        "properties": {
+          "blockheight": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "timestamp": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "blockhash": {
+            "type": "string"
+          },
+          "reward": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "percent": {
+            "type": "number",
+            "format": "float"
+          },
+          "immature": {
+            "type": "boolean",
+            "default": false
+          },
+          "currentLuck": {
+            "type": "number",
+            "format": "float"
+          },
+          "uncle": {
+            "type": "boolean",
+            "default": false
+          },
+          "orphan": {
+            "type": "boolean",
+            "default": false,
+            "description": "Whether the block is orphaned (non-apiVersion:200 coins like AE, GRIN, MWC, BEAM)"
+          }
+        }
+      },
+      "CandidatesModel": {
+        "type": "object",
+        "properties": {
+          "height": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "timestamp": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "difficulty": {
+            "type": "number",
+            "format": "float"
+          },
+          "shares": {
+            "type": "number",
+            "format": "float"
+          },
+          "finder": {
+            "type": "string"
+          },
+          "uncle": {
+            "type": "boolean",
+            "default": false
+          },
+          "uncleHeight": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "orphan": {
+            "type": "boolean",
+            "default": false
+          },
+          "hash": {
+            "type": "string"
+          },
+          "reward": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "ImMaturedModel": {
+        "type": "object",
+        "properties": {
+          "height": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "timestamp": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "difficulty": {
+            "type": "number",
+            "format": "float"
+          },
+          "shares": {
+            "type": "number",
+            "format": "float"
+          },
+          "finder": {
+            "type": "string"
+          },
+          "uncle": {
+            "type": "boolean",
+            "default": false
+          },
+          "uncleHeight": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "orphan": {
+            "type": "boolean",
+            "default": false
+          },
+          "hash": {
+            "type": "string"
+          },
+          "reward": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "MaturedModel": {
+        "type": "object",
+        "properties": {
+          "height": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "timestamp": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "difficulty": {
+            "type": "number",
+            "format": "float"
+          },
+          "shares": {
+            "type": "number",
+            "format": "float"
+          },
+          "finder": {
+            "type": "string"
+          },
+          "uncle": {
+            "type": "boolean",
+            "default": false
+          },
+          "uncleHeight": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "orphan": {
+            "type": "boolean",
+            "default": false
+          },
+          "hash": {
+            "type": "string"
+          },
+          "reward": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "BlockReturnModel": {
+        "type": "object",
+        "properties": {
+          "candidates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CandidatesModel"
+            }
+          },
+          "candidatesTotal": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "immature": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ImMaturedModel"
+            }
+          },
+          "immatureTotal": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "luck": {
+            "$ref": "#/components/schemas/LuckModel"
+          },
+          "matured": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MaturedModel"
+            }
+          },
+          "maturedTotal": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "xml": {
+          "name": "BlockReturnModel"
+        }
+      },
+      "PoolChartsModel": {
+        "type": "object",
+        "properties": {
+          "x": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "timeFormat": {
+            "type": "string"
+          },
+          "y": {
+            "type": "number",
+            "format": "float"
+          },
+          "netdiff": {
+            "type": "number",
+            "format": "float"
+          },
+          "nethr": {
+            "type": "number",
+            "format": "float"
+          }
+        }
+      },
+      "MinerUidModel": {
+        "type": "object",
+        "properties": {
+          "lastBeat": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "height": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "offline": {
+            "type": "boolean",
+            "default": false
+          }
+        }
+      },
+      "PaymentsModel": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "timestamp": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "totalPayees": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "tx": {
+            "type": "string"
+          }
+        }
+      },
+      "WorkerModel": {
+        "type": "object",
+        "properties": {
+          "workerGroup": {
+            "$ref": "#/components/schemas/WorkerGroupModel"
+          }
+        }
+      },
+      "LuckNumberModel": {
+        "type": "object",
+        "properties": {
+          "luck": {
+            "type": "number",
+            "format": "float"
+          },
+          "orphanRate": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "AccountChartModel": {
+        "type": "object",
+        "description": "Chart data point for account hashrate history (non-apiVersion:200 coins like AE, GRIN, MWC, BEAM)",
+        "properties": {
+          "minerHash": {
+            "type": "number",
+            "format": "float",
+            "description": "Miner hashrate"
+          },
+          "minerLargeHash": {
+            "type": "number",
+            "format": "float",
+            "description": "Miner large hashrate (average)"
+          },
+          "timeFormat": {
+            "type": "string",
+            "description": "Formatted time string"
+          },
+          "workerOnline": {
+            "type": "string",
+            "description": "Number of online workers"
+          },
+          "x": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Unix timestamp"
+          }
+        }
+      },
+      "WorkerRangeReturnModel": {
+        "type": "object",
+        "description": "Worker statistics for a specific time range (apiVersion:200 coins)",
+        "properties": {
+          "charts": {
+            "type": "object",
+            "description": "Worker charts by algorithm. Keys are algorithm numbers.",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/AccountChartModel"
+              }
+            }
+          },
+          "currentHashrates": {
+            "type": "object",
+            "description": "Current worker hashrates by algorithm. Keys are algorithm numbers.",
+            "additionalProperties": {
+              "type": "number",
+              "format": "float"
+            }
+          },
+          "hashrates": {
+            "type": "object",
+            "description": "Average worker hashrates by algorithm. Keys are algorithm numbers.",
+            "additionalProperties": {
+              "type": "number",
+              "format": "float"
+            }
+          }
+        },
+        "xml": {
+          "name": "WorkerRangeReturnModel"
+        }
+      },
+      "SharesRangeReturnModel": {
+        "type": "object",
+        "description": "Share statistics for an account within a given time range (apiVersion:200 coins)",
+        "properties": {
+          "shares": {
+            "type": "array",
+            "description": "Array of share data points",
+            "items": {
+              "$ref": "#/components/schemas/ShareDataModel"
+            }
+          }
+        },
+        "xml": {
+          "name": "SharesRangeReturnModel"
+        }
+      },
+      "ShareDataModel": {
+        "type": "object",
+        "description": "Individual share data point",
+        "properties": {
+          "valid": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Number of valid shares"
+          },
+          "stale": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Number of stale shares"
+          },
+          "invalid": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Number of invalid shares"
+          },
+          "x": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Unix timestamp"
+          },
+          "timeFormat": {
+            "type": "string",
+            "description": "Formatted time string"
+          }
+        }
+      }
+    }
+  }
+}
