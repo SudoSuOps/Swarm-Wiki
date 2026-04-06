@@ -314,6 +314,95 @@ Next experiments: debate pass for high-drift pairs (#5), STaR bootstrap Judge C 
 
 ---
 
+## Feedback Gap — Tribunal ↔ Cook Disconnect (2026-04-06)
+
+The scoring and generation systems are **not connected**. Two loops exist, neither talks to the other.
+
+### Loop 1: Cook Self-Assessment (WORKING — CLOSED)
+
+```
+cook_openalex.py
+  → platinum_score() (10 quality gates, self-assessed)
+  → finalize_batch.py (stamps prompt_hash SHA-256)
+  → POST hive-ledger /api/admin/batch (Merkle root + scores)
+  → GET /api/telemetry/prompts (softmax leaderboard)
+  → cook_openalex.py weighted_prompt_choice() (next cycle)
+```
+
+This loop is live. Prompts that produce higher platinum_scores get more allocation. But platinum_score is a **self-assessment** — the cook judging its own output via deterministic gates (keywords, length, numbers). It measures FORMAT, not QUALITY.
+
+### Loop 2: Tribunal Scoring (WORKING — DEAD END)
+
+```
+tribunal_runner.py
+  → judge_score.py (gemma3:12b + qwen2.5:7b, dual-judge)
+  → scoring_prompt.py (5 dimensions, APE-optimized)
+  → PostgreSQL bin table (judge_a_score, judge_b_score, final_score, tier)
+  → judge_deed.py → deeds table
+  → Merkle batcher → Hedera
+  → ??? NOWHERE ???
+```
+
+Tribunal scores are the real quality signal — two independent LLMs scoring 5 dimensions with per-dimension reasoning. But these scores **die in PostgreSQL**. They never reach the prompt evolution system.
+
+### Three Breaks
+
+| Break | What's Missing | Impact |
+|-------|---------------|--------|
+| **Tribunal → Ledger** | No export of tribunal scores to hive-ledger | Cook can't learn from tribunal consensus |
+| **Prompt hash → Tribunal** | Tribunal doesn't know which generation prompt produced the pair | Can't attribute quality to specific prompts |
+| **Ledger → Tribunal** | hive-ledger never queries tribunal PostgreSQL | Telemetry only shows cook self-assessment, not real quality |
+
+### What This Means
+
+- A prompt could produce pairs that pass all 10 platinum gates (score 90+) but consistently score 0.65 specificity in the tribunal → **the prompt keeps getting traffic**
+- A prompt mutation that improves specificity from 0.79 to 0.88 → **the cook system can't detect this improvement**
+- The APE experiment (EXP-004) found specificity is the weakest dimension at 0.79 → **this signal can't reach the Prompt Machine's fitness function**
+
+### Fix: Bridge the Loops
+
+**Phase 1** (LOW effort, HIGH value): Stamp `prompt_hash` on pairs at generation time, propagate through tribunal scoring to deeds. When the tribunal scores a pair, the deed records which prompt generated it.
+
+**Phase 2** (MEDIUM effort): Export tribunal deed scores to hive-ledger. A cron job or event hook reads new deeds from PostgreSQL, groups by `prompt_hash`, and POSTs aggregated scores to hive-ledger's telemetry API.
+
+**Phase 3** (MEDIUM effort): Replace platinum_score with tribunal_score in the softmax allocation. Instead of self-assessed quality gates, the Prompt Machine uses the tribunal's dual-judge consensus to weight prompts.
+
+**Result**: Prompts that generate specific, well-scored pairs get more traffic. Prompts that generate generic pairs (specificity < 0.79) get less traffic and eventually go extinct. The scorer and the generator finally talk to each other.
+
+### Infrastructure Map
+
+All pair generation infrastructure lives on `/data2/`:
+
+| Component | Location | Purpose |
+|-----------|----------|---------|
+| cook-domain-prompts | `/data2/cook-domain-prompts/` | Prompt genome registry (git repo, pip-installable) |
+| openalex cook | `/data2/openalex/` | Academic paper → training pair engine |
+| creditsniper | `/data2/creditsniper/` | Legal/financial pair generation (10 streams × 5 personas) |
+| hive-ledger | `/data2/hive-ledger/` | Telemetry API (Cloudflare Workers + D1, serves softmax weights) |
+| swarm-radar | `/data2/swarm-radar/` | 8-source signal collector → RJ candidate filter |
+| Swarm-Jelly | `/data2/Swarm-Jelly/` | Failure → self-healing pair cook (105K propolis pairs) |
+| HiveJelly | `/data2/HiveJelly/` | Pipeline output staging (cells, vetted, propolis) |
+| virgin-jelly | `/data2/virgin-jelly/` | Royal Jelly protocol reference implementation |
+| audit | `/data2/audit/` | 6-phase quality audit (dedup, classify, score, stamp, HoneyCard) |
+| hive-warehouse | `/data2/hive-warehouse/` | E-commerce API (810K pairs indexed, Stripe) |
+| swarm_cooks | `/data2/swarm_cooks/` | All cook output JSONL (96 files across variants) |
+
+### Key Environment Variables
+
+```bash
+# Cook backends
+VLLM_9B=http://localhost:8081/v1    # SwarmCurator-9B
+VLLM_27B=http://localhost:8082/v1   # SwarmCurator-27B
+TOGETHER_API_KEY=...                # Cloud inference
+CLOUDFLARE_API_TOKEN=...            # Free 30B tier
+
+# Telemetry
+HIVE_LEDGER_URL=https://ledger.swarmandbee.ai
+HIVE_ADMIN_KEY=...                  # Required for batch push
+```
+
+---
+
 ## Related
 
 - [prompt-machine.md](prompt-machine.md) — Prompt evolution, mutations, softmax allocation
