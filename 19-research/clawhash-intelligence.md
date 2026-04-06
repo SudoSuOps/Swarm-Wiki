@@ -183,6 +183,72 @@ NOBODY IS SELLING AGENT SECURITY WEIGHT:
   The early miner wins.
 ```
 
+## The Anthropic Kill Switch (April 4, 2026)
+
+Anthropic just validated ClawHash from a completely different angle — economics.
+
+### What Happened
+
+Anthropic updated Terms of Service effective April 4, 2026: Claude Pro and Max subscriptions can NO LONGER power third-party agent tools like OpenClaw. Users must switch to pay-as-you-go API keys.
+
+**Boris Cherny (head of Claude Code)**: "Subscriptions were not built for the usage patterns of third-party tools, which bypass caching mechanisms and consume disproportionately more compute."
+
+### The Cost Explosion
+
+```
+BEFORE (subscription arbitrage):
+  OpenClaw on Claude Pro: $20/month → unlimited agent tokens
+  Cost per agent session: ~$0.00
+
+AFTER (API pricing):
+  OpenClaw on Claude API: $3/M input, $15/M output tokens
+  Average agent session: ~50K tokens → $0.75/session
+  100 sessions/day: $75/day = $2,250/month
+  
+  FROM $20/MONTH TO $2,250/MONTH = 112x COST INCREASE
+```
+
+### Three Signals Converging
+
+| Signal | Source | Impact |
+|--------|--------|--------|
+| SECURITY | 9 CVEs, 135K exposed, $45M stolen | Agents are compromised |
+| ECONOMICS | Anthropic kills subscription access | Agents cost 112x more |
+| ARCHITECTURE | Can't depend on any single API | Must own your weights |
+
+### The Alternative: Own Your Weights
+
+```
+CLAUDE API:                          OWN YOUR AGENT:
+  $2,250/month ongoing                $49,950 one-time (5,000 lbs ClawHash)
+  Per-token variable cost              $2,750 GPU (RTX 4500 32GB)
+  Dependent on Anthropic TOS           Runs on YOUR hardware
+  Can be cut off AGAIN                 Can NEVER be cut off
+  No security customization            Security baked INTO weights
+  
+  Break-even: 22 days
+  After that: every token is FREE
+  After that: every security update is YOUR micro-cook
+  
+  OWN YOUR WEIGHTS. OWN YOUR SECURITY. OWN YOUR AGENT.
+```
+
+### Market Impact
+
+Every OpenClaw user who was running on Claude Pro subscription is now:
+1. **Paying 112x more** — looking for alternatives immediately
+2. **Evaluating self-hosting** — need fine-tuned open models
+3. **Concerned about future cutoffs** — want sovereignty over their agent
+4. **Needing security** — the CVEs didn't go away, they're WORSE without Anthropic's guardrails
+
+This creates demand for EXACTLY what we sell:
+- **ClawHash weight** → security patterns baked into model weights
+- **Open base model** (Qwen 27B) → runs on own hardware, no API dependency
+- **RTX 4500** ($2,750) → the oven that runs the agent forever
+- **Cookbook recipe** → how to bake a secure, sovereign agent
+
+---
+
 ## Next Steps
 
 1. Generate 5,000 adversarial pairs across 6 ClawHash sub-algorithms
