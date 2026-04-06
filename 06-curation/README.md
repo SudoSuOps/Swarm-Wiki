@@ -115,13 +115,155 @@ Each middleware has an algorithmic fallback. Chain runs in <5ms without LLMs. Fu
 
 ---
 
+## Prompt Genome System (BUILT — /data2/cook-domain-prompts/)
+
+A complete genetic algorithm for prompt evolution. Every prompt is DNA.
+
+### Genome Schema
+
+Each prompt is decomposed into independently mutable parameters:
+
+```json
+{
+  "persona": "senior analyst at a CRE intelligence platform",
+  "credentials": "CCIM/MAI-credentialed",
+  "domain_bias": "cre",
+  "objective": "translates research into actionable market intelligence",
+  "reasoning_style": ["mechanism", "causal_chain"],
+  "numeric_density": 3,
+  "named_entities": true,
+  "tradeoff_analysis": true,
+  "metrics_required": true,
+  "arithmetic_explicit": false,
+  "tone": "professional",
+  "audience": "practitioners"
+}
+```
+
+The **compiler** (`compile_prompt.py`) assembles genome JSON → system prompt string. Every parameter is a gene. Every gene is independently mutable.
+
+### Mutation Axes
+
+| Axis | What It Pushes | Genes Mutated |
+|------|---------------|--------------|
+| specificity | Named entities, tradeoff analysis | `named_entities=true`, `tradeoff_analysis=true` |
+| reasoning | Causal chains, constraint analysis | `reasoning_style` expanded |
+| numeric | Rates, ratios, show the math | `numeric_density` increased, `arithmetic_explicit=true` |
+| persona | Professional credentials, experience | `credentials`, `experience_years` |
+
+2 parents × 4 axes = 8 mutations per generation. **Crossover** breeds two parents into a child.
+
+### Current Population
+
+**Parents** (Generation 0):
+- `quant_analyst` (hash: `00aeb3f5`) — avg 90.5, 1,012 pairs
+- `cre_analyst` (hash: `9206000c`) — avg 90.0, 1,007 pairs
+
+**Generation 1 Mutations** (8 variants):
+- MUT_01 specificity_quant: **93.8** avg (exploring)
+- MUT_05 numeric_quant: **93.4** avg (exploring)
+- MUT_02-08: all outperforming parents (91-95 range)
+
+### Fitness Function
+
+`genome_fitness.py` joins local genome metadata with live telemetry from hive-ledger:
+- Telemetry scores from `/api/telemetry/prompts`
+- **Novelty scoring** prevents convergence — rewards prompts exploring different parts of space
+- **Extinction rule**: avg < 85 after 200 pairs = removed from pool
+- **Softmax allocation**: temperature-scaled weighting, 5% floor prevents starvation
+
+### Files
+
+| File | Location | Role |
+|------|----------|------|
+| `compile_prompt.py` | `/data2/cook-domain-prompts/` | Genome → system prompt compiler |
+| `genome_fitness.py` | `/data2/cook-domain-prompts/` | Fitness + novelty + telemetry join |
+| `genomes/base/` | `/data2/cook-domain-prompts/` | 2 parent genomes (JSON) |
+| `genomes/mutations/gen_1/` | `/data2/cook-domain-prompts/` | 8 gen-1 mutations (JSON) |
+| `genomes/schema.py` | `/data2/cook-domain-prompts/` | PromptGenome dataclass + compile + mutate + crossover |
+| `genomes/novelty.py` | `/data2/cook-domain-prompts/` | Vector distance novelty scoring |
+
+**Key finding**: "The prompt was the bottleneck, not the model." Confirmed by EXP-004 — one sentence change produced +9% specificity improvement. The genome system is the automated version of what APE did manually.
+
+---
+
+## Pair Generation Engine (BUILT — /data2/openalex/)
+
+The cook scripts that turn raw sources into training pairs.
+
+### cook_openalex.py — Main Engine
+
+Turns academic papers into instruction/response training pairs:
+
+```
+OpenAlex JSONL → reconstruct abstract → generate instruction → 
+LLM inference → quality gate → platinum JSONL
+```
+
+**Backends** (3 options):
+- **vLLM** (local): SwarmCurator-9B or 27B on swarmrails GPUs
+- **Together.ai** (cloud): Zero local GPU, 20 concurrent workers
+- **Cloudflare Workers AI** (free): Free 30B model tier
+
+**Multi-worker**: 4-20 concurrent workers depending on backend.
+
+### The 5-Step Trajectory Template
+
+The secret sauce. Every pair is generated with this reasoning scaffold:
+
+```
+1. IDENTIFY the core issue
+2. CALCULATE key metrics — specific numbers, percentages, show the math
+3. ANALYZE root causes — 'because', 'therefore', 'consequently'
+4. EVALUATE risks — 'if X then Y', 'unless Z', 'assuming W'
+5. RECOMMEND specific actions with clear rationale
+```
+
+**Why it works**: JellyScore counts trajectory keywords (5), causal keywords (3), conditional keywords (2), and quantitative markers (2). Max 12 → capped at 10 → divided by 10. The trajectory template guarantees all keyword categories are hit, producing 100% reasoning_depth scores.
+
+### Domain Prompt Library
+
+12 domain files in `/data2/cook-domain-prompts/domains/`:
+
+| Domain | Persona | Key References |
+|--------|---------|---------------|
+| aviation | ATP pilot, A&P engineer, safety investigator | FAA/ICAO/EASA regs, ADs, service bulletins |
+| cre | Senior CRE analyst | Cap rates, NOI, DSCR, FAR citations |
+| medical | Pharma safety analyst | Drug interactions, dosing, FDA refs |
+| legal_consumer | Consumer protection attorney | CFPB, FDCPA, state regs |
+| finance | Capital markets analyst | Fixed income, derivatives, SEC filings |
+| energy | Grid/renewables analyst | DOE, FERC, ISO/RTO refs |
+| crypto | DeFi protocol analyst | Smart contracts, TVL, governance |
+| economic | Macro economist | Fed, BLS, trade data |
+| climate | Environmental scientist | EPA, IPCC, emissions data |
+| software | Systems architect | Architecture patterns, security |
+| ai | ML researcher | Model architectures, training methods |
+
+Each domain prompt appends the universal `RJ_SYSTEM_SUFFIX` which includes the trajectory template.
+
+### PropolisCollector — Failure Harvesting
+
+Failures (propolis-tier pairs) are collected by `PropolisCollector` from `/data2/audit/hive/propolis.py` and fed into `cook_swarmjelly.py` — a specialized cook that turns failures into learning pairs. The failures teach the model what NOT to do.
+
+### Additional Cook Scripts
+
+| Script | Location | Purpose |
+|--------|----------|---------|
+| `cook_all.sh` | `/data2/openalex/` | Batch orchestrator for all domains |
+| `cook_auditor.py` | `/data2/openalex/` | Quality audit on cooked pairs |
+| `test_rj_prompts.py` | `/data2/openalex/` | A/B test prompt variants |
+| `cook_swarmjelly.py` | `/data2/Swarm-Jelly/` | Failure → learning pair cook |
+| `pair_cooker.py` | `/data2/swarm-radar/` | Signal → pair generation |
+| `domain_prompts.py` | `/data2/swarm-radar/` | Signal-specific prompt library |
+| `cook_dna_batch2.py` | `~/swarmwriter-nemotron70b/` | Nemotron 70B pair generation |
+
+---
+
 ## Prompt Machine
 
-Automated prompt evolution that discovers which system prompts produce highest-scoring pairs. See [prompt-machine.md](prompt-machine.md).
+Automated prompt evolution that closes the loop between cook output quality and prompt selection. See [prompt-machine.md](prompt-machine.md).
 
-**Key finding**: "The prompt was the bottleneck, not the model." Confirmed by EXP-004 — one sentence change produced +9% specificity improvement.
-
-**Production state**: Manual APE (research-ops pipeline). Target: automated softmax allocation with continuous mutation.
+**Current state**: Genome system built, telemetry endpoints live, softmax allocation implemented in cook_openalex.py. EXP-004 (APE) confirmed the approach — one sentence change produced +9% specificity improvement. The genome system is the automated, continuous version of what APE did as a one-shot experiment.
 
 ---
 
