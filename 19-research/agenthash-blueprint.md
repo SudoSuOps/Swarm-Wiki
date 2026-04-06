@@ -199,6 +199,28 @@ Together: weights that can operate the trifecta safely
 | **C: Fine-tune Pack** | Model adaptation pack for tool-using workers | Edge deployers |
 | **D: Reliability Scoring Service** | Upload agent logs → failure taxonomy + repair pairs | Enterprise |
 
+## Seed Dataset (LIVE — 10 pairs)
+
+10 contrastive repair pairs saved to `~/google-gemma-4-FTW/domains/agenthash/raw/agenthash_seed_10.jsonl`
+
+All 6 buckets covered: CALL (2), READ (2), RECOVER (1), LOOP (2), STOP (2), ESCALATE (1).
+
+Source: Real operator traces from @bradmillscan (400hrs), @duskofoed, @_motamedia, @chrysb, @Excavationpro, @HKstrongside.
+
+Each pair includes: system prompt with SOUL.md rules, user request, CORRECT response (not the broken one), metadata with bucket/failure_label/repair_note.
+
+### GRPO Training Reference (Year 3 — from Grok)
+
+```bash
+# Feed repair pairs into Slime GRPO/OPD training
+--dataset agenthash_repair_pairs.jsonl \
+--method combine \
+--advantage-estimator grpo \
+--opd-weight 1.5   # boost corrective hints from repair_note
+```
+
+The `repair_note` field in each pair's metadata becomes the OPD hint — token-level directional supervision telling the model WHY the good response is better.
+
 ## Economics
 
 ```
