@@ -50,6 +50,64 @@ RIGHT:  10 junior brokers × 1 tenant type each = 10 deep specializations
   That's how you close $8B. Not by being generalists.
 ```
 
+## The 1031 Exchange Engine
+
+Dollar Generals were placeholders. The real engine was the 1031 exchange.
+
+```
+THE CYCLE:
+  Owner sells a strip mall → has $2M in capital gains
+  Must identify replacement property in 45 days or pay tax
+  DG King: "I have 6 Dollar Generals that close the exchange"
+  
+  DG = perfect 1031 replacement:
+    Single tenant. Net lease. Predictable NOI. Clean closing.
+    No management headaches. No tenant turnover.
+    The owner sleeps at night. The exchange closes on time.
+
+  The DG King wasn't just selling DGs.
+  He was solving the 1031 problem with DGs.
+  The tenant was the PRODUCT. The exchange was the DEMAND.
+```
+
+## The Referral Network — 20% of the Side
+
+One agent, one tenant. But clients want what they want.
+
+```
+DG OWNER: "I want to sell my DG and buy a Taco Bell"
+
+WRONG ANSWER: "Let me learn about Taco Bell for you"
+              (distraction → dilution → lost focus → lost DG pipeline)
+
+RIGHT ANSWER: "I know the Taco Bell broker. Let me refer you."
+              Referral fee: 20% of the cooperating side
+              DG King keeps his DG focus. Earns on the referral. 
+              Taco Bell broker closes their specialty. Everyone wins.
+
+THE ECONOMICS:
+  DG King sells the DG:     $1.5M × 3% = $45K commission (full side)
+  Refers the Taco Bell buy:  $2M × 3% × 20% = $12K referral fee
+  Total on one exchange:     $57K from one client
+
+  The DG King never learned Taco Bell.
+  He just knew the Taco Bell broker's number.
+```
+
+This maps directly to the agent bullpen:
+
+```
+AGENT-DG gets a request for Taco Bell:
+  → Does NOT try to handle it
+  → Routes to AGENT-TACOBELL
+  → Referral fee logged: 20% of cooperating side
+  → AGENT-DG stays focused on DG pipeline
+
+  Same principle: SwarmOS ROUTER dispatches to the right specialist
+  Same economics: referral fee split tracked in the ledger
+  Same discipline: one agent, one tenant, NEVER distracted
+```
+
 ## The AI Bullpen — Same Principle
 
 Replace each junior broker with a specialized agent. Same rule: **one agent, one tenant, one domain.**
