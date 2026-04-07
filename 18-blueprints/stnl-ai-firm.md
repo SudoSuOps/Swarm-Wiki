@@ -172,24 +172,23 @@ GRIND (Generate):
   That email took a human broker 45 minutes to research and write.
   Agent-DG produces it in 3 seconds. 500 per day.
 
-INSPECT:
-  Before any listing goes live:
-  - Title search verified (automated county records)
-  - Lease abstract matches stated terms
-  - Environmental flag check (EPA, state database)
-  - Tenant credit confirmed (DG current BBB from S&P)
-  - Property condition (Google Street View + satellite)
+INK (in contract — the ink is on the paper):
+  The deal is made. The paper is signed.
+  - LOI generated from BOV data → buyer signs → ink
+  - PSA from stock template → both parties execute → ink
+  - Due diligence period opens
+  - Title search, environmental, lease verification
   - Swarm-Inspector 8-layer validation on all analysis
   
-  The INSPECT is why owners trust the listing. It's already underwritten.
+  INK = the LOI and PSA are signed. You're in contract.
+  The hardest part is done. Now you just close.
 
 CLOSE:
-  - LOI generated from BOV data
-  - PSA from closing template library
-  - Due diligence checklist auto-tracked
+  - Due diligence satisfied
   - Closing statement (actual vs estimated)
   - Deed recorded to Hedera — permanent
   - Commission calculated → FEE earned
+  - Steak dinner.
 ```
 
 ## The Tech Stack

@@ -10,10 +10,10 @@ MAGIC simplified the entire CRE brokerage lifecycle into five clear phases:
 
 ```
 M — MEETINGS      Book the sits. 200 dials/day. The bullpen grinding.
-A — APPRAISALS    Value the asset. Comp analysis. BOV. Know the price.
-G — GRIND         Proposals. Listing presentations. Win the mandate.
-I — INSPECT       Validate the work. Title search. 8-layer check. The moat.
-C — CLOSE         Execute the deal. Closing statement. Deed recorded.
+A — APPRAISALS    Value the asset. Comp analysis. BOV. Present the proposal.
+G — GRIND         Win the listing. Go to market. Email blast the book.
+I — INK           Got a deal. LOI signed. PSA executed. In contract.
+C — CLOSE         Close escrow. Deed recorded. FEE earned. Steak dinner.
 ```
 
 **Result**: $8B in closed transactions. Very clear focus. The model works.
@@ -53,9 +53,9 @@ Single Tenant Net Lease — the domain algorithm. Like ClawHash for security or 
 |-------|-----------|-------------------|
 | M — Meetings | Cold calls, door knocks, referrals | Signal workers, lead scoring, contact API |
 | A — Appraisals | Pull comps, drive the property, BOV | SwarmCRE-35B comp analysis, automated BOV |
-| G — Grind | Write proposals, present to owners | Generated proposals, listing presentation builder |
-| I — Inspect | Title search, property inspection, due diligence | Swarm-Inspector 8-layer validation, SwarmTitle insurance |
-| C — Close | Negotiate, execute PSA, close escrow | Deal Machine, closing statement, deed recorded |
+| G — Grind | Win the listing, go to market, blast the book | Generated proposals, email blast, listing distribution |
+| I — Ink | LOI signed, PSA executed, in contract | Auto-generated LOI/PSA from stock templates, e-signature |
+| C — Close | Close escrow, deed recorded, commission earned | Deal Machine, closing statement, Hedera anchor, FEE |
 
 ## Why This Matters
 
