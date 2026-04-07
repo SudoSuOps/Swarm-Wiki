@@ -310,15 +310,16 @@ START HERE:
 The DG King didn't create custom materials for every deal. He had ONE set of templates. Plug in the address, the price, the story. Print. Go.
 
 ```
-THE OM (5 pages, not 50):
+THE OM (1 sheet of paper, folded in half — 4 panels):
   Cover:        Photo + address + price + cap rate
   Inside left:  Aerial + property details + lease summary
   Inside right: Tenant profile + financials + rent schedule
   Back cover:   Contact info + firm branding
 
-  That's it. Not a 50-page novel nobody reads.
-  The buyer wants: what is it, what does it cost, what's the lease.
-  5 pages answers all three. Print 20 copies. Hand them out at the meeting.
+  One piece of paper. Folded in half. That's the entire OM.
+  Not a 50-page novel nobody reads. Not a spiral-bound deck.
+  One sheet. Four panels. Everything the buyer needs to say yes.
+  Print 20 at Kinko's for $15. Hand them out at the meeting.
 
 THE LOI (1 page):
   Price. Terms. Closing date. Contingencies. Sign here.
