@@ -1,0 +1,253 @@
+# STNL AI Firm — The Agent Bullpen Blueprint
+
+**Origin**: Donovan Mackey, 30 years CRE, $8B closed. Marcus & Millichap platform.
+**Thesis**: One agent, one domain, one specialization. Depth beats breadth. The DG King principle.
+**Status**: BLUEPRINT — ready to build on existing Swarm infrastructure
+
+## The DG King Story
+
+A junior broker. Day one, knows nothing. Given one assignment: Dollar General.
+
+Not "go learn CRE." Not "call everyone." Not "figure it out."
+
+**One tenant. One asset type. One domain.**
+
+Year 1: Learned every DG lease structure, every cap rate by state, every landlord pattern.
+Year 2: Known in the market as "the DG guy." Owners called HIM.
+Year 3: Trading 60 DGs per year. The DG King.
+
+The cure was focus. Not more dials. Not more domains. One thing, mastered.
+
+```
+WRONG:  10 junior brokers × 10 tenant types = 100 shallow relationships
+RIGHT:  10 junior brokers × 1 tenant type each = 10 deep specializations
+
+  Broker 1: Dollar General King      (19,000+ locations)
+  Broker 2: Walgreens Specialist      (8,900+ locations)
+  Broker 3: Starbucks Expert          (16,000+ locations)
+  Broker 4: O'Reilly Auto Authority   (6,000+ locations)
+  Broker 5: Dollar Tree Closer        (16,000+ locations)
+  Broker 6: CVS Analyst               (9,000+ locations)
+  Broker 7: 7-Eleven Tracker          (13,000+ locations)
+  Broker 8: AutoZone Specialist       (7,000+ locations)
+  Broker 9: Tractor Supply Expert     (2,200+ locations)
+  Broker 10: QSR Bundle (McDonald's, Chick-fil-A, Popeyes)
+
+  Each one knows EVERYTHING about their tenant.
+  Lease structures. Credit trends. Expansion plans. Closure patterns.
+  Cap rates by state. Average deal size. Who the repeat sellers are.
+  
+  That's how you close $8B. Not by being generalists.
+```
+
+## The AI Bullpen — Same Principle
+
+Replace each junior broker with a specialized agent. Same rule: **one agent, one tenant, one domain.**
+
+```
+Agent-DG:       Dollar General specialist
+                Trained on: DG lease structures, NNN terms, 15-year primary terms
+                Knows: DG credit rating (BBB), avg deal size ($1.2-2.5M), 
+                       cap rates by region (5.5-7.0%), rent bumps (10% every 5yr)
+                Monitors: DG earnings, new store openings, closures
+                Volume: 19,000+ locations tracked
+
+Agent-WAG:      Walgreens specialist  
+                Trained on: WAG/Boots merger implications, pharmacy reimbursement trends,
+                            lease restructuring patterns, dark store risk
+                Knows: WAG credit (BBB-), avg deal ($3-6M), recent sale-leasebacks
+                Monitors: WAG store closure announcements, VillageMD integration
+
+Agent-SBUX:     Starbucks specialist
+                Trained on: SBUX corporate vs licensed stores, drive-thru premium,
+                            15-year ground lease structures
+                Knows: SBUX credit (BBB+), avg deal ($2-4M), drive-thru cap rate premium
+                Monitors: SBUX earnings, new format stores, campus/hospital locations
+
+... (7 more tenant-specific agents)
+```
+
+## Architecture: MAGIC Per Agent
+
+Every agent runs the full MAGIC cycle on their ONE tenant:
+
+```
+MINE (Meetings):
+  Agent-DG monitors:
+  - County assessor records for all DG properties in target MSAs
+  - Owner holding periods (bought >5 years ago = likely seller)
+  - Lease expiration dates (approaching renewal = decision point)
+  - DG earnings calls (credit change = every owner re-evaluates)
+  - New DG store announcements (rising tide = owner confidence)
+  
+  Output: ranked lead list, scored by likelihood to sell
+
+ASSAY (Appraisals):
+  Agent-DG generates automated BOV for every P1 lead:
+  - Pulls last 12 months of DG comps (same state, same lease term range)
+  - Calculates: NOI ÷ market cap rate = indicated value
+  - Adjusts: lease term remaining, rent bump schedule, roof age, traffic count
+  - Compares: what this owner paid vs current market (gain/loss)
+  
+  Output: BOV PDF attached to outreach email
+
+GRIND (Generate):
+  Agent-DG produces personalized outreach:
+  
+  "Mr. Johnson — your Dollar General at 4521 Highway 19 in Perry, GA 
+   has 6 years remaining on the primary term with 10% bumps at year 10. 
+   Similar DGs in central Georgia traded at 5.75 caps last quarter. 
+   Based on your $72,000 NOI, that's an indicated value of $1,252,000. 
+   You purchased in 2019 for $980,000. Would you like a full market 
+   analysis? I specialize exclusively in Dollar General properties."
+  
+  That email took a human broker 45 minutes to research and write.
+  Agent-DG produces it in 3 seconds. 500 per day.
+
+INSPECT:
+  Before any listing goes live:
+  - Title search verified (automated county records)
+  - Lease abstract matches stated terms
+  - Environmental flag check (EPA, state database)
+  - Tenant credit confirmed (DG current BBB from S&P)
+  - Property condition (Google Street View + satellite)
+  - Swarm-Inspector 8-layer validation on all analysis
+  
+  The INSPECT is why owners trust the listing. It's already underwritten.
+
+CLOSE:
+  - LOI generated from BOV data
+  - PSA from closing template library
+  - Due diligence checklist auto-tracked
+  - Closing statement (actual vs estimated)
+  - Deed recorded to Hedera — permanent
+  - Commission calculated → FEE earned
+```
+
+## The Tech Stack
+
+```
+PER AGENT:
+  Brain:          SwarmCRE-35B fine-tuned on tenant-specific pairs
+                  (5,000 lbs DG-Hash weight = $145 to cook)
+  Operations:     SwarmCurator-9B for daily task management
+  Signal:         SwarmSignal-2B on edge for real-time monitoring
+  Analysis:       masterwriter:31b for proposal and email generation
+  Tribunal:       gemma3:12b + qwen2.5:32b dual-scale (validates all analysis)
+
+SHARED:
+  Database:       PostgreSQL (property records, owner contacts, deal pipeline)
+  Storage:        MinIO (BOVs, proposals, closing docs)
+  Finality:       Hedera HCS (every closed deal anchored)
+  Website:        swarmandbee.ai/stnl (deal pipeline dashboard)
+  CRM:            agent memory — who was contacted, when, response, next action
+
+HARDWARE:
+  10 agents × SwarmCRE inference = 1 RTX PRO 4500 32GB handles all 10
+  Signal monitoring = 1 Jetson edge node
+  Total: $3,000 hardware. Replaces $500K/year in junior broker salaries.
+```
+
+## Economics
+
+```
+HUMAN BULLPEN (traditional):
+  10 junior brokers × $50K salary      = $500,000/year
+  Office space + phones + CRM           = $100,000/year
+  Training + management overhead        = $50,000/year
+  TOTAL COST:                            $650,000/year
+  OUTPUT: ~60 DG deals/year (the DG King was exceptional)
+  REVENUE: 60 × $30K commission         = $1,800,000/year
+  PROFIT:                                $1,150,000/year
+
+AGENT BULLPEN:
+  10 specialized agents (GPU inference)  = $2/day = $730/year
+  Data feeds (county, EPA, credit)       = $6,000/year
+  Weight (10 × 5,000 lbs CREHash)       = $1,450 one-time
+  Hardware (RTX 4500 + Jetson)           = $3,250 one-time
+  TOTAL COST:                            ~$11,430 first year
+  OUTPUT: 500 outreach/day × 365 = 182,500 touches/year
+          Conservative 0.5% conversion = 912 qualified leads
+          10% close rate = 91 deals/year
+  REVENUE: 91 × $30K commission          = $2,730,000/year
+  PROFIT:                                $2,718,570/year
+
+  Agent bullpen: 2.4x more deals, 0.02x the cost.
+  The senior broker still closes. That's your job.
+```
+
+## The DG King Principle — Applied to All AI
+
+This isn't just STNL. This is the universal truth about AI agents:
+
+```
+GENERALIST AGENT:
+  "I can do everything" = does nothing well
+  Same failure as a generalist broker
+  Jack of all trades, master of none
+  Hallucinations when asked about specifics
+  No deep knowledge, no trust, no deals
+
+SPECIALIST AGENT:
+  "I am the DG King" = knows everything about one thing
+  Same success as the DG King broker
+  Knows every DG lease structure in the country
+  Accurate because the domain is narrow and deep
+  Trust because the knowledge is verifiable
+  
+  One agent. One domain. One specialization.
+  That was the cure for the human bullpen.
+  It's the cure for the AI bullpen.
+```
+
+This maps directly to the Domain-Hash architecture:
+
+```
+DG-Hash     → Agent-DG specialty (sub-algorithm of CREHash)
+WAG-Hash    → Agent-WAG specialty
+SBUX-Hash   → Agent-SBUX specialty
+
+Each agent has its own:
+  - Training weight (tenant-specific pairs)
+  - Signal workers (tenant-specific monitoring)
+  - Prompt genome (tenant-specific system prompts)
+  - BOV template (tenant-specific analysis)
+  - Comp database (tenant-specific transactions)
+
+Same MAGIC. Same FEE. Different tenant.
+The algorithm is the specialization.
+```
+
+## Phase 1: Prove It with DG
+
+```
+START HERE:
+  1 agent (Agent-DG)
+  1 MSA (central Georgia — you know this market)
+  1 tenant type (Dollar General)
+  500 DG properties monitored
+  50 BOVs per week auto-generated
+  10 personalized outreach per day
+  
+  GOAL: 1 listing in 90 days from agent-generated lead
+  PROOF: the lead came from the machine, not your Rolodex
+  
+  If it works for 1 DG in 1 MSA → scale to 19,000 DGs nationwide
+  If it works for DG → add WAG, SBUX, O'Reilly, Dollar Tree
+  If it works for STNL → the model works for any CRE vertical
+```
+
+## Standing Rules
+
+1. **One agent, one tenant.** Never let an agent cover multiple tenant types.
+2. **The agent knows more than any human about its tenant.** That's the bar.
+3. **Every BOV is tribunal-verified.** No hallucinated cap rates. No fake comps.
+4. **The senior broker closes.** Agents mine, appraise, grind, inspect. Humans close.
+5. **MAGIC → FEE.** Every agent runs the full cycle. No shortcuts.
+6. **Start with one.** Prove DG. Then scale. Don't build 10 agents on day one.
+
+---
+
+*The DG King went from 1 deal to 60 deals in 3 years. One tenant. One focus. One specialization.*
+*Agent-DG does it in 3 months. Same focus. Same depth. Different workforce.*
+*The cure was always the same: one thing, mastered.*
