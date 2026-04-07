@@ -1,0 +1,2 @@
+/home/swarm/Swarm-Wiki/01-architecture/algorithm-registry.md
+/home/swarm/Swarm-Wiki/19-research/bitcoin_whitepaper.pdf

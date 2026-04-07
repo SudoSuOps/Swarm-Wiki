@@ -1,0 +1,736 @@
+{
+  "communities": {
+    "0": [
+      "n1",
+      "n10",
+      "n11",
+      "n12",
+      "n13",
+      "n14",
+      "n15",
+      "n16",
+      "n17",
+      "n18",
+      "n19",
+      "n2",
+      "n20",
+      "n21",
+      "n22",
+      "n23",
+      "n24",
+      "n25",
+      "n26",
+      "n27",
+      "n28",
+      "n29",
+      "n3",
+      "n30",
+      "n31",
+      "n32",
+      "n33",
+      "n34",
+      "n35",
+      "n36",
+      "n37",
+      "n38",
+      "n39",
+      "n4",
+      "n40",
+      "n41",
+      "n42",
+      "n5",
+      "n6",
+      "n7",
+      "n8",
+      "n9"
+    ],
+    "1": [
+      "ai_studio_agent",
+      "bitcoin_merkle_parallel",
+      "bitcoin_proof_of_work_mapping",
+      "cre_broker_agent",
+      "deed_lifecycle",
+      "dual_judge_honesty_mechanism",
+      "ens_domains_13",
+      "finality_layer1_postgres",
+      "finality_layer2_minio",
+      "finality_layer3_ipfs",
+      "finality_layer4_hedera",
+      "finality_layer5_ens",
+      "finality_layer_5",
+      "guarantee_py",
+      "hcs_signal_timestamping",
+      "hedera_8_agents",
+      "hedera_bridge",
+      "hedera_bridge_py",
+      "hedera_hcs_topics",
+      "hedera_hts_tokens",
+      "hedera_readme",
+      "merkle_py",
+      "monitoring_layer",
+      "recording_layer",
+      "registered_agents",
+      "satoshi_hash",
+      "swarmledger_finality",
+      "tribunal_layer",
+      "validate_validator_protocol"
+    ],
+    "2": [
+      "assembler",
+      "base_vertical_abc",
+      "coala_paper",
+      "cre_skills_19",
+      "decision_logging",
+      "deerflow_inspiration",
+      "fleet_context",
+      "fleet_state",
+      "medical_skills_9",
+      "middleware_analysis_9b",
+      "middleware_chain",
+      "middleware_classification_2b",
+      "middleware_quality_gate",
+      "middleware_strategy_27b",
+      "orchestrator",
+      "publisher",
+      "skill_md_format",
+      "skills_discovery",
+      "skills_prompt_section",
+      "validator_curator",
+      "vertical_aviation",
+      "vertical_cre",
+      "vertical_drone",
+      "vertical_medical",
+      "vertical_signal",
+      "verticals_yaml"
+    ],
+    "3": [
+      "agent_orchestration_papers",
+      "agentverse_paper",
+      "autogen_paper",
+      "constitutional_ai_paper",
+      "dynamic_llm_agent_paper",
+      "egoalpha_source",
+      "gptswarm_paper",
+      "just_ask_calibration_paper",
+      "metagpt_paper",
+      "process_outcome_feedback_paper",
+      "production_tribunal_pipeline",
+      "prompting_gpt3_reliable_paper",
+      "reliability_calibration",
+      "rj_threshold_defensibility",
+      "role_specialization_finding",
+      "scoring_prompt_py",
+      "swarm_config_deed_writer",
+      "swarm_config_domain_hash",
+      "swarm_config_py",
+      "swarm_config_red_blue",
+      "swarm_config_scales",
+      "swarm_config_tribunal",
+      "swarm_config_weight_classes",
+      "swarm_yaml",
+      "three_location_classes"
+    ],
+    "4": [
+      "atlas-reasoning-tiers",
+      "base-4b-equals-finetuned-9b",
+      "beemini-router-v2",
+      "cove-verification",
+      "fleet-topology",
+      "gold-standard-build",
+      "memphis-ic-validation",
+      "nemotron-nano",
+      "qwen35-architecture",
+      "qwen35-no-qlora",
+      "router-confidence-formula",
+      "signal-edge-01",
+      "swarm-atlas-27b",
+      "swarmcapitalmarkets-27b",
+      "swarmcre-35b",
+      "swarmcre-35b-v3-plan",
+      "swarmcre-dataset",
+      "swarmcurator-27b",
+      "swarmcurator-2b",
+      "swarmcurator-9b",
+      "swarmjelly-4b",
+      "swarmjelly-pipeline",
+      "swarmpharma-35b",
+      "swarmresearch-32b",
+      "training-patterns"
+    ],
+    "5": [
+      "behavioral_eval",
+      "data_warehouse",
+      "deed",
+      "discovery_doc",
+      "edge_deployment",
+      "eval_protocol",
+      "finding_dimensions",
+      "five_proofs",
+      "five_weight_dimensions",
+      "gitnexus_impact_analysis",
+      "gitnexus_index",
+      "glass_wall_repo",
+      "hedera_anchor",
+      "hive_architecture",
+      "karpathy_signal",
+      "merkle_tree",
+      "proof_of_location",
+      "proof_of_weight",
+      "rwa_deed",
+      "swarm_chain",
+      "swarm_eval",
+      "swarmwiki_repo",
+      "tribunal",
+      "validation_protocol",
+      "weight_classes"
+    ],
+    "6": [
+      "agenthash_demand_signal",
+      "broken_weights_intelligence",
+      "clawhash_new_templates",
+      "curation_readme",
+      "extinction_rule",
+      "failure_pattern_malformed",
+      "failure_pattern_multi_turn",
+      "failure_pattern_plain_text",
+      "five_step_trajectory",
+      "genome_schema",
+      "hive_ledger",
+      "hn_failure_taxonomy",
+      "loop_bridge_fix",
+      "pair_generation_engine",
+      "prompt_genome_system",
+      "prompt_hash_propagation",
+      "prompt_machine",
+      "prompt_mutations",
+      "prompt_registry",
+      "propolis_collector",
+      "softmax_allocation",
+      "stack_vs_weight_distinction",
+      "telemetry_api",
+      "tribunal_cook_disconnect"
+    ],
+    "7": [
+      "BusinessModelREADME",
+      "CalibrationDoctrine",
+      "CapitalMarketsEngine",
+      "ClawForgeMetaAgent",
+      "ClosingStatement",
+      "EnterpriseCookbookPricing",
+      "FiveProvenanceProofs",
+      "FlightSheetEpoch1",
+      "GenesisBlock",
+      "HederaHCS",
+      "JudgeCalibrationCert",
+      "LastMileBlueprint",
+      "MerkleTree",
+      "OM_CRE",
+      "OM_Medical",
+      "OM_Template",
+      "PSA",
+      "PostClosingWarranty",
+      "RedBlueTribunal",
+      "SwarmAndBeeLLC",
+      "SwarmArena",
+      "SwarmCurator9B",
+      "SwarmTitle",
+      "VirginJellyPipeline"
+    ],
+    "8": [
+      "agenthash",
+      "agenthash_buckets",
+      "agenthash_failure_traces",
+      "algorithm_registry",
+      "anthropic_kill_switch",
+      "avionhash",
+      "clawhash",
+      "clawhash_6_subalgorithms",
+      "crehash",
+      "cve_2026_25253",
+      "granthash",
+      "legalhash",
+      "medhash",
+      "nemoclaw",
+      "openclaw",
+      "unfixable_trifecta",
+      "wikihash"
+    ],
+    "9": [
+      "capital_markets_skills",
+      "cloudflare_workers",
+      "cre_skills",
+      "curator_skills_py",
+      "letter_sender",
+      "medical_skills",
+      "r2_buckets",
+      "safestore",
+      "sb_aviation",
+      "sb_cre",
+      "sb_medical",
+      "skill_spec_format",
+      "swarm_api_worker",
+      "swarm_cookbook",
+      "swarm_router_worker",
+      "swarm_skills_framework",
+      "wallet_metering"
+    ],
+    "10": [
+      "curator_bridge",
+      "discord_bridge",
+      "entity_scorer",
+      "event_bridge",
+      "hedera_bridge_signal",
+      "memory_bridge",
+      "ner_entity_databases",
+      "planner",
+      "priority_p1",
+      "priority_p2",
+      "priority_p3",
+      "r2_archive_bridge",
+      "rjp_1_source_weights",
+      "signal_engine",
+      "signal_pipeline",
+      "velocity_tracker"
+    ],
+    "11": [
+      "base_worker_abc",
+      "hn_signal_report_april_2026",
+      "openclaw_anthropic_ban",
+      "worker_arxiv",
+      "worker_cre_news",
+      "worker_edgar",
+      "worker_fred",
+      "worker_github",
+      "worker_hn",
+      "worker_human",
+      "worker_reddit",
+      "worker_rss",
+      "worker_trending",
+      "worker_webhook"
+    ],
+    "12": [
+      "cove_2stage",
+      "cove_promotion",
+      "dataset_curation_audit",
+      "factory_protocol",
+      "factory_protocol_audit",
+      "hcs_seal",
+      "master_platinum",
+      "numeric_verify_gate",
+      "quality_gates",
+      "rj_quality_filter",
+      "safestore_3tier",
+      "six_gate_pipeline",
+      "trajectory_enhancement",
+      "v1_lesson"
+    ],
+    "13": [
+      "aviation_audit",
+      "creditsniper",
+      "dataset_schema",
+      "eu_ai_act",
+      "hippocratic_ai",
+      "medical_pharma_audit",
+      "pharma_trajectory",
+      "regulatory_audit",
+      "shield_ai",
+      "swarm_pharma_35b",
+      "swarmaviation",
+      "swarmmed",
+      "trajectory_label"
+    ],
+    "14": [
+      "grpo",
+      "grpo_method",
+      "living_weight_concept",
+      "opd_method",
+      "openclaw_rl",
+      "openclaw_rl_3_layers",
+      "openclaw_rl_architecture",
+      "slime_4_components",
+      "slime_framework",
+      "slime_prm_judge",
+      "tribunal_as_prm",
+      "tribunal_as_service"
+    ],
+    "15": [
+      "asrs_cook",
+      "blackwell_rtx4500",
+      "blackwell_rtx6000",
+      "energy_economics",
+      "flight_sheets",
+      "miner_discipline",
+      "nas",
+      "rtx3090",
+      "swarm_controller",
+      "swarmrails",
+      "whale"
+    ],
+    "16": [
+      "bee-finalize-watcher",
+      "cloudflared-tunnel",
+      "five-proofs-deed",
+      "minio-zima",
+      "om-aviation",
+      "om-grants",
+      "proof-of-location-case-study",
+      "swarm-witness",
+      "swarmsignal-service",
+      "zima-edge-1"
+    ],
+    "17": [
+      "critic_bee",
+      "filter_bee",
+      "finding_27b",
+      "katniss",
+      "repair_bee",
+      "router_bee",
+      "scout_bee",
+      "swarm_3shift",
+      "swarm_refinery",
+      "swarmrefinery_model"
+    ],
+    "18": [
+      "challengeable_transparency",
+      "finding_energy",
+      "five_trust_layers",
+      "flight_sheet",
+      "glass_wall",
+      "glass_wall_layout",
+      "permit_protocol",
+      "spectators",
+      "swarm_os"
+    ],
+    "19": [
+      "ape_paper",
+      "exp002_fewshot",
+      "exp003_cot",
+      "exp004_ape",
+      "scoring_prompt",
+      "specificity_gap"
+    ],
+    "20": [
+      "competitive_landscape",
+      "costar",
+      "cre_capital_markets_audit",
+      "cre_dataset_moat",
+      "redswan",
+      "swarm_capital_markets_27b"
+    ],
+    "21": [
+      "builder_permit_process",
+      "deployment_runbook",
+      "openai_inference_gateway",
+      "swarmcurator_27b",
+      "swarmcurator_9b",
+      "training_runbook"
+    ],
+    "22": [
+      "dspy",
+      "knowledgept_ares",
+      "promptkg",
+      "self_rag",
+      "swarmgraph"
+    ],
+    "23": [
+      "loi-flight-sheet",
+      "swarmtitle-certification-process",
+      "swarmtitle-insurance",
+      "title-commitment-template"
+    ],
+    "24": [
+      "docling_mcp",
+      "lifecycle",
+      "spot_futures",
+      "virgin_jelly"
+    ],
+    "25": [
+      "agenthash_failure_categories",
+      "grok_finetune_playbook",
+      "grok_lora_hyperparams",
+      "x_signal_openclaw_april_2026"
+    ],
+    "26": [
+      "OfferingMemorandum_Internal",
+      "ProofOfLocation",
+      "RelocationEconomics"
+    ],
+    "27": [
+      "exp001_position_bias",
+      "mtbench"
+    ],
+    "28": [
+      "chateval",
+      "llm_as_judge"
+    ],
+    "29": [
+      "convergence_efficiency",
+      "pressure_to_truth"
+    ],
+    "30": [
+      "mining_matrix",
+      "weights_hash"
+    ],
+    "31": [
+      "infrastructure_audit",
+      "qwen35_architecture"
+    ],
+    "32": [
+      "swarmbeeai_website",
+      "swarmscaler"
+    ],
+    "33": [
+      "swarmandbee_site"
+    ],
+    "34": [
+      "swarm_fleet"
+    ],
+    "35": [
+      "contributing_model_workflow"
+    ],
+    "36": [
+      "contributing_pair_counts"
+    ],
+    "37": [
+      "hedera_accounts"
+    ],
+    "38": [
+      "hedera_fee_schedule"
+    ],
+    "39": [
+      "prm"
+    ],
+    "40": [
+      "gitnexus"
+    ],
+    "41": [
+      "rag_original"
+    ],
+    "42": [
+      "researchops_changelog"
+    ],
+    "43": [
+      "agenthash_failures"
+    ],
+    "44": [
+      "cot_prompt_design"
+    ],
+    "45": [
+      "grpo_hyperparams"
+    ],
+    "46": [
+      "convergence_ladder"
+    ],
+    "47": [
+      "swarmcre_app_store"
+    ],
+    "48": [
+      "hardware_products"
+    ],
+    "49": [
+      "master_gold"
+    ],
+    "50": [
+      "repo_map"
+    ]
+  },
+  "cohesion": {
+    "0": 0.11,
+    "1": 0.08,
+    "2": 0.09,
+    "3": 0.09,
+    "4": 0.1,
+    "5": 0.08,
+    "6": 0.1,
+    "7": 0.11,
+    "8": 0.13,
+    "9": 0.13,
+    "10": 0.14,
+    "11": 0.14,
+    "12": 0.16,
+    "13": 0.15,
+    "14": 0.2,
+    "15": 0.18,
+    "16": 0.2,
+    "17": 0.22,
+    "18": 0.22,
+    "19": 0.4,
+    "20": 0.4,
+    "21": 0.47,
+    "22": 0.4,
+    "23": 0.67,
+    "24": 0.5,
+    "25": 0.5,
+    "26": 0.67,
+    "27": 1.0,
+    "28": 1.0,
+    "29": 1.0,
+    "30": 1.0,
+    "31": 1.0,
+    "32": 1.0,
+    "33": 1.0,
+    "34": 1.0,
+    "35": 1.0,
+    "36": 1.0,
+    "37": 1.0,
+    "38": 1.0,
+    "39": 1.0,
+    "40": 1.0,
+    "41": 1.0,
+    "42": 1.0,
+    "43": 1.0,
+    "44": 1.0,
+    "45": 1.0,
+    "46": 1.0,
+    "47": 1.0,
+    "48": 1.0,
+    "49": 1.0,
+    "50": 1.0
+  },
+  "gods": [
+    {
+      "id": "swarmledger_finality",
+      "label": "SwarmLedger 5-Layer Finality Pipeline (23,500+ deeds, 477 batches)",
+      "edges": 10
+    },
+    {
+      "id": "swarm_config_py",
+      "label": "SwarmConfig \u2014 Central Config Loader",
+      "edges": 8
+    },
+    {
+      "id": "prompt_machine",
+      "label": "Prompt Machine \u2014 Automated Prompt Evolution",
+      "edges": 8
+    },
+    {
+      "id": "middleware_chain",
+      "label": "7-Middleware Chain (SignalIngestion\u2192Classification\u2192Analysis\u2192Strategy\u2192QualityGate\u2192StateUpdate\u2192Dispatch)",
+      "edges": 8
+    },
+    {
+      "id": "broken_weights_intelligence",
+      "label": "Broken Weights Intelligence \u2014 Agent Model Failures (April 2026)",
+      "edges": 8
+    },
+    {
+      "id": "deed",
+      "label": "Title Deed",
+      "edges": 8
+    },
+    {
+      "id": "algorithm_registry",
+      "label": "Algorithm Registry",
+      "edges": 8
+    },
+    {
+      "id": "reliability_calibration",
+      "label": "Reliability & Calibration Research (LLM score defensibility)",
+      "edges": 7
+    },
+    {
+      "id": "agent_orchestration_papers",
+      "label": "Agent Orchestration Research Papers (Tier 2)",
+      "edges": 7
+    },
+    {
+      "id": "clawhash",
+      "label": "ClawHash",
+      "edges": 7
+    }
+  ],
+  "surprises": [
+    {
+      "source": "SwarmConfig \u2014 Central Config Loader",
+      "target": "Tribunal Layer (Scale A + Scale B, 24/7 autonomous)",
+      "source_files": [
+        "00-config/swarm_config.py",
+        "README.md"
+      ],
+      "confidence": "INFERRED",
+      "relation": "references",
+      "why": "inferred connection - not explicitly stated in source; crosses file types (code \u2194 doc); connects across different repos/directories; bridges separate communities"
+    },
+    {
+      "source": "Tribunal Parameters (drift_threshold, temperature, batch_size)",
+      "target": "Tribunal Layer (Scale A + Scale B, 24/7 autonomous)",
+      "source_files": [
+        "00-config/swarm_config.py",
+        "README.md"
+      ],
+      "confidence": "INFERRED",
+      "relation": "conceptually_related_to",
+      "why": "inferred connection - not explicitly stated in source; crosses file types (code \u2194 doc); connects across different repos/directories; bridges separate communities"
+    },
+    {
+      "source": "Decision Logging (.state/fleet_runs.jsonl for RL training)",
+      "target": "GRPO \u2014 Binary RL (tool-call accuracy, completion correctness)",
+      "source_files": [
+        "06-curation/middleware.md",
+        "19-research/slime-framework-reference.md"
+      ],
+      "confidence": "INFERRED",
+      "relation": "semantically_similar_to",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories; bridges separate communities; semantically similar concepts with no structural link"
+    },
+    {
+      "source": "5-Step Trajectory Template (IDENTIFY\u2192CALCULATE\u2192ANALYZE\u2192EVALUATE\u2192RECOMMEND)",
+      "target": "Paper: Constitutional AI \u2014 Harmlessness from AI Feedback (Bai et al., 2022)",
+      "source_files": [
+        "06-curation/README.md",
+        "19-research/reliability-calibration.md"
+      ],
+      "confidence": "INFERRED",
+      "relation": "semantically_similar_to",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories; bridges separate communities; semantically similar concepts with no structural link"
+    },
+    {
+      "source": "PropolisCollector (failure harvesting \u2192 cook_swarmjelly.py)",
+      "target": "Broken Weights Intelligence \u2014 Agent Model Failures (April 2026)",
+      "source_files": [
+        "06-curation/README.md",
+        "19-research/broken-weights-intelligence.md"
+      ],
+      "confidence": "INFERRED",
+      "relation": "semantically_similar_to",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories; semantically similar concepts with no structural link; peripheral node `PropolisCollector (failure harvesting \u2192 cook_swarmjelly.py)` unexpectedly reaches hub `Broken Weights Intelligence \u2014 Agent Model Failures (April 2026)`"
+    }
+  ],
+  "questions": [
+    {
+      "type": "bridge_node",
+      "question": "Why does `Curator Orchestrator (state machine: Pending\u2192Cooking\u2192Ready\u2192Published)` connect `Community 2` to `Community 10`?",
+      "why": "High betweenness centrality (0.143) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `Planner (VelocityTracker heat-map \u2192 cook orders)` connect `Community 10` to `Community 2`?",
+      "why": "High betweenness centrality (0.109) - this node is a cross-community bridge."
+    },
+    {
+      "type": "isolated_nodes",
+      "question": "What connects `swarm.yaml \u2014 Single Source of Truth Config File`, `Tribunal Scale Configuration (Scale A / Scale B models)`, `Domain-Hash Pricing Config (price_per_lb, rj_per_hour)` to the rest of the system?",
+      "why": "117 weakly-connected nodes found - possible documentation gaps or missing edges."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `Community 0` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.11 - nodes in this community are weakly interconnected."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `Community 1` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.08 - nodes in this community are weakly interconnected."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `Community 2` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.09 - nodes in this community are weakly interconnected."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `Community 3` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.09 - nodes in this community are weakly interconnected."
+    }
+  ]
+}
