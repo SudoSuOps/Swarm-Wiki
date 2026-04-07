@@ -18,6 +18,16 @@ Year 3: Trading 60 DGs per year. The DG King.
 
 The cure was focus. Not more dials. Not more domains. One thing, mastered.
 
+**The real numbers:**
+- 1 script. 1 database. 200 dials per day. Zero distractions.
+- He knew every DG owner in the country. Every lease. Every cap rate.
+- He never came with "hey I got an idea." He brought listings.
+- Listed 1 per week. Average deal $1.5M. Commission 3%. 50/50 split.
+- $22.5K per deal to the broker. 52 deals/year = $1.17M annual income.
+- $2.34M total GCI from ONE junior broker on ONE tenant type.
+- Cost: $75K salary + overhead. ROI: 31x.
+- He didn't mine ideas. He mined the database. Built the harvest. Transacted.
+
 ```
 WRONG:  10 junior brokers × 10 tenant types = 100 shallow relationships
 RIGHT:  10 junior brokers × 1 tenant type each = 10 deep specializations
