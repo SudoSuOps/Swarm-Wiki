@@ -343,6 +343,68 @@ THE PRINCIPLE:
   Same principle.
 ```
 
+## INK — The Flywheel
+
+The listing IS the marketing. Every new DG listing creates the next one.
+
+```
+THE CALL:
+  "Mr. Jones, hi this is Joe from Marcus & Millichap.
+   Great news — I just listed a new Dollar General in Florida.
+   10-year lease with bumps, corner lot, on a light, 7 cap.
+   Perfect 1031 replacement."
+
+  "Joe, send me the deal."
+
+  That's it. No pitch. No sell. No convincing.
+  The LISTING is the pitch. The DG is the product.
+  The owner is already looking. You just called first.
+```
+
+The email blast + the call = INK.
+
+```
+INK:
+  I — INVENTORY     The listing. The new DG. The product in hand.
+  N — NETWORK       The book of business. Every DG owner in the database.
+  K — KNOCK         The 200 dials. Ring ring. "I just listed a new DG."
+
+  Email blast goes out: "NEW LISTING — Dollar General, Florida, 7 cap"
+  → 2,000 DG owners in the database see it
+  → 50 open the email
+  → 10 reply "send me details"
+  → 5 want to see numbers
+  → 2 make offers
+  → 1 buys
+  
+  AND: 3 of those 2,000 owners think "if DGs are trading at 7 caps,
+       maybe I should sell mine too" → they call Joe → next listing
+  
+  THE FLYWHEEL:
+    List a DG → blast the book → sell the DG → 
+    owner sells their DG → list THAT DG → blast the book → repeat
+    
+    Every listing creates the next listing.
+    The inventory IS the marketing.
+    The machine feeds itself.
+```
+
+For the agent bullpen — same flywheel:
+
+```
+AGENT-DG:
+  Lists a DG → auto-blasts the database (500 personalized emails)
+  → tracks opens, replies, interest signals
+  → auto-follows up with BOV for interested owners
+  → routes 1031 exchange buyers to the listing
+  → 3 owners see the trade and want to sell theirs
+  → AGENT-DG already has their BOV ready (pre-generated)
+  → next listing. Flywheel spins.
+  
+  The human DG King ran this cycle manually. 52 turns/year.
+  AGENT-DG runs it continuously. The flywheel never stops.
+```
+
 For the AI agent:
 
 ```
