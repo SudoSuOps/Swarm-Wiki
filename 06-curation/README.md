@@ -10,8 +10,8 @@ The tribunal scores pairs 24/7. Simple, reliable, battle-tested.
 PRODUCTION PIPELINE:
   Pairs (PostgreSQL) → Bin (queue) → Tribunal Runner → Deed Recorder → Merkle Batcher
                                          ↓
-                              Judge A (gemma3:12b, GPU1)
-                              Judge B (qwen2.5:7b, whale)
+                              Scale A (gemma3:12b, GPU1)
+                              Scale B (qwen2.5:32b, GPU0)
                               Per-dimension CoT scoring
                               Drift threshold: 0.15
 ```
@@ -21,8 +21,8 @@ PRODUCTION PIPELINE:
 | Component | Implementation | Location |
 |-----------|---------------|----------|
 | Scoring engine | `tribunal_runner.py` | swarmrails (systemd) |
-| Judge A | gemma3:12b via ollama | GPU1 (RTX PRO 6000) |
-| Judge B | qwen2.5:7b via ollama | whale (RTX 3090) |
+| Scale A | gemma3:12b via ollama | GPU1 (RTX PRO 6000) |
+| Scale B | qwen2.5:32b via ollama | GPU0 (RTX PRO 6000) |
 | Deed recorder | `deed_recorder.py` | zima-edge (systemd) |
 | Merkle batcher | Every 50 deeds | zima-edge |
 | Scoring prompt | Per-dimension CoT + APE-optimized rubric anchors | `scoring_prompt.py` |
@@ -335,7 +335,7 @@ This loop is live. Prompts that produce higher platinum_scores get more allocati
 
 ```
 tribunal_runner.py
-  → judge_score.py (gemma3:12b + qwen2.5:7b, dual-judge)
+  → judge_score.py (gemma3:12b + qwen2.5:32b, dual-scale)
   → scoring_prompt.py (5 dimensions, APE-optimized)
   → PostgreSQL bin table (judge_a_score, judge_b_score, final_score, tier)
   → judge_deed.py → deeds table

@@ -77,12 +77,12 @@ Reason:          Close but below gate. Need Judge B validation.
 
 1. +1.0% is below the +2% gate
 2. +0.4s latency compounds: ~15 fewer pairs/hr at current throughput
-3. Unknown if Judge B (qwen2.5:7b) benefits the same way
+3. Unknown if Scale B (qwen2.5:32b) benefits the same way *(Note: experiment was originally run when Scale B was qwen2.5:7b; Scale B is now qwen2.5:32b as of April 2026)*
 4. Asymmetric scoring formats between judges could introduce new bias
 
 ## Next Step: Judge B Validation
 
-Running the same experiment through qwen2.5:7b on whale (192.168.0.99:11434).
+Running the same experiment through Scale B on whale (192.168.0.99:11434). *(Note: Scale B was qwen2.5:7b when this experiment was designed; Scale B is now qwen2.5:32b as of April 2026.)*
 
 - If BOTH judges improve → combined gain may cross +2% → SHIP
 - If only Judge A benefits → HOLD — asymmetric formats are risky

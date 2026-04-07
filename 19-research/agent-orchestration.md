@@ -10,7 +10,7 @@ Papers covering multi-agent systems, role specialization, and pipeline orchestra
 - **Link**: https://arxiv.org/abs/2308.08155
 - **GitHub**: 28K+ stars
 - **Why it matters**: The definitive multi-agent conversation framework. Provides the orchestration pattern for coordinating multiple LLM agents — directly applicable to our SwarmOS epoch orchestration layer.
-- **Swarm application**: Pattern reference for tribunal_runner.py coordinating Judge A, Judge B, deed recorder, and Merkle builder.
+- **Swarm application**: Pattern reference for tribunal_runner.py coordinating Scale A, Scale B, deed recorder, and Merkle builder.
 
 ### 12. AgentVerse: Facilitating Multi-Agent Collaboration and Exploring Emergent Behaviors
 - **Authors**: Weize Chen, Yusheng Su, Jingwei Zuo, Cheng Yang, Chenfei Yuan, et al.
@@ -37,7 +37,7 @@ Papers covering multi-agent systems, role specialization, and pipeline orchestra
 - **Authors**: Sirui Hong, Xiawu Zheng, Jonathan P. Chen, Yuheng Cheng, Ceyao Zhang, et al.
 - **Date**: 2023-08-01
 - **Link**: https://arxiv.org/abs/2308.00352
-- **Why it matters**: Assigns specialized roles to different agents in a structured workflow with standardized outputs. Mirrors our architecture where Judge A, Judge B, deed recorder, and Merkle builder each have distinct roles.
+- **Why it matters**: Assigns specialized roles to different agents in a structured workflow with standardized outputs. Mirrors our architecture where Scale A, Scale B, deed recorder, and Merkle builder each have distinct roles.
 - **Swarm application**: Validates our role separation: judges score, writer deeds, builder batches, anchor finalizes.
 
 ### 16. Language Agents as Optimizable Graphs (GPTSwarm)
@@ -51,9 +51,9 @@ Papers covering multi-agent systems, role specialization, and pipeline orchestra
 
 ## Key Takeaways for Swarm
 
-1. **Role specialization beats generalists** — MetaGPT and AutoGen both show that agents with specialized roles outperform single-agent architectures. Our separated Judge A / Judge B / Deed Writer / Recorder validates this.
+1. **Role specialization beats generalists** — MetaGPT and AutoGen both show that agents with specialized roles outperform single-agent architectures. Our separated Scale A / Scale B / Deed Writer / Recorder validates this.
 2. **Pipeline = graph = optimizable** — GPTSwarm's insight: if your pipeline is a graph, you can optimize it. Our pairs → bin → judges → deeds → Merkle → anchor is exactly such a graph.
-3. **Dynamic team composition is the next level** — Currently our judges are fixed (gemma3:12b + qwen2.5:7b). Research suggests domain-specific judge selection could improve quality.
+3. **Dynamic team composition is the next level** — Currently our scales are fixed (gemma3:12b + qwen2.5:32b). Research suggests domain-specific scale selection could improve quality.
 4. **Emergent behaviors matter** — AgentVerse shows that multi-agent systems develop emergent patterns. Our RJ yield differences across domains (97.8% legal vs 85.3% medical) may partially reflect judge pair dynamics, not just source quality.
 
 ---

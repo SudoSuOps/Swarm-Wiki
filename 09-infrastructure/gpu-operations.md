@@ -7,8 +7,8 @@ Power management, clock optimization, and the MINER discipline: tune GPUs like a
 | GPU | Card | VRAM | Architecture | Max Power | Max Core | Max Mem | Bandwidth | Role |
 |-----|------|------|-------------|-----------|----------|---------|-----------|------|
 | GPU0 | RTX PRO 6000 Blackwell | 96GB GDDR7 | sm_120 | 600W | 3,090 MHz | 14,001 MHz | 1,792 GB/s | Training (cook) |
-| GPU1 | RTX PRO 6000 Blackwell | 96GB GDDR7 | sm_120 | 600W | 3,090 MHz | 14,001 MHz | 1,792 GB/s | Judge A (inference) |
-| Whale | RTX 3090 | 24GB GDDR6X | sm_86 | 350W | 1,695 MHz | 9,751 MHz | 936 GB/s | Judge B (inference) |
+| GPU1 | RTX PRO 6000 Blackwell | 96GB GDDR7 | sm_120 | 600W | 3,090 MHz | 14,001 MHz | 1,792 GB/s | Scale A (inference) |
+| GPU0 | RTX PRO 6000 Blackwell | 96GB GDDR7 | sm_120 | 600W | 3,090 MHz | 14,001 MHz | 1,792 GB/s | Scale B (inference) |
 | Fleet (48x) | RTX PRO 4500 Blackwell | 32GB GDDR7 | sm_120 | 200W | 2,617 MHz | ~14,001 MHz | 896 GB/s | Expansion (Blackwell) |
 | Fleet (100x) | RTX 3090 | 24GB GDDR6X | sm_86 | 350W | 1,695 MHz | 9,751 MHz | 936 GB/s | Expansion (Ampere) |
 
@@ -97,7 +97,7 @@ The same clock tuning that crypto miners use to maximize hashrate-per-watt appli
 | Form factor | Dual-slot | Dual-slot (or single-slot server) | Density option |
 | Architecture | sm_120 | sm_120 | Same Blackwell, same software |
 
-**Fleet deployment pattern:** Each 4500 runs one model (gemma3:12b quantized = ~8GB, qwen2.5:7b = ~5GB). At 150W per card, 48 cards = 7.2 kW running 48 independent judges. That's 48 parallel scoring threads. At 380 pairs/hr per judge pair, 24 parallel tribunal pairs = **9,120 pairs/hr**. The 163-day wall becomes **7 days**.
+**Fleet deployment pattern:** Each 4500 runs one model (gemma3:12b quantized = ~8GB, qwen2.5:32b quantized = ~20GB). At 150W per card, 48 cards = 7.2 kW running 48 independent scales. That's 48 parallel scoring threads. At 380 pairs/hr per scale pair, 24 parallel tribunal pairs = **9,120 pairs/hr**. The 163-day wall becomes **7 days**.
 
 ### Why Training is Memory-Bound (The ETH Mining Parallel)
 
@@ -203,7 +203,7 @@ python3 /home/swarm/google-gemma-4-FTW/edge/energy_tracker.py
 
 ```
 ╔══════════════════════════════════════════════════════╗
-║       RTX 3090 — CLOCK CHART (JUDGE B)               ║
+║       RTX 3090 — CLOCK CHART (WHALE)                  ║
 ╠══════════════════════════════════════════════════════╣
 ║  Core:    210 - 1,860 MHz (inference: 1,200 MHz)     ║
 ║  Memory:  up to 9,751 MHz                            ║
@@ -349,8 +349,8 @@ Former mining cards. We tuned these for ETH. Same knowledge, new workload.
 ### 3090 Inference Flight Sheets
 
 ```
-JUDGE 7B (qwen2.5:7b):     Core 1,200 MHz | Mem auto | Power 150W | ~200 tok/s
-JUDGE 12B (gemma3:12b):    Core 1,400 MHz | Mem auto | Power 200W | ~80 tok/s
+SCALE 12B (gemma3:12b):    Core 1,400 MHz | Mem auto | Power 200W | ~80 tok/s
+SCALE 32B (qwen2.5:32b):  Core 1,400 MHz | Mem auto | Power 250W | ~50 tok/s
 IDLE / STANDBY:            Core 210 MHz   | Mem auto | Power 100W
 ```
 

@@ -25,13 +25,13 @@
 |--------------|-----------|
 | Coin (ETC, KAS) | Algorithm (MedHash, CREHash) |
 | Wallet ID | GPU ID (gpu0, gpu1, whale) |
-| Worker | Judge instance (gemma3:12b, qwen2.5:7b) |
+| Worker | Scale instance (gemma3:12b, qwen2.5:32b) |
 | Hashrate | Deeds scored per hour |
 | Block | Merkle batch (50 deeds) |
 | Block reward | Revenue from deed package sales |
-| Valid share | Royal Jelly deed (score >= 0.75) |
-| Stale share | Honey deed (0.50-0.74) |
-| Invalid share | Propolis deed (< 0.50) |
+| Valid share | Royal Jelly deed (score >= 0.85) |
+| Stale share | Honey deed (0.70-0.84) |
+| Invalid share | Propolis deed (< 0.70) |
 | Difficulty | 100 - RJ yield % |
 | Mining pool | Tribunal fleet (swarmrails + whale + edge) |
 | Nonce | Score (0.00-1.00) |
@@ -61,8 +61,8 @@ When a deed package sells ($29-$199):
 
 | Recipient | Share | Role |
 |-----------|-------|------|
-| Judge A GPU | 40% | Primary scorer |
-| Judge B GPU | 30% | Cross-validator |
+| Scale A GPU | 40% | Primary scorer |
+| Scale B GPU | 30% | Cross-validator |
 | Deed Recorder | 10% | Filing + Merkle |
 | Infrastructure | 20% | NAS, networking, Hedera |
 

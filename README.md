@@ -30,12 +30,12 @@ Single source of truth for all Swarm & Bee IP. Defendable AI Training Data Infra
 |--------|-------|---------|
 | Pairs in PostgreSQL | 1,495,857 | Across 10 registered domains |
 | Deeds Filed | 8,400+ | Dual-judge scored, Merkle-anchored |
-| Royal Jelly | 5,200+ | Score >= 0.75, production-grade |
+| Royal Jelly | 5,200+ | Score >= 0.85, production-grade |
 | Merkle Batches | 167+ | 50 deeds per SHA256 tree |
 | Domains Selling | 2 | Medical + Grants (Master Writer) |
 | Domains in Tribunal | 4 | CRE, Aviation, Self-Healing, Legal |
 | Domains Coming Soon | 4 | Finance, Imaging, Blockchain, Research |
-| Tribunal Rate | 777 pairs/hr | 24/7 autonomous, Judge A + Judge B |
+| Tribunal Rate | 777 pairs/hr | 24/7 autonomous, Scale A + Scale B |
 | Permanent Services | 7 | tribunal-runner, deed-recorder, watchdog, 3 APIs, chain |
 | GPU Fleet | 128x RTX 6000 + 48x RTX 4500 | 13.5 TB total VRAM |
 | Active Cook | Gemma 4 31B | 75% complete, eval_loss 0.5194 |
@@ -53,8 +53,8 @@ Single source of truth for all Swarm & Bee IP. Defendable AI Training Data Infra
 ├─────────────────────────────────────────────────────────────┤
 │                    TRIBUNAL LAYER                            │
 │  tribunal-runner (24/7, systemd, swarmrails)                │
-│  Judge A: gemma3:12b (RTX PRO 6000, GPU1)                  │
-│  Judge B: qwen2.5:7b (RTX 3090, whale rig)                 │
+│  Scale A: gemma3:12b (RTX PRO 6000, GPU1)                  │
+│  Scale B: qwen2.5:32b (RTX PRO 6000, GPU0)                 │
 │  Protocol: 2-pass, drift ≤ 0.15, deterministic             │
 ├─────────────────────────────────────────────────────────────┤
 │                    RECORDING LAYER                           │
@@ -96,16 +96,16 @@ Single source of truth for all Swarm & Bee IP. Defendable AI Training Data Infra
 
 | Class | Tier | Score | Outcome |
 |-------|------|-------|---------|
-| Class A | Royal Jelly | >= 0.75 | Prime location. Specialist responses. Irreplaceable. |
-| Class B | Honey | 0.50-0.74 | Decent area. Adequate. Replaceable. |
-| Class C | Propolis | < 0.50 | Bad neighborhood. Hallucinations. No tenants. |
+| Class A | Royal Jelly | >= 0.85 | Prime location. Specialist responses. Irreplaceable. |
+| Class B | Honey | 0.70-0.84 | Decent area. Adequate. Replaceable. |
+| Class C | Propolis | < 0.70 | Bad neighborhood. Hallucinations. No tenants. |
 
 ## Fleet
 
 | Machine | Hardware | Role | SSH |
 |---------|----------|------|-----|
-| swarmrails | 2x RTX PRO 6000 96GB + Xeon w9-3475X 72T 256GB | Training + Judge A + Chain API + GEO | localhost |
-| whale (.99) | RTX 3090 24GB | Judge B (qwen2.5:7b) | key-only |
+| swarmrails | 2x RTX PRO 6000 96GB + Xeon w9-3475X 72T 256GB | Training + Scale A + Scale B + Chain API + GEO | localhost |
+| whale (.99) | RTX 3090 24GB | Inference node | key-only |
 | zima-edge (.230) | Intel N150 + T1000 4GB | Deed recorder + watchdog | key-only |
 | zima-lite (.173) | Celeron N3450 8GB | Web host + 3 APIs | password |
 | zima-swarm (.112) | Intel N150 16GB | Docker + Tailscale | key-only |

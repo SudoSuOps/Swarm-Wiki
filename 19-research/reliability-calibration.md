@@ -1,6 +1,6 @@
 # Reliability & Calibration — Making LLM Scores Defensible
 
-Papers addressing the fundamental question: can LLM scores be trusted? These inform how to make our Royal Jelly threshold boundaries (0.75 / 0.50) and drift threshold (0.15) scientifically defensible.
+Papers addressing the fundamental question: can LLM scores be trusted? These inform how to make our Royal Jelly threshold boundaries (0.85 / 0.70) and drift threshold (0.15) scientifically defensible.
 
 ## TIER 3 — Reliability Infrastructure
 
@@ -9,7 +9,7 @@ Papers addressing the fundamental question: can LLM scores be trusted? These inf
 - **Date**: 2023-05-24
 - **Link**: https://arxiv.org/abs/2305.14975
 - **Why it matters**: Methods for getting calibrated confidence scores from LLMs. Directly applicable to making our judges output reliable numerical quality scores rather than arbitrary numbers.
-- **Swarm application**: Can we calibrate gemma3:12b and qwen2.5:7b so their 0.85 actually means the same thing? This paper shows how.
+- **Swarm application**: Can we calibrate gemma3:12b and qwen2.5:32b so their 0.85 actually means the same thing? This paper shows how.
 
 ### 18. Prompting GPT-3 To Be Reliable
 - **Authors**: Chenglei Si, Zhe Gan, Zhengyuan Yang, et al.

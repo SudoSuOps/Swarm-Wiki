@@ -1,6 +1,6 @@
 # LLM-as-Judge & Dual-Judge Systems
 
-These papers directly validate and inform our dual-judge tribunal architecture where two independent base models (gemma3:12b + qwen2.5:7b) score AI training pairs.
+These papers directly validate and inform our dual-scale tribunal architecture where two independent base models (gemma3:12b + qwen2.5:32b) score AI training pairs.
 
 ## TIER 1 — Directly Applicable to Tribunal
 
@@ -8,7 +8,7 @@ These papers directly validate and inform our dual-judge tribunal architecture w
 - **Authors**: Chi-Min Chan, Weize Chen, Yusheng Su, Jianxuan Yu, Wei Xue, et al.
 - **Date**: 2023-08-14
 - **Link**: https://arxiv.org/abs/2308.07201
-- **Why it matters**: Closest match to our system. Uses multiple LLM agents in a debate framework to improve evaluation quality — directly parallel to our dual-judge tribunal where gemma3:12b and qwen2.5:7b independently score and their agreement determines finality.
+- **Why it matters**: Closest match to our system. Uses multiple LLM agents in a debate framework to improve evaluation quality — directly parallel to our dual-scale tribunal where gemma3:12b and qwen2.5:32b independently score and their agreement determines finality.
 - **Swarm application**: Validates dual-judge architecture. Could inform a "debate pass" when judges disagree beyond drift threshold.
 
 ### 2. LM vs LM: Detecting Factual Errors via Cross Examination
@@ -22,7 +22,7 @@ These papers directly validate and inform our dual-judge tribunal architecture w
 - **Authors**: Kai Xiong, Xiao Ding, Yixin Cao, Ting Liu, Bing Qin
 - **Date**: 2023-05-19
 - **Link**: https://arxiv.org/abs/2305.11595
-- **Why it matters**: Studies inter-model agreement/disagreement — the exact metric our tribunal uses when gemma3 and qwen2.5 score the same pair. Directly informs how to interpret judge concordance.
+- **Why it matters**: Studies inter-model agreement/disagreement — the exact metric our tribunal uses when gemma3:12b and qwen2.5:32b score the same pair. Directly informs how to interpret scale concordance.
 - **Swarm application**: Research backing for our drift threshold (0.15). May suggest better agreement metrics.
 
 ### 4. Shepherd: A Critic for Language Model Generation

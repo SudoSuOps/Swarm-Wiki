@@ -80,7 +80,7 @@ Per-domain: grants +0.0030, medical +0.0241, legal +0.0333 (n=3)
 
 The direction asymmetry is clear: when the assistant response appears first, scores go up 40.8% of the time and down only 7.8%. This 5.2:1 ratio confirms a genuine position preference in gemma3:12b — reading a high-quality response first creates a favorable impression that slightly inflates the score.
 
-However, the magnitude (+0.0064) is below the 0.01 significance gate. At this level, position bias cannot flip a pair across tier boundaries (Royal Jelly >= 0.75, Honey >= 0.50). A pair scoring 0.746 in normal order would score 0.752 in swapped order — still the same tier.
+However, the magnitude (+0.0064) is below the 0.01 significance gate. At this level, position bias cannot flip a pair across tier boundaries (Royal Jelly >= 0.85, Honey >= 0.70). A pair scoring 0.846 in normal order would score 0.852 in swapped order — still the same tier. *(Note: thresholds updated April 2026 from 0.75/0.50 to 0.85/0.70. The experiment was run under the old thresholds but the conclusion holds — the bias magnitude is too small to flip tiers under either scheme.)*
 
 ### Pilot overstated the effect by 67%
 
