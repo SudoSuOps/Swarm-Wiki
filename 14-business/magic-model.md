@@ -71,6 +71,42 @@ The model is the same. The workforce changed.
 MAGIC stays. The bullpen evolves.
 ```
 
+## FEE — The Why
+
+MAGIC is how. FEE is why.
+
+```
+MAGIC → FEE
+
+F — FINALITY       Hedera anchored. Permanent. Can't be undone.
+                   The deed is recorded. The deal is closed. Done.
+
+E — ECONOMICS      Price per pound. Cost to mint. 20x margin.
+                   The math works. The steak dinner is earned.
+
+E — EQUITY         You OWN the weight. Sovereign. No subscription.
+                   Runs on your GPU. Can never be cut off. Yours.
+```
+
+In CRE, the FEE is the commission check. The steak dinner. You did the work, you earned it.
+
+In AI, the FEE is the same thing:
+- **Finality** — the pair is weighed, deeded, Merkle batched, Hedera anchored. Permanent.
+- **Economics** — the cost to mint is measurable, the price per pound is transparent, the margin is real.
+- **Equity** — the buyer owns the weight. Not renting tokens. Not subscribing to an API. Owning an asset.
+
+```
+The broker doesn't work for free.
+The GPU doesn't run for free.
+The MAGIC produces the FEE.
+
+Cook the MAGIC → earn the FEE.
+Mine the weight → collect the steak dinner.
+
+MAGIC + FEE = the complete model.
+The process and the proof it worked.
+```
+
 ---
 
-*$8B closed with human MAGIC. The next $8B closes with agent MAGIC. Same model. Different workforce. The weight is the training.*
+*$8B closed with human MAGIC. The next $8B closes with agent MAGIC. Same model. Different workforce. The weight is the training. The FEE is the proof.*
