@@ -107,6 +107,99 @@ MAGIC + FEE = the complete model.
 The process and the proof it worked.
 ```
 
+## Agent-DG: The MAGIC Skill
+
+The product. Agent-DG running the MAGIC playbook as a Claude Code skill.
+
+### Commands
+
+```
+/magic dg                          # run full MAGIC cycle on Dollar General
+/magic dg --mine                   # M — find DG owners likely to sell
+/magic dg --appraise 123-main-st   # A — BOV on a specific DG property
+/magic dg --grind                  # G — generate outreach for P1 leads
+/magic dg --ink deal-001           # I — generate LOI/PSA for a deal
+/magic dg --close deal-001         # C — closing statement, deed, FEE
+
+/magic walgreens                   # same MAGIC, different tenant
+/magic starbucks                   # same MAGIC, different tenant
+```
+
+### What Each Step Does
+
+```
+/magic dg --mine
+  Query county assessor APIs for DG properties in target MSAs
+  Cross-reference owner holding period (>5yr = likely seller)
+  Check lease expiration dates (within 3yr = decision point)
+  Score and rank by likelihood to sell
+  → P1_leads.csv (owner, address, NOI, cap rate, hold period)
+
+/magic dg --appraise [address]
+  Pull DG comps (same state, last 12 months, similar lease term)
+  Calculate: NOI ÷ market cap rate = indicated value
+  Generate: 1-sheet OM (4 panels, folded in half)
+  Generate: listing proposal (5-page booklet)
+  → BOV.pdf + OM.pdf + proposal.pdf (stock templates, auto-populated)
+
+/magic dg --grind
+  For each P1 lead, generate personalized email from BOV data:
+  "Mr. Jones — I just listed a new DG in Florida. 10yr with bumps,
+   corner lot, on a light, 7 cap. Send me the deal?"
+  Blast the book of business
+  → outreach_batch.csv ready for email send
+
+/magic dg --ink [deal-id]
+  Generate LOI from deal terms (1 page, stock template)
+  Generate PSA from stock template
+  → LOI.pdf + PSA.pdf ready for signature
+  The ink is on the paper. In contract.
+
+/magic dg --close [deal-id]
+  Closing statement (actual vs estimated)
+  Deed recorded → Hedera anchored → permanent
+  Commission calculated → FEE earned
+  → closing_statement.pdf + steak dinner
+```
+
+### Model Stack
+
+```
+SwarmCRE-35B      — underwriting, BOV, comp analysis
+masterwriter:31b  — OM copy, proposal narrative, email personalization
+SwarmCurator-9B   — operations, lead scoring, pipeline management
+gemma3:12b        — tribunal validation on all analysis (no hallucinated cap rates)
+```
+
+### Stock Templates (1 sheet, 1 page, zero friction)
+
+```
+OM:        1 sheet folded in half → 4 panels (cover, left, right, back)
+LOI:       1 page (price, terms, closing date, contingencies, sign here)
+Proposal:  5-page booklet (cover, valuation, marketing plan, track record, contact)
+Email:     3 sentences (new listing, the numbers, "send me the deal?")
+
+All stock. Change the address and the numbers. Print.
+The agent that generates fastest lists first.
+```
+
+### The Flywheel
+
+```
+Agent-DG lists a DG
+  → auto-blasts the database (personalized, with BOV attached)
+  → tracks opens, replies, interest
+  → routes 1031 buyers to the listing
+  → 3 owners see the trade and want to sell theirs
+  → Agent-DG already has their BOV ready (pre-generated)
+  → next listing → flywheel spins
+
+Every listing creates the next listing.
+The inventory IS the marketing.
+The machine feeds itself.
+MAGIC → FEE → MAGIC → FEE → MAGIC → FEE
+```
+
 ---
 
 *$8B closed with human MAGIC. The next $8B closes with agent MAGIC. Same model. Different workforce. The weight is the training. The FEE is the proof.*
