@@ -171,6 +171,54 @@ SwarmCurator-9B   — operations, lead scoring, pipeline management
 gemma3:12b        — tribunal validation on all analysis (no hallucinated cap rates)
 ```
 
+### Comp Deeds — The Appraisal Stack
+
+Every DG trade in the country gets a comp deed. Same format as the OM. Same 1 sheet folded in half. Same 4 panels. Universal.
+
+```
+COMP DEED (1 sheet, folded in half):
+  COVER:          Photo + address + SOLD + price + cap rate + date
+  INSIDE LEFT:    Lease summary (tenant, term remaining, bumps, NNN expenses)
+  INSIDE RIGHT:   Sale details (buyer, seller, $/SF, cap rate, NOI, hold period)
+  BACK:           Map + nearby comps + market cap rate trend line
+
+  Every DG trade → comp deed filed
+  Agent-DG maintains 500+ comp deeds in the library
+  Updated weekly from public records + CoStar/Crexi feeds
+```
+
+When an owner asks "what's my DG worth?":
+
+```
+  Agent-DG pulls 5 comp deeds from same state, similar lease term
+  Hands them over like a stack of playing cards
+  The owner sees REAL trades, not opinions
+  
+  "Mr. Jones, here are the last 5 Dollar Generals that sold
+   in Georgia. 5.5 to 6.25 caps. Yours is worth $1.25M.
+   Here's the comps."
+   
+  The comp deed IS the appraisal.
+  No 50-page report. No "let me get back to you."
+  5 cards on the table. The math speaks.
+```
+
+The comp deed format:
+- Same dimensions as the OM (1 sheet folded)
+- Same design language (cover, left, right, back)
+- Stock template — auto-populated from trade data
+- Agent-DG generates them in 2 seconds from the database
+- Tribunal-verified — no hallucinated cap rates, no fake comps
+
+```
+AGENT-DG COMP LIBRARY:
+  /magic dg --comps GA              # all DG comps in Georgia
+  /magic dg --comps FL --last 6mo   # Florida, last 6 months
+  /magic dg --comps --near 30301    # within 50 miles of zip code
+  /magic dg --comp-deck 123-main    # 5 best comps for a specific property
+                                    # → comp_deck.pdf (5 sheets, ready to hand out)
+```
+
 ### Stock Templates (1 sheet, 1 page, zero friction)
 
 ```
