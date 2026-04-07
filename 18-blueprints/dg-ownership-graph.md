@@ -104,48 +104,71 @@ THE HIERARCHY OF CONTACT QUALITY:
 
 ## The DG Ownership Graph Schema
 
+One record per Florida Dollar General parcel. This is a real ownership graph, not a contact spreadsheet.
+
+```
+FIELD                       SOURCE                  NOTES
+─────────────────────────────────────────────────────────────
+store_address               DG locator / OSM        physical location
+lat                         geocode                 spatial match to parcel
+lon                         geocode                 spatial match to parcel
+parcel_id                   FL DOR / Regrid         ties to tax roll
+county                      FL DOR / Regrid         67 FL counties
+owner_name_raw              tax roll / ATTOM        as-filed owner name
+owner_mailing_address       tax roll / ATTOM        where tax bills go (best contact)
+ownership_source            pipeline metadata       "FL_DOR" / "ATTOM" / "Regrid"
+entity_match_name           Sunbiz resolution       normalized entity name
+entity_jurisdiction         Sunbiz / OpenCorp       FL, DE, etc.
+sunbiz_doc_number           Sunbiz                  unique FL filing ID
+registered_agent            Sunbiz                  legal contact
+registered_agent_address    Sunbiz                  agent office address
+officers_managers           Sunbiz                  decision makers (JSON array)
+parent_entity               OpenCorp / SEC EDGAR    ultimate parent (REIT, PE fund)
+confidence_score            pipeline                0.0-1.0 match quality
+last_verified_at            pipeline                timestamp of last data pull
+```
+
+Example record:
+
 ```json
 {
-  "store": {
-    "address": "4521 Highway 19",
-    "city": "Perry",
-    "state": "FL",
-    "zip": "32347",
-    "lat": 30.0542,
-    "lng": -83.1806,
-    "store_number": "8042"
-  },
-  "parcel": {
-    "parcel_id": "R08-123-456-789",
-    "county": "Taylor",
-    "assessed_value": 1250000,
-    "owner_name": "DG Southeast Holdings LLC",
-    "owner_addr": "PO Box 12345",
-    "owner_city": "Orlando",
-    "owner_state": "FL",
-    "owner_zip": "32801",
-    "source": "FL DOR tax roll"
-  },
-  "entity": {
-    "name": "DG Southeast Holdings LLC",
-    "jurisdiction": "FL",
-    "status": "Active",
-    "registered_agent": "CT Corporation System",
-    "officers": [
-      {"name": "John Smith", "title": "Manager"},
-      {"name": "Jane Doe", "title": "Member"}
-    ],
-    "parent": "Spirit Realty Capital Inc (NYSE: SRC)",
-    "source": "Sunbiz + OpenCorporates"
-  },
-  "contact": {
-    "best_mailing": "PO Box 12345, Orlando, FL 32801",
-    "decision_maker": "John Smith (Manager)",
-    "registered_agent": "CT Corporation System",
-    "corporate_hq": "2727 N Harwood St, Dallas, TX 75201",
-    "source_quality": "tax_roll_mailing (highest)"
-  }
+  "store_address": "4521 Highway 19, Perry, FL 32347",
+  "lat": 30.0542,
+  "lon": -83.1806,
+  "parcel_id": "R08-123-456-789",
+  "county": "Taylor",
+  "owner_name_raw": "DG Southeast Holdings LLC",
+  "owner_mailing_address": "PO Box 12345, Orlando, FL 32801",
+  "ownership_source": "FL_DOR",
+  "entity_match_name": "DG Southeast Holdings LLC",
+  "entity_jurisdiction": "FL",
+  "sunbiz_doc_number": "L19000012345",
+  "registered_agent": "CT Corporation System",
+  "registered_agent_address": "1200 S Pine Island Rd, Plantation, FL 33324",
+  "officers_managers": [
+    {"name": "John Smith", "title": "Manager"},
+    {"name": "Jane Doe", "title": "Member"}
+  ],
+  "parent_entity": "Spirit Realty Capital Inc (NYSE: SRC)",
+  "confidence_score": 0.95,
+  "last_verified_at": "2026-04-07T14:00:00Z"
 }
+```
+
+## Recommended Pipeline (API-first)
+
+```
+PRIMARY (today):
+  1. Regrid or ATTOM   → parcel ownership (owner_name + mailing address)
+  2. Sunbiz            → entity resolution (officers, registered agent, filing)
+  3. OpenCorporates    → multi-state parent chain
+  
+AUTHORITATIVE FALLBACK / AUDIT:
+  4. FL DOR tax roll   → free, statewide, official (verify everything against this)
+  
+SUPPLEMENTAL (public parents):
+  5. SEC EDGAR         → corporate HQ, filing addresses, 10-K/10-Q for REITs
+```
 ```
 
 ## Data Pipeline
