@@ -305,6 +305,58 @@ START HERE:
   If it works for STNL → the model works for any CRE vertical
 ```
 
+## The Machine: Stock Materials, Zero Friction
+
+The DG King didn't create custom materials for every deal. He had ONE set of templates. Plug in the address, the price, the story. Print. Go.
+
+```
+THE OM (5 pages, not 50):
+  Cover:        Photo + address + price + cap rate
+  Inside left:  Aerial + property details + lease summary
+  Inside right: Tenant profile + financials + rent schedule
+  Back cover:   Contact info + firm branding
+
+  That's it. Not a 50-page novel nobody reads.
+  The buyer wants: what is it, what does it cost, what's the lease.
+  5 pages answers all three. Print 20 copies. Hand them out at the meeting.
+
+THE LOI (1 page):
+  Price. Terms. Closing date. Contingencies. Sign here.
+  No 12-page letter of intent with 47 conditions.
+  1 page. The deal either works or it doesn't.
+
+THE PROPOSAL (5-page booklet):
+  Cover page
+  Inside left: your property, our valuation, market comps
+  Inside right: marketing plan, timeline, fee structure
+  Back cover: about the broker, track record, contact
+
+  Stock template. Change the address and the numbers. Print.
+  200 dials → 3 meetings → 1 listing → print the booklet → go to market.
+
+THE PRINCIPLE:
+  No custom decks. No 50-page reports. No "let me build something special."
+  STOCK materials + REAL data = speed.
+  The broker who prints fastest lists first.
+  The agent who generates fastest lists first.
+  Same principle.
+```
+
+For the AI agent:
+
+```
+AGENT-DG TEMPLATE LIBRARY:
+  OM template:       5-page PDF, auto-populated from BOV data
+  LOI template:      1-page, auto-populated from deal terms
+  Proposal booklet:  5-page, auto-populated from comps + marketing plan
+  
+  Generation time:   3 seconds (masterwriter:31b)
+  Print time:        0 seconds (PDF emailed)
+  
+  The DG King printed at Kinko's. Agent-DG emails a PDF.
+  Same 5 pages. Same 1-page LOI. Zero friction.
+```
+
 ## Standing Rules
 
 1. **One agent, one tenant.** Never let an agent cover multiple tenant types.
