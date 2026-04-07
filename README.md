@@ -194,3 +194,5 @@ The [glass-wall](https://github.com/SudoSuOps/glass-wall) repo is the philosophi
 | [SWARMEVAL.md](https://github.com/SudoSuOps/glass-wall/blob/main/SWARMEVAL.md) | Combat evaluation — drop your model in the chain |
 | [PRESSURE_TO_TRUTH.md](https://github.com/SudoSuOps/glass-wall/blob/main/PRESSURE_TO_TRUTH.md) | The thesis under pressure |
 | [SPECTATORS.md](https://github.com/SudoSuOps/glass-wall/blob/main/SPECTATORS.md) | The audience — who watches the glass wall |
+- [CRE Micro-Domain Taxonomy](docs/wiki/cre-micro-domain-taxonomy.md)
+- [How to Select the Next CRE Micro-Domain](docs/wiki/how-to-select-the-next-cre-micro-domain.md)
