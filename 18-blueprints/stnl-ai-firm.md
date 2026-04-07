@@ -419,6 +419,85 @@ AGENT-DG TEMPLATE LIBRARY:
   Same 5 pages. Same 1-page LOI. Zero friction.
 ```
 
+## The "I Got A Buyer" Letter — PostGrid Physical Mail
+
+The kill shot. Not "want to sell?" but "I have a buyer for your property."
+
+```
+THE LETTER (PostGrid API — $1.50/letter, physical mail):
+
+  Dear Mr. Jones,
+
+  I represent a qualified 1031 exchange buyer actively seeking 
+  Dollar General properties in central Florida. Your property at 
+  4521 Highway 19, Perry, FL meets their acquisition criteria:
+
+    ✓ Single tenant net lease
+    ✓ 5+ years remaining on primary term
+    ✓ Cap rate range: 5.50 - 7.00%
+
+  Similar Dollar Generals in your area have recently traded at 
+  5.75 caps, indicating a market value of approximately $1,252,000 
+  for your property.
+
+  I specialize exclusively in Dollar General properties and have 
+  closed [X] DG transactions this year. I would welcome the 
+  opportunity to provide you with a confidential market analysis.
+
+  Respectfully,
+  [Broker Name]
+  [Firm]
+  [Direct Line]
+
+  THIS IS NOT EMAIL. This is a physical letter. 
+  It sits on the desk. It doesn't get deleted.
+  It gets read. It gets kept. It gets called on.
+```
+
+Why physical mail beats email for STNL:
+
+```
+EMAIL:
+  Open rate: 15-20%
+  Gets buried in inbox
+  Feels like spam
+  Owner deletes it
+
+PHYSICAL LETTER:
+  Open rate: ~100% (everyone opens mail)
+  Sits on the desk for days
+  Feels personal and professional
+  Owner calls back weeks later: "I got your letter"
+  
+  $1.50 per letter × 200 letters = $300
+  1 listing from 200 letters = $45K commission
+  ROI: 150x on the mailing
+```
+
+Agent-DG + PostGrid integration:
+
+```
+/magic dg --mail FL --template buyer-letter
+
+  Agent-DG:
+  1. Pulls top 200 DG owners from FL book (scored by likelihood to sell)
+  2. Auto-populates the "I Got A Buyer" template with:
+     - Owner name (from tax roll)
+     - Property address
+     - Remaining lease term
+     - Recent comps in their area
+     - Indicated value from BOV
+  3. Sends to PostGrid API → physical letters printed and mailed
+  4. Logs every letter: owner, address, date sent, template used
+  5. 14 days later → follow-up call: "Did you get my letter?"
+
+  COST: 200 × $1.50 = $300
+  EXPECTED: 1-2 listings from 200 letters = $45K-$90K commission
+  ROI: 150-300x
+```
+
+The Letter Sender skill already exists in the wiki (`07-skills/letter-sender.md`). PostGrid API is wired. Agent-DG just needs the template and the book of business.
+
 ## Standing Rules
 
 1. **One agent, one tenant.** Never let an agent cover multiple tenant types.
